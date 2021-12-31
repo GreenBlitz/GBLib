@@ -10,7 +10,10 @@ package edu.greenblitz.gblib.gear;
 public class Gear {
 	private GearState state;
 	private double kPower, kSpeed;
-	private Gear instance;
+
+	private static Gear instance;
+
+	private static double DEF_VALUE = 0.7;
 
 	/**
 	 * Constructor method
@@ -25,25 +28,34 @@ public class Gear {
 		this.state = initState;
 	}
 
-	public Gear getInstance() {
+	public static Gear getInstance() {
 		if (instance == null) {
-			instance = new Gear(0.7, 0.7, GearState.SPEED);
+			instance = new Gear(DEF_VALUE, DEF_VALUE, GearState.SPEED);
 		}
 		return instance;
 	}
 
-	public Gear getInstance(double kPower, double kSpeed) {
+	public static Gear getInstance(double kPower, double kSpeed) {
 		if (instance == null) {
 			instance = new Gear(kPower, kSpeed, GearState.SPEED);
 		}
 		return instance;
 	}
 
-	public Gear getInstance(double kPower, double kSpeed, GearState initState) {
+	public static Gear getInstance(double kPower, double kSpeed, GearState initState) {
 		if (instance == null) {
 			instance = new Gear(kPower, kSpeed, initState);
 		}
 		return instance;
+	}
+
+	public GearState getState(){
+		return this.state;
+	}
+
+	private GearState getInverseState(){
+		if(this.state == GearState.POWER) return GearState.SPEED;
+		else return GearState.POWER;
 	}
 
 	/**
@@ -67,8 +79,12 @@ public class Gear {
 	 * Switches between the two gear states regardless of current state
 	 */
 	public void toggle() {
-		if (this.state.isPower()) this.state = GearState.SPEED;
-		else this.state = GearState.POWER;
+		this.state = this.getInverseState();
+	}
+
+	public double getInverseValue(){
+		if (this.state.isSpeed()) return kPower;
+		else return kSpeed;
 	}
 
 	/**
