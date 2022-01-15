@@ -59,6 +59,7 @@ public class SmartJoystick {
             m_axis = axis;
             setInverted(isInverted);
         }
+        
 
         public void setInverted(boolean isInverted) {
             m_inverted = isInverted ? -1 : 1;
@@ -173,29 +174,30 @@ public class SmartJoystick {
         SmartDashboard.putNumber((left ? "left" : "right") + " rumble", power);
     }
 
-    public HashMap<String, Double> getButtonsOn() {
+    public HashMap<Integer, Double> getButtonsOn() {
         //todo: for now - 1 == button is on, 0 == button is of (for on/off buttons);
-        HashMap<String, Double> buttons = new HashMap<String, Double>();
-        // A, B, X, Y, L1, R1, START, BACK, L3, R3, POV_UP, POV_RIGHT, POV_DOWN, POV_LEFT;
-        buttons.put("A", A.get() ? 1.0 : 0.0);
-        buttons.put("B", B.get() ? 1.0 : 0.0);
-        buttons.put("X", X.get() ? 1.0 : 0.0);
-        buttons.put("Y", Y.get() ? 1.0 : 0.0);
-        buttons.put("L1", L1.get() ? 1.0 : 0.0);
-        buttons.put("R1", R1.get() ? 1.0 : 0.0);
-        buttons.put("START", START.get() ? 1.0 : 0.0);
-        buttons.put("BACK", BACK.get() ? 1.0 : 0.0);
-        buttons.put("L3", L3.get() ? 1.0 : 0.0);
-        buttons.put("POV_UP", POV_UP.get() ? 1.0 : 0.0);
-        buttons.put("POV_RIGHT", POV_RIGHT.get() ? 1.0 : 0.0);
-        buttons.put("POV_DOWN", POV_DOWN.get() ? 1.0 : 0.0);
-        buttons.put("POV_LEFT", POV_LEFT.get() ? 1.0 : 0.0);
-        buttons.put("LEFT_X", Axis.LEFT_X.getValue(this));
-        buttons.put("LEFT_Y", Axis.LEFT_Y.getValue(this));
-        buttons.put("LEFT_TRIGGER", Axis.LEFT_TRIGGER.getValue(this));
-        buttons.put("RIGHT_TRIGGER", Axis.RIGHT_TRIGGER.getValue(this));
-        buttons.put("RIGHT_X", Axis.RIGHT_X.getValue(this));
-        buttons.put("RIGHT_Y", Axis.RIGHT_Y.getValue(this));
+        HashMap<Integer, Double> buttons = new HashMap<Integer, Double>();
+        // A, B, X, Y, L1, R1, START, BACK, L3, R3, POV_UP, POV_RIGHT, POV_DOWN, POV_LEFT, stick;
+        buttons.put(1, A.get() ? 1.0 : 0.0);
+        buttons.put(2, B.get() ? 1.0 : 0.0);
+        buttons.put(3, X.get() ? 1.0 : 0.0);
+        buttons.put(4, Y.get() ? 1.0 : 0.0);
+        buttons.put(5, L1.get() ? 1.0 : 0.0);
+        buttons.put(6, R1.get() ? 1.0 : 0.0);
+        buttons.put(7, START.get() ? 1.0 : 0.0);
+        buttons.put(8, BACK.get() ? 1.0 : 0.0);
+        buttons.put(9, L3.get() ? 1.0 : 0.0);
+        buttons.put(10, R3.get() ? 1.0 : 0.0);
+        buttons.put(11, POV_UP.get() ? 1.0 : 0.0);
+        buttons.put(12, POV_RIGHT.get() ? 1.0 : 0.0);
+        buttons.put(13, POV_DOWN.get() ? 1.0 : 0.0);
+        buttons.put(14, POV_LEFT.get() ? 1.0 : 0.0);
+        buttons.put(15, Axis.LEFT_X.getValue(this));
+        buttons.put(16, Axis.LEFT_Y.getValue(this));
+        buttons.put(17, Axis.LEFT_TRIGGER.getValue(this));
+        buttons.put(18, Axis.RIGHT_TRIGGER.getValue(this));
+        buttons.put(19, Axis.RIGHT_X.getValue(this));
+        buttons.put(20, Axis.RIGHT_Y.getValue(this));
         return buttons;
     }
 }
