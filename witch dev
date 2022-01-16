@@ -1,0 +1,23 @@
+[33mcommit 89793e8afbd6b5cfa5eaf2406cf521ffc7529c39[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Raz Rishoni <raz@Razs-MacBook-Air.local>
+Date:   Thu Dec 30 20:50:59 2021 +0200
+
+    Raz - Project setup
+
+[33mcommit 444197d4b714f81f353d7eb74ba54f8aec0c2609[m
+Author: Raz Rishoni <raz@Razs-MacBook-Air.local>
+Date:   Thu Dec 30 20:31:00 2021 +0200
+
+    Raz - added gitignore
+
+[33mcommit 9cff6a39fdf94b4fd9dbf8e459bba047fc8a07f1[m
+Author: tnrz135 <razrishoni135@gmail.com>
+Date:   Thu Dec 30 20:15:32 2021 +0200
+
+    Update README.md
+
+[33mcommit bdb10f71c9ad8ff0bb8ba4df804b3888928cc298[m
+Author: tnrz135 <razrishoni135@gmail.com>
+Date:   Thu Dec 30 20:13:37 2021 +0200
+
+    Initial commit
