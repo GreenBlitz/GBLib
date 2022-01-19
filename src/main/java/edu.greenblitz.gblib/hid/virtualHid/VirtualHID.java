@@ -36,10 +36,6 @@ public class VirtualHID extends GenericHID {
         zeroHashMap.put(18, 0.0);
         zeroHashMap.put(19, 0.0);
         zeroHashMap.put(20, 0.0);
-        zeroHashMap.put(21, 0.0);
-        zeroHashMap.put(22, 0.0);
-        zeroHashMap.put(23, 0.0);
-        zeroHashMap.put(24, 0.0);
     }
 
     public VirtualHID(HashMap<Double, HashMap<Integer, Double>> followDriverData) {
@@ -120,5 +116,10 @@ public class VirtualHID extends GenericHID {
         } else {
             return getCurButtons().get(16);
         }
+    }
+
+    @Override
+    public double getRawAxis(int axis) {
+        return getCurButtons().get(15+axis);
     }
 }
