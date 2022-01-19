@@ -9,7 +9,7 @@ public class VirtualHID extends GenericHID {
         super(port);
     }
 
-    private double startTime;//todo: use this!!!!
+    private double startTime;
     private HashMap<Double, HashMap<Integer, Double>> followDriverData;
     private static final HashMap<Integer, Double> zeroHashMap = new HashMap<>();
 
