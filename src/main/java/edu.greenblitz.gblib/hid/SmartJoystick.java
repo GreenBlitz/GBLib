@@ -16,7 +16,7 @@ import java.util.HashMap;
  * @see JoystickButton
  */
 public class SmartJoystick {
-    private Joystick m_joystick;
+    protected Joystick m_joystick;
     private double deadzone;
 
     private static final double DEADZONE = 0.03;
