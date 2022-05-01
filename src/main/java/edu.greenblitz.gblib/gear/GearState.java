@@ -3,8 +3,8 @@ package edu.greenblitz.gblib.gear;
 /**
  * This class represents the available gear states
  *
- * @Author Nitzan
- * @Author Raz
+ * @author Nitzan
+ * @author Raz
  */
 
 public enum GearState {

@@ -10,8 +10,8 @@ import java.util.Set;
 /**
  * This class adds the ability to track the subsystems used for a given command
  *
- * @Author Nitzan
- * @Author Raz
+ * @author Nitzan
+ * @author Raz
  */
 public abstract class GBCommand implements Command {
 

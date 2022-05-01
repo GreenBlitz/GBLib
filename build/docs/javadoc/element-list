@@ -1,0 +1,8 @@
+edu.greenblitz.gblib
+edu.greenblitz.gblib.base
+edu.greenblitz.gblib.encoder
+edu.greenblitz.gblib.gear
+edu.greenblitz.gblib.gyro
+edu.greenblitz.gblib.hid
+edu.greenblitz.gblib.sensors
+edu.greenblitz.gblib.threading

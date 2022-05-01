@@ -3,8 +3,8 @@ package edu.greenblitz.gblib.gear;
 /**
  * This class represents the gear box on the robot's chassis
  *
- * @Author Nitzan
- * @Author Raz
+ * @author Nitzan
+ * @author Raz
  */
 
 public class Gear {
