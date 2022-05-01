@@ -65,12 +65,12 @@ repositories {
 // Also defines JUnit 4.
 dependencies {
     implementation wpi.java.deps.wpilib()
-    implementation wpi.java.vendor.java()
+    implementation wpi.java.vendor.java()/*
     roborioDebug wpi.java.deps.wpilibJniDebug(wpi.platforms.roborio)
     roborioDebug wpi.java.vendor.jniDebug(wpi.platforms.roborio)
     roborioRelease wpi.java.deps.wpilibJniRelease(wpi.platforms.roborio)
     roborioRelease wpi.java.vendor.jniRelease(wpi.platforms.roborio)
-
+*/
 
 
     nativeDebug wpi.java.deps.wpilibJniDebug(wpi.platforms.desktop)
