@@ -12,6 +12,7 @@ import java.util.Set;
  *
  * @author Nitzan
  * @author Raz
+ * @author Tal -ish
  */
 public abstract class GBCommand implements Command {
 
@@ -37,7 +38,7 @@ public abstract class GBCommand implements Command {
 	 *
 	 * @param sys - the new subsystem
 	 */
-	public void addRequirement(Subsystem sys) {
+	public void require(Subsystem sys) {
 		this.systems.add(sys);
 	}
 

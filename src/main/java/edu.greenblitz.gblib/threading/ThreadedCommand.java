@@ -18,7 +18,7 @@ public class ThreadedCommand extends GBCommand {
         threadable = func;
 
         for (Subsystem sys : req){
-            addRequirement(sys);
+            require(sys);
         }
     }
 
