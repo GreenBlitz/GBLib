@@ -26,7 +26,7 @@ public class PigeonGyro extends AbstractGyro {
     }
     
     @Override
-    double getNormalizedYaw() {
+    public double getNormalizedYaw() {
         return super.getNormalizedYaw();
     }
     
