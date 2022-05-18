@@ -13,19 +13,19 @@ public class GearDependentValue<T>{
 		this.whenSpeed = whenSpeed;
 	}
 
-	public T getValue(GearState state){
-		return state.isSpeed() ? whenSpeed : whenPower;
+	public T getValue(boolean isPower){
+		return isPower ? whenPower : whenSpeed;
 	}
 
 	public T getValue(){
 		return getValue(Gear.getInstance().getState());
 	}
 
-	public void setValue(GearState state, T val){
-		if (state.isSpeed())
-			this.whenSpeed = val;
-		else
+	public void setValue(boolean isPower, T val){
+		if (isPower)
 			this.whenPower = val;
+		else
+			this.whenSpeed = val;
 	}
 
 }

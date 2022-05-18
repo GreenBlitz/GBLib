@@ -5,58 +5,49 @@ package edu.greenblitz.gblib.gear;
  *
  * @author Nitzan
  * @author Raz
+ * @author Amir
+ * @author Tal
  */
 
 public class Gear {
-	private GearState state;
-
+	private boolean isPower;
+	
+	
 	private static Gear instance;
-
-
+	
+	
 	/**
 	 * Constructor method
 	 *
-	 * @param initState - the initial state of the robot gears (SPEED or POWER)
+	 * @param isPower - the initial state of the robot gears (SPEED or POWER)
 	 */
-	private Gear(GearState initState) {
-		this.state = initState;
+	private Gear(boolean isPower) {
+		this.isPower = isPower;
 	}
-
+	
 	public static Gear getInstance() {
 		if (instance == null) {
-			instance = new Gear(GearState.SPEED);
+			instance = new Gear(false);
 		}
 		return instance;
 	}
-
-
-	public static Gear getInstance(GearState initState) {
-		if (instance == null) {
-			instance = new Gear(initState);
-		}
-		return instance;
+	
+	public boolean getState() {
+		return this.isPower;
 	}
-
-	public GearState getState(){
-		return this.state;
-	}
-
-	public GearState getInverseState(){
-		if(this.state == GearState.POWER) return GearState.SPEED;
-		else return GearState.POWER;
-	}
-
+	
+	
 	/**
 	 * Switches between the two gear states regardless of current state
 	 */
 	public void toggle() {
-		this.state = this.getInverseState();
+		this.isPower = !this.isPower;
 	}
-
+	
 	/**
 	 * @param desiredState - the gear state we wish to change into
 	 */
-	public void setState(GearState desiredState) {
-		this.state = desiredState;
+	public void setState(boolean desiredState) {
+		this.isPower = desiredState;
 	}
 }
