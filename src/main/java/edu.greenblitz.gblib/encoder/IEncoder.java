@@ -16,4 +16,7 @@ public interface IEncoder {
      * @return ticks per second
      */
     double getTickRate();
+    
+    
+    
 }

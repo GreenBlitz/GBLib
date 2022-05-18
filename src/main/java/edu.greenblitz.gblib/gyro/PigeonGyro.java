@@ -24,7 +24,12 @@ public class PigeonGyro extends AbstractGyro {
         bird.getRawGyro(vals);
         return Math.toRadians(vals[0]);
     }
-
+    
+    @Override
+    double getNormalizedYaw() {
+        return super.getNormalizedYaw();
+    }
+    
     @Override
     public void reset() {
         bird.setYaw(0);

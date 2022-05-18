@@ -51,7 +51,11 @@ public abstract class AbstractEncoder implements IEncoder{
     public void invert(boolean inverted) {
         inverted = inverted;
     }
-
+    
+//    public double getNormalizedVelocity() {
+//        return getTickRate() * invert() / getNormalizeConst().getValue();
+//    }
+    
     public boolean isInverted() {
         return inverted;
     }
