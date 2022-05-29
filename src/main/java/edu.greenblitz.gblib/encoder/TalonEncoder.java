@@ -2,10 +2,13 @@ package edu.greenblitz.gblib.encoder;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import java.util.function.DoubleSupplier;
+
 public class TalonEncoder extends AbstractEncoder {
     private TalonSRX m_talon;
 
-    public TalonEncoder(TalonSRX talon) {
+    public TalonEncoder(DoubleSupplier normConst, TalonSRX talon) {
+		super(normConst);
         m_talon = talon;
     }
 

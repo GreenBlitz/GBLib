@@ -3,12 +3,15 @@ package edu.greenblitz.gblib.encoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
+import java.util.function.DoubleSupplier;
+
 public class SparkMaxEncoder extends AbstractEncoder {
 	private static final int SPARK_COUNT_RATIO = 42;
 	private RelativeEncoder m_sparkEncoder;
 	private int m_nullPosition;
 
-	public SparkMaxEncoder(CANSparkMax sparkEncoder) {
+	public SparkMaxEncoder(DoubleSupplier normConst, CANSparkMax sparkEncoder) {
+		super(normConst);
 		m_sparkEncoder = sparkEncoder.getEncoder();
 		m_nullPosition = 0;
 	}

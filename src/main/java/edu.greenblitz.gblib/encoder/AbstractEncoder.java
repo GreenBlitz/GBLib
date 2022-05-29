@@ -23,16 +23,16 @@ public abstract class AbstractEncoder implements IEncoder{
     }
 
     public AbstractEncoder() {
-        accumulatedTicks = 0;
-        accumulatedDistance = 0;
+        this(() -> 1);
     }
 
     /**
      * This constructor receives the normalize constant of the motor controller.
      */
     public AbstractEncoder(DoubleSupplier normalizeConst){
-        this();
-        this.normalizeConst = normalizeConst;
+		accumulatedTicks = 0;
+	    accumulatedDistance = 0;
+	    this.normalizeConst = normalizeConst;
     }
 
     public void switchGear(){
