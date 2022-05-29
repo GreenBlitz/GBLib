@@ -6,7 +6,7 @@ import java.util.function.DoubleSupplier;
 
 public abstract class AbstractEncoder implements IEncoder{
     private boolean inverted;
-    private int accumulatedTicks;
+    private double accumulatedTicks;
     private double accumulatedDistance;
     private DoubleSupplier normalizeConst;
 
@@ -14,7 +14,7 @@ public abstract class AbstractEncoder implements IEncoder{
      *
      * @return velocity after conversion in m/s
      */
-    double getNormalizedVelocity() {
+    public double getNormalizedVelocity() {
         return getTickRate() * invert() / normalizeConst.getAsDouble();
     }
 

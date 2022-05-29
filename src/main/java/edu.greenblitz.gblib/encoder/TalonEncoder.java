@@ -1,4 +1,3 @@
-/*
 package edu.greenblitz.gblib.encoder;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -16,7 +15,7 @@ public class TalonEncoder extends AbstractEncoder {
     }
 
     @Override
-    public int getRawTicks() {
+    public double getRawTicks() {
         return m_talon.getSelectedSensorPosition();
     }
 
@@ -25,4 +24,4 @@ public class TalonEncoder extends AbstractEncoder {
         return m_talon.getSelectedSensorVelocity() * 10;
     }
 
-}*/
+}
