@@ -6,7 +6,7 @@ import java.util.function.DoubleSupplier;
 
 public abstract class AbstractEncoder implements IEncoder{
     private boolean inverted;
-    private int accumulatedTicks;
+    private double accumulatedTicks;
     private double accumulatedDistance;
     private DoubleSupplier normalizeConst;
 
@@ -14,7 +14,7 @@ public abstract class AbstractEncoder implements IEncoder{
      *
      * @return velocity after conversion in m/s
      */
-    double getNormalizedVelocity() {
+    public double getNormalizedVelocity() {
         return getTickRate() * invert() / normalizeConst.getAsDouble();
     }
 
@@ -23,16 +23,16 @@ public abstract class AbstractEncoder implements IEncoder{
     }
 
     public AbstractEncoder() {
-        accumulatedTicks = 0;
-        accumulatedDistance = 0;
+        this(() -> 1);
     }
 
     /**
      * This constructor receives the normalize constant of the motor controller.
      */
     public AbstractEncoder(DoubleSupplier normalizeConst){
-        this();
-        this.normalizeConst = normalizeConst;
+		accumulatedTicks = 0;
+	    accumulatedDistance = 0;
+	    this.normalizeConst = normalizeConst;
     }
 
     public void switchGear(){
