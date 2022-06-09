@@ -27,15 +27,8 @@ public class Chassis extends GBSubsystem {
 		setIdleMode(AbstractMotor.IdleMode.Brake);
 		this.wheelDistance = wheelDistance;
 	}
-	
 	public static Chassis getInstance() {
 		return instance;
-	}
-	
-	public void setIdleMode(AbstractMotor.IdleMode idleMode) {
-		for (Motor motor : motors) {
-			motor.setIdleMode(idleMode);
-		}
 	}
 	
 	public static void create(
@@ -46,7 +39,13 @@ public class Chassis extends GBSubsystem {
 		instance = new Chassis(motorType, ports, isInverted, wheelDistance);
 	}
 	
-	public Motor[] getRightMotors() {
+	public void setIdleMode(AbstractMotor.IdleMode idleMode) {
+		for (Motor motor : motors) {
+			motor.setIdleMode(idleMode);
+		}
+	}
+	
+	public Motor[] getRightMotor() {
 		Motor[] right = new Motor[motors.length / 2];
 		for (int i = 0; i < motors.length / 2; i++) {
 			right[i] = motors[i];
@@ -54,12 +53,12 @@ public class Chassis extends GBSubsystem {
 		return right;
 	}
 	
-	public Motor getRightMotors(int id) {
-		Motor[] rightMotors = getRightMotors();
+	public Motor getRightMotor(int id) {
+		Motor[] rightMotors = getRightMotor();
 		return rightMotors[id];
 	}
 	
-	public Motor[] getLeftMotors() {
+	public Motor[] getLeftMotor() {
 		Motor[] left = new Motor[motors.length / 2];
 		for (int i = 0; i < motors.length / 2; i++) {
 			left[i] = motors[motors.length / 2 + i];
@@ -67,16 +66,16 @@ public class Chassis extends GBSubsystem {
 		return left;
 	}
 	
-	public Motor getLeftMotors(int id) {
-		Motor[] leftMotors = getLeftMotors();
+	public Motor getLeftMotor(int id) {
+		Motor[] leftMotors = getLeftMotor();
 		return leftMotors[id];
 	}
 	
 	public void moveMotors(double powerLeft, double powerRight) {
-		for (Motor motor : getLeftMotors()) {
+		for (Motor motor : getLeftMotor()) {
 			motor.setPower(powerLeft);
 		}
-		for (Motor motor : getRightMotors()) {
+		for (Motor motor : getRightMotor()) {
 			motor.setPower(powerRight);
 		}
 	}
@@ -84,36 +83,18 @@ public class Chassis extends GBSubsystem {
 	public void moveMotors(double power) {
 		moveMotors(power, power);
 	}
-
-
-//	public void semiToCoast() {
-//		for(int i = 1; i < 5; i++){
-//			motors[i].setIdleMode(AbstractMotor.IdleMode.Coast); //moves two thirds to coast
-//		}
-//	}
-//
-//	public void semiToBrake() {
-//		for(int i = 1; i < 5; i++){
-//			motors[i].setIdleMode(AbstractMotor.IdleMode.Brake); //moves two thirds to brake
-//		}
-//	}
+	
 	
 	public void arcadeDrive(double moveValue, double rotateValue) {
 		moveMotors(moveValue - rotateValue, moveValue + rotateValue);
 	}
 	
-	//	public void arcadeDrive(double moveValue, double rotateValue) {
-//		SmartDashboard.putNumber("rotate power", rotateValue);
-//		moveMotors(moveValue - rotateValue, moveValue + rotateValue);
-//	}
-//
-//
 	public double getLeftMeters() {
-		return getLeftMotors(1).getNormalizedPosition();
+		return getLeftMotor(1).getNormalizedPosition();
 	}
 	
 	public double getRightMeters() {
-		return getRightMotors(1).getNormalizedPosition();
+		return getRightMotor(1).getNormalizedPosition();
 	}
 	
 	public double getMeters() {
@@ -121,11 +102,11 @@ public class Chassis extends GBSubsystem {
 	}
 	
 	public double getLeftVelocity() {
-		return getLeftMotors(1).getNormalizedVelocity();
+		return getLeftMotor(1).getNormalizedVelocity();
 	}
 	
 	public double getRightVelocity() {
-		return getRightMotors(1).getNormalizedVelocity();
+		return getRightMotor(1).getNormalizedVelocity();
 	}
 	
 	
@@ -133,11 +114,11 @@ public class Chassis extends GBSubsystem {
 		return (getRightVelocity() + getLeftVelocity()) * 0.5;
 	}
 	
-	//	public double getAngularVelocityByWheels() {
-//		return (getRightRate() - getLeftRate())/getWheelDistance();
-//		//this is true, if u don't understand, go to your mommy and cry (ask asaf);
-//	}
-//
+		public double getAngularVelocityByWheels() {
+		return (getRightVelocity() - getLeftVelocity())/getWheelDistance();
+		//this is true, if u don't understand, go to your mommy and cry (ask asaf);
+	}
+
 	public double getAngle() {
 		return gyroscope.getNormalizedYaw();
 	}
@@ -157,19 +138,14 @@ public class Chassis extends GBSubsystem {
 	public double getWheelDistance() {
 		return wheelDistance;
 	}
-//
+
 //	public Position getLocation() { //todo todo todo fzxtdjyygvju
 //		return Localizer.getInstance().getLocation();
 //	}
-//	@Override
-//	public void periodic() {
-//		SmartDashboard.putNumber("Pigeon angle deg", Math.toDegrees(getAngle()));
-//		putString("Location", Chassis.getInstance().getLocation().toString());
-//	}
 	
 	public void resetEncoders() {
-		getLeftMotors(1).resetEncoder();
-		getRightMotors(1).resetEncoder();
+		getLeftMotor(1).resetEncoder();
+		getRightMotor(1).resetEncoder();
 	}
 	
 	public void setMotorByID(int id, double power) {
