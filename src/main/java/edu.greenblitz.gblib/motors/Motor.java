@@ -6,7 +6,9 @@
 package edu.greenblitz.gblib.motors;
 
 public interface Motor {
-	
+
+//	public Motor getInstance();
+//
 	/**
 	 * sets motor power from -1 to 1;
 	 */
@@ -41,6 +43,13 @@ public interface Motor {
 	void setGearRatio(double gearRatio);
 	double getNormalizedPosition();
 	
+	
+	/**
+	 * @return raw velocity in ticks per second
+	 */
+	double getRawVelocity();
+	
+	
 	/**
 	 * normalizes encoder ticks to rotations using the gear ratio
 	 *
@@ -48,4 +57,17 @@ public interface Motor {
 	 */
 	double getNormalizedVelocity();
 	
+	void configurePID(double p);
+	
+	void configurePID(double p, double i);
+	
+	void configurePID(double p, double i , double d);
+	
+	void configurePID(double p, double i, double d, double ff);
+	
+	void setCurrentLimit(int limit);
+	
+	void resetEncoder();
+	
+	void setIdleMode(AbstractMotor.IdleMode idleMode);
 }

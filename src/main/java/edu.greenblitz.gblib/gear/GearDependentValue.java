@@ -3,25 +3,25 @@ package edu.greenblitz.gblib.gear;
 
 import java.util.function.DoubleSupplier;
 
-public class GearDependentValue<T>{
+public class GearDependentValue{
 
-	protected T whenPower;
-	protected T whenSpeed;
+	protected double whenPower;
+	protected double whenSpeed;
 
-	public GearDependentValue(T whenPower, T whenSpeed){
+	public GearDependentValue(double whenPower, double whenSpeed){
 		this.whenPower = whenPower;
 		this.whenSpeed = whenSpeed;
 	}
 
-	public T getValue(boolean isPower){
+	public double getValue(boolean isPower){
 		return isPower ? whenPower : whenSpeed;
 	}
 
-	public T getValue(){
+	public double getValue(){
 		return getValue(Gear.getInstance().getState());
 	}
 
-	public void setValue(boolean isPower, T val){
+	public void setValue(boolean isPower, double val){
 		if (isPower)
 			this.whenPower = val;
 		else

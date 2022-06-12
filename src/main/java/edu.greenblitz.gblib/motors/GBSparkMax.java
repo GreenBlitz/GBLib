@@ -4,24 +4,28 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
 
-public class GBSparkMax implements Motor {
+public class GBSparkMax extends AbstractMotor {
 	private CANSparkMax motor;
 	private RelativeEncoder encoder;
-	
-	/**
-	 * sets gear ratio as 42 for default, but can be changed
-	 */
-	private double gearRatio = 42;
-	
 	
 	/**
 	 * Constructor:
 	 * Defines motor as the SparkMax with the given id;
 	 * Sets encoder as the motor's encoder;
+	 * Sets gear ratio as given;
 	 */
-	public GBSparkMax(int id) {
+	public GBSparkMax(int id, double gearRatio) {
 		this.motor = new CANSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless);
 		this.encoder = this.motor.getEncoder();
+		setGearRatio(gearRatio);
+	}
+	
+	
+	/**
+	 * sets gear ratio as 42 for default, if not given otherwise;
+	 */
+	public GBSparkMax(int id) {
+		this(id, 42);
 	}
 	
 	
@@ -45,30 +49,51 @@ public class GBSparkMax implements Motor {
 		return encoder.getPosition();
 	}
 	
-	
-	/**
-	 * Sets gear ratio in ticks per rotation;
-	 */
 	@Override
-	public void setGearRatio(double gearRatio) {
-		this.gearRatio = gearRatio;
+	public double getRawVelocity() {
+		return encoder.getVelocity();
 	}
 	
 	
-	/**
-	 * @return position in degrees;
-	 */
 	@Override
-	public double getNormalizedPosition() {
-		return (this.getRawTicks()/gearRatio)*360;
+	public void configurePID(double p) {
+		motor.getPIDController().setP(p);
 	}
 	
-	
-	/**
-	 * @return velocity in RPM
-	 */
 	@Override
-	public double getNormalizedVelocity() {
-		return (encoder.getVelocity()/gearRatio)*60;
+	public void configurePID(double p, double i) {
+		motor.getPIDController().setP(p);
+		motor.getPIDController().setI(i);
+	}
+	
+	@Override
+	public void configurePID(double p, double i, double d) {
+		motor.getPIDController().setP(p);
+		motor.getPIDController().setI(i);
+		motor.getPIDController().setD(d);
+	}
+	
+	@Override
+	public void configurePID(double p, double i, double d, double ff) {
+		motor.getPIDController().setP(p);
+		motor.getPIDController().setI(i);
+		motor.getPIDController().setD(d);
+		motor.getPIDController().setFF(ff);
+	}
+	
+	@Override
+	public void setCurrentLimit(int limit) {
+		motor.setSmartCurrentLimit(limit);
+	}
+	
+	@Override
+	public void resetEncoder() {
+		motor.getEncoder().setPosition(0);
+	}
+	
+	@Override
+	public void setIdleMode(IdleMode idleMode) {
+		if (idleMode == IdleMode.Brake){motor.setIdleMode(CANSparkMax.IdleMode.kBrake);}
+		else {motor.setIdleMode(CANSparkMax.IdleMode.kCoast);}
 	}
 }
