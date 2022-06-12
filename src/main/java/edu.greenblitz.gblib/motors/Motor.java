@@ -45,7 +45,7 @@ public interface Motor {
 	
 	
 	/**
-	 * @return returns raw velocity in ticks per second
+	 * @return raw velocity in ticks per second
 	 */
 	double getRawVelocity();
 	
