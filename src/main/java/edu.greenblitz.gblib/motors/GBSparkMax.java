@@ -1,8 +1,10 @@
 package edu.greenblitz.gblib.motors;
 
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
+import edu.greenblitz.gblib.motion.pid.PIDObject;
 
 public class GBSparkMax extends AbstractMotor {
 	private CANSparkMax motor;
@@ -56,30 +58,34 @@ public class GBSparkMax extends AbstractMotor {
 	
 	
 	@Override
-	public void configurePID(double p) {
-		motor.getPIDController().setP(p);
+	public void configurePID(PIDObject pidObject) {
+		motor.getPIDController().setP(pidObject.getKp());
+		motor.getPIDController().setI(pidObject.getKi());
+		motor.getPIDController().setD(pidObject.getKd());
+		motor.getPIDController().setFF(pidObject.getKf());
+		motor.getPIDController().setIZone(pidObject.getIZone());
 	}
 	
 	@Override
-	public void configurePID(double p, double i) {
-		motor.getPIDController().setP(p);
-		motor.getPIDController().setI(i);
+	public void setTargetByPID(double target, PIDTarget targetType) {
+		switch (targetType){
+			case Speed:
+				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity);
+				break;
+			case Current:
+				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kCurrent);
+				break;
+			case Position:
+				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kPosition);
+				break;
+		}
 	}
 	
 	@Override
-	public void configurePID(double p, double i, double d) {
-		motor.getPIDController().setP(p);
-		motor.getPIDController().setI(i);
-		motor.getPIDController().setD(d);
+	public void setTargetSpeedByPID(double target) {
+		motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity);
 	}
 	
-	@Override
-	public void configurePID(double p, double i, double d, double ff) {
-		motor.getPIDController().setP(p);
-		motor.getPIDController().setI(i);
-		motor.getPIDController().setD(d);
-		motor.getPIDController().setFF(ff);
-	}
 	
 	@Override
 	public void setCurrentLimit(int limit) {

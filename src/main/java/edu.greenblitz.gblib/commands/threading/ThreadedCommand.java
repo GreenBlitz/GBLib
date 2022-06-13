@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.threading;
+package edu.greenblitz.gblib.commands.threading;
 
 import edu.greenblitz.gblib.base.GBCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;

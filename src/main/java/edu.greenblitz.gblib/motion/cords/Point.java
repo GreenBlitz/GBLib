@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.base;
+package edu.greenblitz.gblib.motion.cords;
 
 /**
  * Represents a simple 2D point

@@ -1,11 +1,9 @@
 package edu.greenblitz.gblib.motors;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXPIDSetConfiguration;
+import edu.greenblitz.gblib.motion.pid.PIDObject;
 
 public class GBFalcon extends AbstractMotor {
 	private TalonFX motor;
@@ -30,10 +28,6 @@ public class GBFalcon extends AbstractMotor {
 	@Override
 	public void setPower(double power) {
 		motor.set(ControlMode.PercentOutput, power);
-	}
-	
-	public void setAngleByPID(double angle) {
-		motor.set(ControlMode.Position, angle);
 	}
 	
 	@Override
@@ -61,30 +55,35 @@ public class GBFalcon extends AbstractMotor {
 	}
 	
 	@Override
-	public void configurePID(double p) {
-		motor.config_kP(0, p);
+	public void configurePID(PIDObject pidObject) {
+		motor.config_kP(0,pidObject.getKp());
+		motor.config_kI(0,pidObject.getKi());
+		motor.config_kD(0,pidObject.getKd());
+		motor.config_kF(0,pidObject.getKf());
+		motor.config_IntegralZone(0,pidObject.getIZone());
 	}
 	
 	@Override
-	public void configurePID(double p, double i) {
-		motor.config_kP(0, p);
-		motor.config_kI(0, i);
+	public void setTargetByPID(double target, PIDTarget targetType) {
+		switch (targetType){
+			case Speed:
+				motor.set(TalonFXControlMode.Velocity, target);
+				break;
+			case Current:
+				motor.set(TalonFXControlMode.Current, target);
+				break;
+			case Position:
+				motor.set(TalonFXControlMode.Position, target);
+				break;
+		}
+		
 	}
 	
 	@Override
-	public void configurePID(double p, double i, double d) {
-		motor.config_kP(0, p);
-		motor.config_kI(0, i);
-		motor.config_kD(0, d);
+	public void setTargetSpeedByPID(double target) {
+		motor.set(TalonFXControlMode.Velocity, target);
 	}
 	
-	@Override
-	public void configurePID(double p, double i, double d, double ff) {
-		motor.config_kP(0, p);
-		motor.config_kI(0, i);
-		motor.config_kD(0, d);
-		motor.config_kF(0, ff);
-	}
 	
 	@Override
 	public void setCurrentLimit(int limit) {

@@ -2,17 +2,18 @@ package edu.greenblitz.gblib.motion.pid;
 
 public class PIDObject {
 
-    private double m_kp, m_kd, m_ki, m_kf;
+    private double kp, kd, ki, ff;
     private double iZone;
+    private double tolerance;
     private int inverted = 1;
 
     @Override
     public String toString() {
         return "PIDObject{" +
-                "kp=" + m_kp +
-                ", kd=" + m_kd +
-                ", ki=" + m_ki +
-                ", kf=" + m_kf +
+                "kp=" + kp +
+                ", kd=" + kd +
+                ", ki=" + ki +
+                ", kf=" + ff +
                 ", inv=" + inverted +
                 ", iZone="+ iZone+ "}";
     }
@@ -22,10 +23,10 @@ public class PIDObject {
     }
     
     public PIDObject(double kp, double ki, double kd, double kf, int inv, double iZone) {
-        this.m_kp = kp;
-        this.m_kd = kd;
-        this.m_ki = ki;
-        this.m_kf = kf;
+        this.kp = kp;
+        this.kd = kd;
+        this.ki = ki;
+        this.ff = kf;
         this.iZone = iZone;
         setInverted(inv);
     }
@@ -71,34 +72,33 @@ public class PIDObject {
     public PIDObject(double kp, int inv) {
         this(kp, 0.0, inv);
     }
-
-
+    
     public double getKp() {
-        return m_kp;
+        return kp;
     }
 
-    public void setKp(double m_kp) {
-        this.m_kp = m_kp;
+    public void setKp(double kp) {
+        this.kp = kp;
     }
 
     public double getKd() {
-        return m_kd;
+        return kd;
     }
 
-    public void setKd(double m_kd) {
-        this.m_kd = m_kd;
+    public void setKd(double kd) {
+        this.kd = kd;
     }
 
     public double getKi() {
-        return m_ki;
+        return ki;
     }
 
-    public void setKi(double m_ki) {
-        this.m_ki = m_ki;
+    public void setKi(double ki) {
+        this.ki = ki;
     }
 
     public double getKf() {
-        return m_kf;
+        return ff;
     }
     
     public double getIZone() {
@@ -109,8 +109,48 @@ public class PIDObject {
         this.iZone = iZone;
     }
     
-    public void setKf(double m_kf) {
-        this.m_kf = m_kf;
+    public void setFF(double ff) {
+        this.ff = ff;
     }
+    
+    public double getTolerance() {
+        return tolerance;
+    }
+    
+    public void setTolerance(double tolerance) {
+        this.tolerance = tolerance;
+    }
+    
+    public PIDObject withKp(double kp){
+        this.setKp(kp);
+        return this;
+    }
+    
+    public PIDObject withKi(double ki){
+        this.setKi(ki);
+        return this;
+    }
+    
+    public PIDObject withKd(double kd){
+        this.setKd(kd);
+        return this;
+    }
+    
+    public PIDObject withFF(double ff){
+        this.setFF(ff);
+        return this;
+    }
+    
+    public PIDObject withIZone(double iZone){
+        setIZone(iZone);
+        return this;
+    }
+    
+    public PIDObject withTolerance(double tolerance){
+        setTolerance(tolerance);
+        return this;
+    }
+    
+    
 
 }

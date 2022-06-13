@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.base;
+package edu.greenblitz.gblib.motion.cords;
 
 /**
  * Represent a position in 2D space (for example of a org.greenblitz.example.robot) that consists of x, y, and angle (heading, the direction the object faces)

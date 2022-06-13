@@ -24,5 +24,11 @@ public abstract class AbstractMotor implements Motor{
 		Brake
 	}
 	
+	public enum PIDTarget{
+		Speed,
+		Position,
+		Current
+	}
+	
 	
 }

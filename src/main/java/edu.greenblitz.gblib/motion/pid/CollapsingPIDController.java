@@ -1,6 +1,7 @@
 package edu.greenblitz.gblib.motion.pid;
 
-import org.greenblitz.motion.tolerance.ITolerance;
+import edu.greenblitz.gblib.motion.tolerance.ITolerance;
+
 
 public class CollapsingPIDController extends PIDController {
 

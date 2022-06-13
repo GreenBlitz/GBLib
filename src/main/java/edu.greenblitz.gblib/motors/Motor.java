@@ -5,6 +5,9 @@
 
 package edu.greenblitz.gblib.motors;
 
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import edu.greenblitz.gblib.motion.pid.PIDObject;
+
 public interface Motor {
 
 //	public Motor getInstance();
@@ -56,14 +59,9 @@ public interface Motor {
 	 * @return velocity in RPM;
 	 */
 	double getNormalizedVelocity();
-	
-	void configurePID(double p);
-	
-	void configurePID(double p, double i);
-	
-	void configurePID(double p, double i , double d);
-	
-	void configurePID(double p, double i, double d, double ff);
+	void configurePID(PIDObject pidObject);
+	void setTargetByPID(double target, AbstractMotor.PIDTarget targetType);
+	void setTargetSpeedByPID(double target);
 	
 	void setCurrentLimit(int limit);
 	

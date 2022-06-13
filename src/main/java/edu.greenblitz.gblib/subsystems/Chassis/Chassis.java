@@ -3,14 +3,11 @@ package edu.greenblitz.gblib.subsystems.Chassis;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.greenblitz.gblib.gyro.PigeonGyro;
 import edu.greenblitz.gblib.motion.Localizer;
-import edu.greenblitz.gblib.motion.base.Position;
+import edu.greenblitz.gblib.motion.cords.Position;
 import edu.greenblitz.gblib.motors.AbstractMotor;
 import edu.greenblitz.gblib.motors.Motor;
 import edu.greenblitz.gblib.motors.MotorType;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 public class Chassis extends GBSubsystem {
 	private static Chassis instance;

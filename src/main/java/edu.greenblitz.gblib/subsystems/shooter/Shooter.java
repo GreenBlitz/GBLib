@@ -1,5 +1,7 @@
+/*
 package edu.greenblitz.gblib.subsystems.shooter;
 import edu.greenblitz.gblib.motors.AbstractMotor;
+import edu.greenblitz.gblib.motors.GBSparkMax;
 import edu.greenblitz.gblib.motors.Motor;
 import edu.greenblitz.gblib.motors.MotorType;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
@@ -19,15 +21,6 @@ public class Shooter extends GBSubsystem {
 		this.motor.setInverted(isInverted);
 		this.motor.setCurrentLimit(40);
 		this.motor.setIdleMode(AbstractMotor.IdleMode.Coast);
-		
-//		leader = new GBSparkMax(RobotMap.Pegasus.Shooter.ShooterMotor.PORT_LEADER);
-//
-//		leader.setInverted(RobotMap.Pegasus.Shooter.ShooterMotor.LEADER_INVERTED);
-//
-//		leader.setIdleMode(AbstractMotor.IdleMode.Coast);
-//
-//		leader.setCurrentLimit(40);
-//
 //		//leader.setClosedLoopRampRate(1);
 //
 		preparedToShoot = false;
@@ -58,10 +51,10 @@ public class Shooter extends GBSubsystem {
 		this.RPM = rpm;
 	}
 	
-//	public void setSpeedByPID(double target) {
-////		leader.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity); //todo fix
-//		System.out.println("plz fix me- set speed by PID in shooter");
-//	}
+	public void setSpeedByPID(double target) {
+//		leader.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity); //todo fix
+		System.out.println("plz fix me- set speed by PID in shooter");
+	}
 
 //	public void setPIDConsts(PIDObject obj, double iZone) {
 //		SparkMaxPIDController controller = leader.getPIDController();
@@ -103,8 +96,9 @@ public class Shooter extends GBSubsystem {
 //		return isShooter;
 //	}
 	
-//	public SparkMaxPIDController getPIDController() {
-//		return leader.getPIDController();
-//	}
+	public GBSparkMax getPIDController() {
+		return motor.getPIDController();
+	}
 
 }
+*/
