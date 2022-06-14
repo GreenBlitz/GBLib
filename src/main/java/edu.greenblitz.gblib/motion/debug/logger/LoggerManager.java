@@ -1,7 +1,7 @@
 package edu.greenblitz.gblib.motion.debug.logger;
 
+import edu.greenblitz.gblib.motion.debug.DebugTables;
 import edu.wpi.first.networktables.NetworkTable;
-import org.greenblitz.debug.DebugTables;
 
 import java.util.HashMap;
 import java.util.Map;
