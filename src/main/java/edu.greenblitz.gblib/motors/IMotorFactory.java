@@ -2,5 +2,5 @@ package edu.greenblitz.gblib.motors;
 
 public interface IMotorFactory {
 	
-	Motor generate(int id);
+	GBMotor generate(int id);
 }

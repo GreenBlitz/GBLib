@@ -1,20 +1,19 @@
-/*
 package edu.greenblitz.gblib.subsystems.shooter;
+import com.revrobotics.SparkMaxPIDController;
+import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.AbstractMotor;
-import edu.greenblitz.gblib.motors.GBSparkMax;
-import edu.greenblitz.gblib.motors.Motor;
+import edu.greenblitz.gblib.motors.GBMotor;
 import edu.greenblitz.gblib.motors.MotorType;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shooter extends GBSubsystem {
 	
 	private static Shooter instance;
 	
-	private Motor motor;
+	private GBMotor motor;
 	private boolean preparedToShoot;
 	private boolean isShooter;
-	private static double RPM = 3000;
+	private final static double RPM = 3000;
 	
 	private Shooter(MotorType motorType, int id, boolean isInverted) {
 		this.motor = motorType.generate(id);
@@ -47,27 +46,18 @@ public class Shooter extends GBSubsystem {
 		motor.setIdleMode(idleMode);
 	}
 	
-	public void setRPM(double rpm){
-		this.RPM = rpm;
-	}
-	
+	/**
+	 * pid is handled by GBMotor either internal motor controller pid or external in GBMotor implementation
+	 * @param target the target speed in rpm
+	 */
 	public void setSpeedByPID(double target) {
-//		leader.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity); //todo fix
-		System.out.println("plz fix me- set speed by PID in shooter");
+		motor.setTargetSpeedByPID(target);
 	}
 
-//	public void setPIDConsts(PIDObject obj, double iZone) {
-//		SparkMaxPIDController controller = leader.getPIDController();
-//		controller.setP(obj.getKp());
-//		controller.setI(obj.getKi());
-//		controller.setD(obj.getKd());
-//		controller.setFF(obj.getKf());
-//		controller.setIZone(iZone);
-//	}
+	public void setPIDConsts(PIDObject obj) {
+		motor.configurePID(obj);
+	}
 
-//	public void setPIDConsts(PIDObject obj) {
-//		setPIDConsts(obj, 0);
-//	}
 	
 	public double getShooterSpeed() {
 		return motor.getNormalizedVelocity();
@@ -85,20 +75,6 @@ public class Shooter extends GBSubsystem {
 		this.preparedToShoot = preparedToShoot;
 	}
 	
-//	public boolean toggleShooter() {
-//		System.out.println(isShooter);
-//		isShooter = !isShooter;
-//		if (isShooter) {
-//			(new ShooterByRPM(RobotMap.Pegasus.Shooter.ShooterMotor.pid, RobotMap.Pegasus.Shooter.ShooterMotor.iZone, RPM)).schedule();
-//		} else {
-//			(new StopShooter()).schedule();
-//		}
-//		return isShooter;
-//	}
 	
-	public GBSparkMax getPIDController() {
-		return motor.getPIDController();
-	}
 
 }
-*/

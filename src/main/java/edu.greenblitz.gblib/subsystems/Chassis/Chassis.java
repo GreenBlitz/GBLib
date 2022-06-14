@@ -5,7 +5,7 @@ import edu.greenblitz.gblib.gyro.PigeonGyro;
 import edu.greenblitz.gblib.motion.Localizer;
 import edu.greenblitz.gblib.motion.cords.Position;
 import edu.greenblitz.gblib.motors.AbstractMotor;
-import edu.greenblitz.gblib.motors.Motor;
+import edu.greenblitz.gblib.motors.GBMotor;
 import edu.greenblitz.gblib.motors.MotorType;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
 
@@ -13,11 +13,11 @@ public class Chassis extends GBSubsystem {
 	private static Chassis instance;
 	private final PigeonGyro gyroscope;
 	private final double wheelDistance;
-	private final Motor[] motors;
+	private final GBMotor[] motors;
 	
 	
 	private Chassis(MotorType motorType, int[] ports, boolean[] isInverted, double wheelDistance) {
-		motors = new Motor[ports.length];
+		motors = new GBMotor[ports.length];
 		
 		for (int i = 0; i < motors.length; i++) {
 			motors[i] = motorType.generate(ports[i]);
@@ -43,42 +43,42 @@ public class Chassis extends GBSubsystem {
 	}
 	
 	public void setIdleMode(AbstractMotor.IdleMode idleMode) {
-		for (Motor motor : motors) {
+		for (GBMotor motor : motors) {
 			motor.setIdleMode(idleMode);
 		}
 	}
 	
-	public Motor[] getRightMotor() {
-		Motor[] right = new Motor[motors.length / 2];
+	public GBMotor[] getRightMotor() {
+		GBMotor[] right = new GBMotor[motors.length / 2];
 		for (int i = 0; i < motors.length / 2; i++) {
 			right[i] = motors[i];
 		}
 		return right;
 	}
 	
-	public Motor getRightMotor(int id) {
-		Motor[] rightMotors = getRightMotor();
+	public GBMotor getRightMotor(int id) {
+		GBMotor[] rightMotors = getRightMotor();
 		return rightMotors[id];
 	}
 	
-	public Motor[] getLeftMotor() {
-		Motor[] left = new Motor[motors.length / 2];
+	public GBMotor[] getLeftMotor() {
+		GBMotor[] left = new GBMotor[motors.length / 2];
 		for (int i = 0; i < motors.length / 2; i++) {
 			left[i] = motors[motors.length / 2 + i];
 		}
 		return left;
 	}
 	
-	public Motor getLeftMotor(int id) {
-		Motor[] leftMotors = getLeftMotor();
+	public GBMotor getLeftMotor(int id) {
+		GBMotor[] leftMotors = getLeftMotor();
 		return leftMotors[id];
 	}
 	
 	public void moveMotors(double powerLeft, double powerRight) {
-		for (Motor motor : getLeftMotor()) {
+		for (GBMotor motor : getLeftMotor()) {
 			motor.setPower(powerLeft);
 		}
-		for (Motor motor : getRightMotor()) {
+		for (GBMotor motor : getRightMotor()) {
 			motor.setPower(powerRight);
 		}
 	}

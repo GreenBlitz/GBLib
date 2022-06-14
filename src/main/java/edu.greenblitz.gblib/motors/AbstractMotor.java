@@ -1,6 +1,6 @@
 package edu.greenblitz.gblib.motors;
 
-public abstract class AbstractMotor implements Motor{
+public abstract class AbstractMotor implements GBMotor {
 	private double gearRatio;
 	
 	@Override

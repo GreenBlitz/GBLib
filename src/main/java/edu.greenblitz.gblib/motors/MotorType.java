@@ -6,13 +6,13 @@ package edu.greenblitz.gblib.motors;
 public enum MotorType implements IMotorFactory {
 	GBFalcon {
 		@Override
-		public Motor generate(int id) {
+		public GBMotor generate(int id) {
 			return new GBFalcon(id);
 		}
 	},
 	GBSparkMax {
 		@Override
-		public Motor generate(int id) {
+		public GBMotor generate(int id) {
 			return new GBSparkMax(id);
 		}
 	}

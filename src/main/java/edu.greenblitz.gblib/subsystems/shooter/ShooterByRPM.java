@@ -1,4 +1,3 @@
-/*
 package edu.greenblitz.gblib.subsystems.shooter;
 
 import edu.greenblitz.gblib.motion.pid.PIDObject;
@@ -15,22 +14,18 @@ public class ShooterByRPM extends ShooterCommand {
 
 	public ShooterByRPM(PIDObject obj, double iZone, double target) {
 		this.obj = obj;
-		this.obj.setFF(RobotMap.Pegasus.Shooter.ShooterMotor.RPM_TO_POWER.linearlyInterpolate(target)[0] / target);
 		this.iZone = iZone;
 		this.target = target;
 //		this.logger = RemoteCSVTarget.initTarget("FlyWheelVel", "time", "vel");
 		this.inShootingSpeed = 0;
 	}
 
-	public ShooterByRPM(double target) {
-		this(RobotMap.Pegasus.Shooter.ShooterMotor.pid, RobotMap.Pegasus.Shooter.ShooterMotor.iZone, target);
-	}
 
 	@Override
 	public void initialize() {
 		shooter.setPreparedToShoot(false);
 //		shooter.getPIDController().setIAccum(0.0);
-//		shooter.setPIDConsts(obj, iZone);
+		shooter.setPIDConsts(obj);
 		tStart = System.currentTimeMillis()/1000.0;
 	}
 
@@ -63,4 +58,3 @@ public class ShooterByRPM extends ShooterCommand {
 		super.end(interrupted);
 	}
 }
-*/

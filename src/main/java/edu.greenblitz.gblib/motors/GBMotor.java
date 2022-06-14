@@ -5,10 +5,9 @@
 
 package edu.greenblitz.gblib.motors;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 
-public interface Motor {
+public interface GBMotor {
 
 //	public Motor getInstance();
 //
@@ -21,6 +20,7 @@ public interface Motor {
 	/**
 	 * if true, makes motors rotate in opposite direction;
 	 */
+	@Deprecated // should be done with factory builder
 	void setInverted(boolean inverted);
 	
 	/**
@@ -43,6 +43,7 @@ public interface Motor {
 	/**
 	 * sets new gear ratio (gears per rotations)
 	 */
+	@Deprecated
 	void setGearRatio(double gearRatio);
 	double getNormalizedPosition();
 	
@@ -63,6 +64,7 @@ public interface Motor {
 	void setTargetByPID(double target, AbstractMotor.PIDTarget targetType);
 	void setTargetSpeedByPID(double target);
 	
+	@Deprecated
 	void setCurrentLimit(int limit);
 	
 	void resetEncoder();
