@@ -47,10 +47,6 @@ public class PIDController {
 		m_maximumOutput = max;
 	}
 	
-	public void setGoal(double goal) {
-		m_goal = goal;
-	}
-	
 	public void configure(double curr, double goal, double limitLower, double limitUpper, double absoluteMinimumOut) {
 		setGoal(goal);
 		m_previousError = goal - curr;
@@ -75,6 +71,10 @@ public class PIDController {
 	
 	public double getGoal() {
 		return m_goal;
+	}
+	
+	public void setGoal(double goal) {
+		m_goal = goal;
 	}
 	
 	public double getLowerOutputLimit() {
@@ -123,6 +123,10 @@ public class PIDController {
 		return m_obj;
 	}
 	
+	public void setPidObject(PIDObject newPidObj) {
+		this.m_obj = newPidObj;
+	}
+	
 	public double getLastError() {
 		return m_previousError;
 	}
@@ -159,10 +163,6 @@ public class PIDController {
 			return value;
 		}
 		return Math.min(Math.max(value, m_minimumOutput), m_maximumOutput);
-	}
-	
-	public void setPidObject(PIDObject newPidObj) {
-		this.m_obj = newPidObj;
 	}
 	
 	public void atEnd() {

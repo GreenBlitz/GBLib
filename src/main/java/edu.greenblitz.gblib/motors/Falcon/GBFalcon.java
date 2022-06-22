@@ -1,27 +1,19 @@
-package edu.greenblitz.gblib.motors;
+package edu.greenblitz.gblib.motors.Falcon;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonFXPIDSetConfiguration;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.gblib.motors.AbstractMotor;
 
 public class GBFalcon extends AbstractMotor {
-	private TalonFX motor;
-	/**
-	 * Constructor:
-	 * Defines motor as the Falcon with the given id;
-	 * Sets gear ratio as given;
-	 */
-	public GBFalcon(int id, double gearRatio) {
-		motor = new TalonFX(id);
-		setGearRatio(gearRatio);
-	}
+	private final TalonFX motor;
 	
 	/**
-	 * sets default gear ratio as 2048, if not given otherwise
+	 * Constructor:
+	 * Defines motor as the edu.greenblitz.gblib.motors.Falcon with the given id;
 	 */
 	public GBFalcon(int id) {
-		this(id, 2048);
+		motor = new TalonFX(id);
 	}
 	
 	
@@ -31,17 +23,17 @@ public class GBFalcon extends AbstractMotor {
 	}
 	
 	@Override
+	public boolean getInverted() {
+		return (motor.getInverted()); /*getInverted is also a talon method*/
+	}
+	
+	@Override
 	public void setInverted(boolean inverted) {
 		if (inverted) {
 			motor.setInverted(TalonFXInvertType.CounterClockwise);
 		} else {
 			motor.setInverted(TalonFXInvertType.Clockwise);
 		}
-	}
-	
-	@Override
-	public boolean getInverted() {
-		return (motor.getInverted()); /*getInverted is also a talon method*/
 	}
 	
 	@Override
@@ -56,16 +48,16 @@ public class GBFalcon extends AbstractMotor {
 	
 	@Override
 	public void configurePID(PIDObject pidObject) {
-		motor.config_kP(0,pidObject.getKp());
-		motor.config_kI(0,pidObject.getKi());
-		motor.config_kD(0,pidObject.getKd());
-		motor.config_kF(0,pidObject.getKf());
-		motor.config_IntegralZone(0,pidObject.getIZone());
+		motor.config_kP(0, pidObject.getKp());
+		motor.config_kI(0, pidObject.getKi());
+		motor.config_kD(0, pidObject.getKd());
+		motor.config_kF(0, pidObject.getKf());
+		motor.config_IntegralZone(0, pidObject.getIZone());
 	}
 	
 	@Override
 	public void setTargetByPID(double target, PIDTarget targetType) {
-		switch (targetType){
+		switch (targetType) {
 			case Speed:
 				motor.set(TalonFXControlMode.Velocity, target);
 				break;
@@ -84,21 +76,31 @@ public class GBFalcon extends AbstractMotor {
 		motor.set(TalonFXControlMode.Velocity, target);
 	}
 	
-	
-	@Override
-	public void setCurrentLimit(int limit) {
-		motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40,35, 100));
-	}
-	
 	@Override
 	public void resetEncoder() {
 		motor.setSelectedSensorPosition(0);
 	}
 	
+	public void setCurrentLimit(int limit) {
+		motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(limit != 0, limit, 0.875 * limit, 100));
+	}
+	
+	public void setVoltageCompensation(double voltage) {
+		motor.enableVoltageCompensation(voltage != 0);
+		motor.configVoltageCompSaturation(voltage);
+	}
+	
+	public void setRampRate(double rampRate) {
+		motor.configOpenloopRamp(rampRate);
+	}
+	
 	@Override
 	public void setIdleMode(IdleMode idleMode) {
-		if (idleMode == IdleMode.Brake){motor.setNeutralMode(NeutralMode.Brake);}
-		else {motor.setNeutralMode(NeutralMode.Coast);}
+		if (idleMode == IdleMode.Brake) {
+			motor.setNeutralMode(NeutralMode.Brake);
+		} else {
+			motor.setNeutralMode(NeutralMode.Coast);
+		}
 		
 	}
 	

@@ -10,10 +10,8 @@ package edu.greenblitz.gblib.gear;
  */
 
 public class Gear {
-	private boolean isPower;
-	
-	
 	private static Gear instance;
+	private boolean isPower;
 	
 	
 	/**
@@ -36,18 +34,17 @@ public class Gear {
 		return this.isPower;
 	}
 	
+	/**
+	 * @param desiredState - the gear state we wish to change into
+	 */
+	public void setState(boolean desiredState) {
+		this.isPower = desiredState;
+	}
 	
 	/**
 	 * Switches between the two gear states regardless of current state
 	 */
 	public void toggle() {
 		this.isPower = !this.isPower;
-	}
-	
-	/**
-	 * @param desiredState - the gear state we wish to change into
-	 */
-	public void setState(boolean desiredState) {
-		this.isPower = desiredState;
 	}
 }

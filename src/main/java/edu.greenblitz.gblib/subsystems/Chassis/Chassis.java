@@ -6,6 +6,7 @@ import edu.greenblitz.gblib.motion.Localizer;
 import edu.greenblitz.gblib.motion.cords.Position;
 import edu.greenblitz.gblib.motors.AbstractMotor;
 import edu.greenblitz.gblib.motors.GBMotor;
+import edu.greenblitz.gblib.motors.IMotorFactory;
 import edu.greenblitz.gblib.motors.MotorType;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
 
@@ -16,13 +17,11 @@ public class Chassis extends GBSubsystem {
 	private final GBMotor[] motors;
 	
 	
-	private Chassis(MotorType motorType, int[] ports, boolean[] isInverted, double wheelDistance) {
+	private Chassis(IMotorFactory motorType, int[] ports, double wheelDistance) {
 		motors = new GBMotor[ports.length];
 		
 		for (int i = 0; i < motors.length; i++) {
 			motors[i] = motorType.generate(ports[i]);
-			motors[i].setInverted(isInverted[i]);
-			motors[i].setCurrentLimit(40);
 		}
 		
 		gyroscope = new PigeonGyro(new PigeonIMU(12)); //Pigeon connects to talon/CAN bus
@@ -30,6 +29,7 @@ public class Chassis extends GBSubsystem {
 		setIdleMode(AbstractMotor.IdleMode.Brake);
 		this.wheelDistance = wheelDistance;
 	}
+	
 	public static Chassis getInstance() {
 		return instance;
 	}
@@ -37,9 +37,8 @@ public class Chassis extends GBSubsystem {
 	public static void create(
 			MotorType motorType,
 			int[] ports,
-			boolean[] isInverted,
 			double wheelDistance) {
-		instance = new Chassis(motorType, ports, isInverted, wheelDistance);
+		instance = new Chassis(motorType, ports, wheelDistance);
 	}
 	
 	public void setIdleMode(AbstractMotor.IdleMode idleMode) {
@@ -117,11 +116,11 @@ public class Chassis extends GBSubsystem {
 		return (getRightVelocity() + getLeftVelocity()) * 0.5;
 	}
 	
-		public double getAngularVelocityByWheels() {
-		return (getRightVelocity() - getLeftVelocity())/getWheelDistance();
+	public double getAngularVelocityByWheels() {
+		return (getRightVelocity() - getLeftVelocity()) / getWheelDistance();
 		//this is true, if u don't understand, go to your mommy and cry (ask asaf);
 	}
-
+	
 	public double getAngle() {
 		return gyroscope.getNormalizedYaw();
 	}
@@ -141,7 +140,7 @@ public class Chassis extends GBSubsystem {
 	public double getWheelDistance() {
 		return wheelDistance;
 	}
-
+	
 	public Position getLocation() {
 		return Localizer.getInstance().getLocation();
 	}

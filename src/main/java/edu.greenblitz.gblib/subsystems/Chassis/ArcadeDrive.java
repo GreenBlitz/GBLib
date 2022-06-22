@@ -7,9 +7,9 @@ import edu.greenblitz.gblib.motors.AbstractMotor;
 
 public class ArcadeDrive extends ChassisCommand {
 	
-	private SmartJoystick joystick;
 	private static final GearDependentValue forwardsFactor = new GearDependentValue(1.0, 0.3);
 	private static final GearDependentValue turnFactor = new GearDependentValue(0.2, 0.2);
+	private final SmartJoystick joystick;
 	
 	public ArcadeDrive(SmartJoystick joystick) {
 		this.joystick = joystick;

@@ -5,7 +5,7 @@ public class StopShooter extends ShooterCommand {
 	public void initialize() {
 		shooter.setPower(0);
 	}
-
+	
 	@Override
 	public boolean isFinished() {
 		return true;

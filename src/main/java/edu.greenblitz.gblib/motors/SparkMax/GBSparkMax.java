@@ -1,18 +1,18 @@
-package edu.greenblitz.gblib.motors;
+package edu.greenblitz.gblib.motors.SparkMax;
 
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.gblib.motors.AbstractMotor;
 
 public class GBSparkMax extends AbstractMotor {
-	private CANSparkMax motor;
-	private RelativeEncoder encoder;
+	private final CANSparkMax motor;
+	private final RelativeEncoder encoder;
 	
 	/**
 	 * Constructor:
-	 * Defines motor as the SparkMax with the given id;
+	 * Defines motor as the edu.greenblitz.gblib.motors.SparkMax with the given id;
 	 * Sets encoder as the motor's encoder;
 	 * Sets gear ratio as given;
 	 */
@@ -37,13 +37,13 @@ public class GBSparkMax extends AbstractMotor {
 	}
 	
 	@Override
-	public void setInverted(boolean inverted) {
-		motor.setInverted(inverted);
+	public boolean getInverted() {
+		return motor.getInverted();
 	}
 	
 	@Override
-	public boolean getInverted() {
-		return motor.getInverted();
+	public void setInverted(boolean inverted) {
+		motor.setInverted(inverted);
 	}
 	
 	@Override
@@ -68,7 +68,7 @@ public class GBSparkMax extends AbstractMotor {
 	
 	@Override
 	public void setTargetByPID(double target, PIDTarget targetType) {
-		switch (targetType){
+		switch (targetType) {
 			case Speed:
 				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity);
 				break;
@@ -87,7 +87,6 @@ public class GBSparkMax extends AbstractMotor {
 	}
 	
 	
-	@Override
 	public void setCurrentLimit(int limit) {
 		motor.setSmartCurrentLimit(limit);
 	}
@@ -99,7 +98,24 @@ public class GBSparkMax extends AbstractMotor {
 	
 	@Override
 	public void setIdleMode(IdleMode idleMode) {
-		if (idleMode == IdleMode.Brake){motor.setIdleMode(CANSparkMax.IdleMode.kBrake);}
-		else {motor.setIdleMode(CANSparkMax.IdleMode.kCoast);}
+		if (idleMode == IdleMode.Brake) {
+			motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+		} else {
+			motor.setIdleMode(CANSparkMax.IdleMode.kCoast);
+		}
 	}
+	
+	public void setVoltageCompensation(int voltageCompensation) {
+		if (voltageCompensation != 0) {
+			motor.enableVoltageCompensation(voltageCompensation);
+		} else {
+			motor.disableVoltageCompensation();
+		}
+	}
+	
+	public void setRampRate(double rampRate) {
+		motor.setOpenLoopRampRate(rampRate);
+		motor.setClosedLoopRampRate(rampRate);
+	}
+	
 }
