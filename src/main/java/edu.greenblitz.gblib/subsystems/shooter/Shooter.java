@@ -15,18 +15,17 @@ public class Shooter extends GBSubsystem {
 	private boolean preparedToShoot;
 	private boolean isShooter;
 	
-	private Shooter(IMotorFactory motorType, int id, boolean isInverted) {
-		this.motor = motorType.generate(id);
+	private Shooter(IMotorFactory motorFactory, int id) {
+		this.motor = motorFactory.generate(id);
 //		//leader.setClosedLoopRampRate(1);
 //
 		preparedToShoot = false;
 	}
 	
 	public static void create(
-			MotorType motorType,
-			int port,
-			boolean isInverted) {
-		instance = new Shooter(motorType, port, isInverted);
+			IMotorFactory motorFactory,
+			int port) {
+		instance = new Shooter(motorFactory, port);
 		
 	}
 	
