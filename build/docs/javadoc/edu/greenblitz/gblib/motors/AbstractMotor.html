@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -135,7 +135,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="GBFalcon.html" title="class in edu.greenblitz.gblib.motors">GBFalcon</a></code>, <code><a href="GBSparkMax.html" title="class in edu.greenblitz.gblib.motors">GBSparkMax</a></code></dd>
+<dd><code><a href="SparkMax/GBSparkMax.html" title="class in edu.greenblitz.gblib.motors.SparkMax">GBSparkMax</a></code>, <code><a href="TalonFX/GBTalonFX.html" title="class in edu.greenblitz.gblib.motors.TalonFX">GBTalonFX</a></code></dd>
 </dl>
 <hr>
 <pre>public abstract class <span class="typeNameLabel">AbstractMotor</span>
@@ -212,22 +212,27 @@ implements <a href="GBMotor.html" title="interface in edu.greenblitz.gblib.motor
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>double</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNormalizedPosition()">getNormalizedPosition</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getGearRatio()">getGearRatio</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNormalizedPosition()">getNormalizedPosition</a></span>()</code></th>
+<td class="colLast">
+<div class="block">normalizes encoder ticks to rotations using the gear ratio;</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNormalizedVelocity()">getNormalizedVelocity</a></span>()</code></th>
 <td class="colLast">
 <div class="block">normalizes encoder ticks to rotations using the gear ratio</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setGearRatio(double)">setGearRatio</a></span>&#8203;(double&nbsp;gearRatio)</code></th>
-<td class="colLast">
-<div class="block">sets new gear ratio (gears per rotations)</div>
-</td>
+<td class="colLast">&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -242,7 +247,7 @@ implements <a href="GBMotor.html" title="interface in edu.greenblitz.gblib.motor
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;edu.greenblitz.gblib.motors.<a href="GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a></h3>
-<code><a href="GBMotor.html#configurePID(edu.greenblitz.gblib.motion.pid.PIDObject)">configurePID</a>, <a href="GBMotor.html#getInverted()">getInverted</a>, <a href="GBMotor.html#getRawTicks()">getRawTicks</a>, <a href="GBMotor.html#getRawVelocity()">getRawVelocity</a>, <a href="GBMotor.html#resetEncoder()">resetEncoder</a>, <a href="GBMotor.html#setCurrentLimit(int)">setCurrentLimit</a>, <a href="GBMotor.html#setIdleMode(edu.greenblitz.gblib.motors.AbstractMotor.IdleMode)">setIdleMode</a>, <a href="GBMotor.html#setInverted(boolean)">setInverted</a>, <a href="GBMotor.html#setPower(double)">setPower</a>, <a href="GBMotor.html#setTargetByPID(double,edu.greenblitz.gblib.motors.AbstractMotor.PIDTarget)">setTargetByPID</a>, <a href="GBMotor.html#setTargetSpeedByPID(double)">setTargetSpeedByPID</a></code></li>
+<code><a href="GBMotor.html#configurePID(edu.greenblitz.gblib.motion.pid.PIDObject)">configurePID</a>, <a href="GBMotor.html#getInverted()">getInverted</a>, <a href="GBMotor.html#getRawTicks()">getRawTicks</a>, <a href="GBMotor.html#getRawVelocity()">getRawVelocity</a>, <a href="GBMotor.html#resetEncoder()">resetEncoder</a>, <a href="GBMotor.html#setIdleMode(edu.greenblitz.gblib.motors.AbstractMotor.IdleMode)">setIdleMode</a>, <a href="GBMotor.html#setInverted(boolean)">setInverted</a>, <a href="GBMotor.html#setPower(double)">setPower</a>, <a href="GBMotor.html#setTargetByPID(double,edu.greenblitz.gblib.motors.AbstractMotor.PIDTarget)">setTargetByPID</a>, <a href="GBMotor.html#setTargetSpeedByPID(double)">setTargetSpeedByPID</a></code></li>
 </ul>
 </li>
 </ul>
@@ -279,6 +284,15 @@ implements <a href="GBMotor.html" title="interface in edu.greenblitz.gblib.motor
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="getGearRatio()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getGearRatio</h4>
+<pre class="methodSignature">public&nbsp;double&nbsp;getGearRatio()</pre>
+</li>
+</ul>
 <a id="setGearRatio(double)">
 <!--   -->
 </a>
@@ -286,8 +300,6 @@ implements <a href="GBMotor.html" title="interface in edu.greenblitz.gblib.motor
 <li class="blockList">
 <h4>setGearRatio</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;setGearRatio&#8203;(double&nbsp;gearRatio)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="GBMotor.html#setGearRatio(double)">GBMotor</a></code></span></div>
-<div class="block">sets new gear ratio (gears per rotations)</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="GBMotor.html#setGearRatio(double)">setGearRatio</a></code>&nbsp;in interface&nbsp;<code><a href="GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a></code></dd>
@@ -301,9 +313,13 @@ implements <a href="GBMotor.html" title="interface in edu.greenblitz.gblib.motor
 <li class="blockList">
 <h4>getNormalizedPosition</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;getNormalizedPosition()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="GBMotor.html#getNormalizedPosition()">GBMotor</a></code></span></div>
+<div class="block">normalizes encoder ticks to rotations using the gear ratio;</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="GBMotor.html#getNormalizedPosition()">getNormalizedPosition</a></code>&nbsp;in interface&nbsp;<code><a href="GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>position in parts of a rotation as in 0.5 is a half rotation;</dd>
 </dl>
 </li>
 </ul>

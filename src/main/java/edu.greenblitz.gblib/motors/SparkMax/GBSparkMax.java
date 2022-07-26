@@ -105,6 +105,11 @@ public class GBSparkMax extends AbstractMotor {
 		}
 	}
 	
+	@Override
+	public IdleMode getIdleMode() {
+		return motor.getIdleMode() == CANSparkMax.IdleMode.kBrake ? IdleMode.Brake : IdleMode.Coast;
+	}
+	
 	public void setVoltageCompensation(int voltageCompensation) {
 		if (voltageCompensation != 0) {
 			motor.enableVoltageCompensation(voltageCompensation);

@@ -26,8 +26,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":38,"i8":38,"i9":6,"i10":38,"i11":6,"i12":6,"i13":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],32:["t6","Deprecated Methods"]};
+var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -123,7 +123,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="AbstractMotor.html" title="class in edu.greenblitz.gblib.motors">AbstractMotor</a></code>, <code><a href="GBFalcon.html" title="class in edu.greenblitz.gblib.motors">GBFalcon</a></code>, <code><a href="GBSparkMax.html" title="class in edu.greenblitz.gblib.motors">GBSparkMax</a></code></dd>
+<dd><code><a href="AbstractMotor.html" title="class in edu.greenblitz.gblib.motors">AbstractMotor</a></code>, <code><a href="SparkMax/GBSparkMax.html" title="class in edu.greenblitz.gblib.motors.SparkMax">GBSparkMax</a></code>, <code><a href="TalonFX/GBTalonFX.html" title="class in edu.greenblitz.gblib.motors.TalonFX">GBTalonFX</a></code></dd>
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">GBMotor</span></pre>
@@ -141,7 +141,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
@@ -160,7 +160,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNormalizedPosition()">getNormalizedPosition</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">normalizes encoder ticks to rotations using the gear ratio;</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>double</code></td>
@@ -186,44 +188,33 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCurrentLimit(int)">setCurrentLimit</a></span>&#8203;(int&nbsp;limit)</code></th>
-<td class="colLast">
-<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
-</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setGearRatio(double)">setGearRatio</a></span>&#8203;(double&nbsp;gearRatio)</code></th>
+<td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setGearRatio(double)">setGearRatio</a></span>&#8203;(double&nbsp;gearRatio)</code></th>
-<td class="colLast">
-<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
-</td>
-</tr>
-<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setIdleMode(edu.greenblitz.gblib.motors.AbstractMotor.IdleMode)">setIdleMode</a></span>&#8203;(<a href="AbstractMotor.IdleMode.html" title="enum in edu.greenblitz.gblib.motors">AbstractMotor.IdleMode</a>&nbsp;idleMode)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setInverted(boolean)">setInverted</a></span>&#8203;(boolean&nbsp;inverted)</code></th>
-<td class="colLast">
-<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
-</td>
+<td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPower(double)">setPower</a></span>&#8203;(double&nbsp;power)</code></th>
 <td class="colLast">
 <div class="block">sets motor power from -1 to 1;</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTargetByPID(double,edu.greenblitz.gblib.motors.AbstractMotor.PIDTarget)">setTargetByPID</a></span>&#8203;(double&nbsp;target,
               <a href="AbstractMotor.PIDTarget.html" title="enum in edu.greenblitz.gblib.motors">AbstractMotor.PIDTarget</a>&nbsp;targetType)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTargetSpeedByPID(double)">setTargetSpeedByPID</a></span>&#8203;(double&nbsp;target)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -255,18 +246,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">sets motor power from -1 to 1;</div>
 </li>
 </ul>
-<a id="setInverted(boolean)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setInverted</h4>
-<pre class="methodSignature">@Deprecated
-void&nbsp;setInverted&#8203;(boolean&nbsp;inverted)</pre>
-<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
-<div class="block">if true, makes motors rotate in opposite direction;</div>
-</li>
-</ul>
 <a id="getInverted()">
 <!--   -->
 </a>
@@ -278,6 +257,15 @@ void&nbsp;setInverted&#8203;(boolean&nbsp;inverted)</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if the motors are inverted;</dd>
 </dl>
+</li>
+</ul>
+<a id="setInverted(boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setInverted</h4>
+<pre class="methodSignature">void&nbsp;setInverted&#8203;(boolean&nbsp;inverted)</pre>
 </li>
 </ul>
 <a id="getRawTicks()">
@@ -293,18 +281,6 @@ void&nbsp;setInverted&#8203;(boolean&nbsp;inverted)</pre>
 </dl>
 </li>
 </ul>
-<a id="setGearRatio(double)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setGearRatio</h4>
-<pre class="methodSignature">@Deprecated
-void&nbsp;setGearRatio&#8203;(double&nbsp;gearRatio)</pre>
-<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
-<div class="block">sets new gear ratio (gears per rotations)</div>
-</li>
-</ul>
 <a id="getNormalizedPosition()">
 <!--   -->
 </a>
@@ -312,6 +288,11 @@ void&nbsp;setGearRatio&#8203;(double&nbsp;gearRatio)</pre>
 <li class="blockList">
 <h4>getNormalizedPosition</h4>
 <pre class="methodSignature">double&nbsp;getNormalizedPosition()</pre>
+<div class="block">normalizes encoder ticks to rotations using the gear ratio;</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>position in parts of a rotation as in 0.5 is a half rotation;</dd>
+</dl>
 </li>
 </ul>
 <a id="getRawVelocity()">
@@ -369,17 +350,6 @@ void&nbsp;setGearRatio&#8203;(double&nbsp;gearRatio)</pre>
 <pre class="methodSignature">void&nbsp;setTargetSpeedByPID&#8203;(double&nbsp;target)</pre>
 </li>
 </ul>
-<a id="setCurrentLimit(int)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setCurrentLimit</h4>
-<pre class="methodSignature">@Deprecated
-void&nbsp;setCurrentLimit&#8203;(int&nbsp;limit)</pre>
-<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
-</li>
-</ul>
 <a id="resetEncoder()">
 <!--   -->
 </a>
@@ -392,10 +362,19 @@ void&nbsp;setCurrentLimit&#8203;(int&nbsp;limit)</pre>
 <a id="setIdleMode(edu.greenblitz.gblib.motors.AbstractMotor.IdleMode)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>setIdleMode</h4>
 <pre class="methodSignature">void&nbsp;setIdleMode&#8203;(<a href="AbstractMotor.IdleMode.html" title="enum in edu.greenblitz.gblib.motors">AbstractMotor.IdleMode</a>&nbsp;idleMode)</pre>
+</li>
+</ul>
+<a id="setGearRatio(double)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>setGearRatio</h4>
+<pre class="methodSignature">void&nbsp;setGearRatio&#8203;(double&nbsp;gearRatio)</pre>
 </li>
 </ul>
 </li>

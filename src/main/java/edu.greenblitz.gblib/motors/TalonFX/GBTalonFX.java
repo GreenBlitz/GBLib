@@ -8,6 +8,8 @@ import edu.greenblitz.gblib.motors.AbstractMotor;
 public class GBTalonFX extends AbstractMotor {
 	private final TalonFX motor;
 	
+	private IdleMode idleMode = IdleMode.Brake;
+	
 	/**
 	 * Constructor:
 	 * Defines motor as the Falcon with the given id;
@@ -96,6 +98,7 @@ public class GBTalonFX extends AbstractMotor {
 	
 	@Override
 	public void setIdleMode(IdleMode idleMode) {
+		this.idleMode = idleMode;
 		if (idleMode == IdleMode.Brake) {
 			motor.setNeutralMode(NeutralMode.Brake);
 		} else {
@@ -104,5 +107,8 @@ public class GBTalonFX extends AbstractMotor {
 		
 	}
 	
-	
+	@Override
+	public IdleMode getIdleMode() {
+		return idleMode;
+	}
 }
