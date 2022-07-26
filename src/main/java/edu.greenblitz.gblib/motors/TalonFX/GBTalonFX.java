@@ -1,18 +1,18 @@
-package edu.greenblitz.gblib.motors.Falcon;
+package edu.greenblitz.gblib.motors.TalonFX;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.AbstractMotor;
 
-public class GBFalcon extends AbstractMotor {
+public class GBTalonFX extends AbstractMotor {
 	private final TalonFX motor;
 	
 	/**
 	 * Constructor:
-	 * Defines motor as the edu.greenblitz.gblib.motors.Falcon with the given id;
+	 * Defines motor as the Falcon with the given id;
 	 */
-	public GBFalcon(int id) {
+	public GBTalonFX(int id) {
 		motor = new TalonFX(id);
 	}
 	

@@ -7,7 +7,6 @@ import edu.greenblitz.gblib.motion.cords.Position;
 import edu.greenblitz.gblib.motors.AbstractMotor;
 import edu.greenblitz.gblib.motors.GBMotor;
 import edu.greenblitz.gblib.motors.IMotorFactory;
-import edu.greenblitz.gblib.motors.MotorType;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
 
 public class Chassis extends GBSubsystem {

@@ -1,10 +1,10 @@
-package edu.greenblitz.gblib.motors.Falcon;
+package edu.greenblitz.gblib.motors.TalonFX;
 
 import edu.greenblitz.gblib.motors.AbstractMotor;
 import edu.greenblitz.gblib.motors.GBMotor;
 import edu.greenblitz.gblib.motors.IMotorFactory;
 
-public class FalconFactory implements IMotorFactory {
+public class TalonFXFactory implements IMotorFactory {
 	
 	private int currentLimit = 0;
 	private double voltageCompensation = 0;
@@ -15,7 +15,7 @@ public class FalconFactory implements IMotorFactory {
 	
 	@Override
 	public GBMotor generate(int id) {
-		GBFalcon motor = new GBFalcon(id);
+		GBTalonFX motor = new GBTalonFX(id);
 		motor.setCurrentLimit(currentLimit);
 		motor.setVoltageCompensation(voltageCompensation);
 		motor.setRampRate(rampRate);
@@ -25,32 +25,32 @@ public class FalconFactory implements IMotorFactory {
 		return motor;
 	}
 	
-	public FalconFactory withCurrentLimit(int currentLimit) {
+	public TalonFXFactory withCurrentLimit(int currentLimit) {
 		this.currentLimit = currentLimit;
 		return this;
 	}
 	
-	public FalconFactory withVoltageCompensation(double voltageCompensation) {
+	public TalonFXFactory withVoltageCompensation(double voltageCompensation) {
 		this.voltageCompensation = voltageCompensation;
 		return this;
 	}
 	
-	public FalconFactory withRampRate(double rampRate) {
+	public TalonFXFactory withRampRate(double rampRate) {
 		this.rampRate = rampRate;
 		return this;
 	}
 	
-	public FalconFactory withInverted(boolean inverted) {
+	public TalonFXFactory withInverted(boolean inverted) {
 		this.inverted = inverted;
 		return this;
 	}
 	
-	public FalconFactory withIdleMode(AbstractMotor.IdleMode idleMode) {
+	public TalonFXFactory withIdleMode(AbstractMotor.IdleMode idleMode) {
 		this.idleMode = idleMode;
 		return this;
 	}
 	
-	public FalconFactory withGearRatio(double gearRatio) {
+	public TalonFXFactory withGearRatio(double gearRatio) {
 		this.gearRatio = gearRatio;
 		return this;
 	}

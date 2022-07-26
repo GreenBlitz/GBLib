@@ -33,7 +33,7 @@ public interface GBMotor {
 	/**
 	 * normalizes encoder ticks to rotations using the gear ratio;
 	 *
-	 * @return position in meters;
+	 * @return position in parts of a rotation as in 0.5 is a half rotation;
 	 */
 	
 	double getNormalizedPosition();

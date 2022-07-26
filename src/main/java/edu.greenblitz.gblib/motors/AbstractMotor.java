@@ -14,7 +14,7 @@ public abstract class AbstractMotor implements GBMotor {
 	
 	@Override
 	public double getNormalizedPosition() {
-		return (getRawTicks() / gearRatio) * 360;
+		return (getRawTicks() / gearRatio);
 	}
 	
 	
