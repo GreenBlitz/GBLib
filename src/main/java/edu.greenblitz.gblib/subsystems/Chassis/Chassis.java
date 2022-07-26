@@ -16,11 +16,12 @@ public class Chassis extends GBSubsystem {
 	private final GBMotor[] motors;
 	
 	
-	private Chassis(IMotorFactory motorFactory, int[] ports, double wheelDistance) {
+	private Chassis(IMotorFactory motorFactory, int[] ports, boolean[] isInverted, double wheelDistance) {
 		motors = new GBMotor[ports.length];
 		
 		for (int i = 0; i < motors.length; i++) {
 			motors[i] = motorFactory.generate(ports[i]);
+			motors[i].setInverted(isInverted[i]);
 		}
 		
 		gyroscope = new PigeonGyro(new PigeonIMU(12)); //Pigeon connects to talon/CAN bus
@@ -36,8 +37,9 @@ public class Chassis extends GBSubsystem {
 	public static void create(
 			IMotorFactory motorFactory,
 			int[] ports,
+			boolean[] isInverted,
 			double wheelDistance) {
-		instance = new Chassis(motorFactory, ports, wheelDistance);
+		instance = new Chassis(motorFactory, ports, isInverted, wheelDistance);
 	}
 	
 	public void setIdleMode(AbstractMotor.IdleMode idleMode) {
