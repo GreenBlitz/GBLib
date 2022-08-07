@@ -24,10 +24,10 @@ public class GBSparkMax extends AbstractMotor {
 	
 	
 	/**
-	 * sets gear ratio as 42 for default, if not given otherwise;
+	 * sets gear ratio is 1 for default, if not given otherwise;
 	 */
 	public GBSparkMax(int id) {
-		this(id, 42);
+		this(id, 1);
 	}
 	
 	
