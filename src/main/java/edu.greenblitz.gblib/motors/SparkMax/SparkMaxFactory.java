@@ -11,7 +11,7 @@ public class SparkMaxFactory implements IMotorFactory {
 	private double rampRate = 0;
 	private boolean inverted = false;
 	private AbstractMotor.IdleMode idleMode = AbstractMotor.IdleMode.Brake;
-	private double gearRatio = 42;
+	private double gearRatio = 1;
 	
 	@Override
 	public GBMotor generate(int id) {
