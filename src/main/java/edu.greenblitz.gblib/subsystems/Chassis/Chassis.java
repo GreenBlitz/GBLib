@@ -10,13 +10,12 @@ import edu.greenblitz.gblib.motors.IMotorFactory;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
 
 public class Chassis extends GBSubsystem {
-	private static Chassis instance;
 	private final PigeonGyro gyroscope;
 	private final double wheelDistance;
 	private final GBMotor[] motors;
 	
 	
-	private Chassis(IMotorFactory motorFactory, int[] ports, boolean[] isInverted, double wheelDistance) {
+	public Chassis(IMotorFactory motorFactory, int[] ports, boolean[] isInverted, double wheelDistance) {
 		motors = new GBMotor[ports.length];
 		
 		for (int i = 0; i < motors.length; i++) {
@@ -30,17 +29,6 @@ public class Chassis extends GBSubsystem {
 		this.wheelDistance = wheelDistance;
 	}
 	
-	public static Chassis getInstance() {
-		return instance;
-	}
-	
-	public static void create(
-			IMotorFactory motorFactory,
-			int[] ports,
-			boolean[] isInverted,
-			double wheelDistance) {
-		instance = new Chassis(motorFactory, ports, isInverted, wheelDistance);
-	}
 	
 	public void setIdleMode(AbstractMotor.IdleMode idleMode) {
 		for (GBMotor motor : motors) {

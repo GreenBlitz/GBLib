@@ -9,29 +9,17 @@ import edu.greenblitz.gblib.subsystems.GBSubsystem;
 public class Shooter extends GBSubsystem {
 	
 	private final static double RPM = 3000;
-	private static Shooter instance;
 	private final GBMotor motor;
 	private boolean preparedToShoot;
 	private boolean isShooter;
 	
-	private Shooter(IMotorFactory motorFactory, int id) {
+	public Shooter(IMotorFactory motorFactory, int id) {
 		this.motor = motorFactory.generate(id);
 //		//leader.setClosedLoopRampRate(1);
 //
 		preparedToShoot = false;
 	}
 	
-	public static void create(
-			IMotorFactory motorFactory,
-			int port) {
-		instance = new Shooter(motorFactory, port);
-		
-	}
-	
-	
-	public static Shooter getInstance() {
-		return instance;
-	}
 	
 	public void setPower(double power) {
 		this.motor.setPower(power);
