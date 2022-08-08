@@ -5,6 +5,7 @@
 
 package edu.greenblitz.gblib.motors.brushless;
 
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
 
