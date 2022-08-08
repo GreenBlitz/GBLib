@@ -98,13 +98,7 @@ public class GBTalonFX extends AbstractMotor {
 	
 	@Override
 	public void setIdleMode(IdleMode idleMode) {
-		this.idleMode = idleMode;
-		if (idleMode == IdleMode.Brake) {
-			motor.setNeutralMode(NeutralMode.Brake);
-		} else {
-			motor.setNeutralMode(NeutralMode.Coast);
-		}
-		
+
 	}
 	
 	@Override

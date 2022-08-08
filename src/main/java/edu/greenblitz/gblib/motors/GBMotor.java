@@ -5,6 +5,7 @@
 
 package edu.greenblitz.gblib.motors;
 
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 
 public interface GBMotor {
@@ -63,4 +64,6 @@ public interface GBMotor {
 	AbstractMotor.IdleMode getIdleMode();
 	
 	void setTicksToRotations(double ticksToRotations);
+
+	void setCurrentLimit(int limit);
 }

@@ -86,7 +86,7 @@ public class GBSparkMax extends AbstractMotor {
 		motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity);
 	}
 	
-	
+	@Override
 	public void setCurrentLimit(int limit) {
 		motor.setSmartCurrentLimit(limit);
 	}
