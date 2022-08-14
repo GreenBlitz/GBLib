@@ -1,4 +1,6 @@
-package edu.greenblitz.gblib.motors;
+package edu.greenblitz.gblib.motors.brushed;
+
+import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 
 public interface GBBrushedMotor {
 

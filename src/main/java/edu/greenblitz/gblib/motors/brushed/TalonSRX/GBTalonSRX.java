@@ -1,10 +1,9 @@
-package edu.greenblitz.gblib.motors.TalonSRX;
+package edu.greenblitz.gblib.motors.brushed.TalonSRX;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.AbstractMotor.*;
-import edu.greenblitz.gblib.motors.GBBrushedMotor;
+import edu.greenblitz.gblib.motors.brushless.AbstractMotor.*;
+import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
 
 public class GBTalonSRX implements GBBrushedMotor {
 

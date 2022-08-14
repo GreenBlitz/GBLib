@@ -1,8 +1,8 @@
-package edu.greenblitz.gblib.motors.SparkMax;
+package edu.greenblitz.gblib.motors.brushless.SparkMax;
 
-import edu.greenblitz.gblib.motors.AbstractMotor;
-import edu.greenblitz.gblib.motors.GBMotor;
-import edu.greenblitz.gblib.motors.IMotorFactory;
+import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
+import edu.greenblitz.gblib.motors.brushless.GBMotor;
+import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 
 public class SparkMaxFactory implements IMotorFactory {
 	

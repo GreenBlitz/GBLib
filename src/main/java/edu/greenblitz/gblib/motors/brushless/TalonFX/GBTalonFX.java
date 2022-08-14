@@ -1,9 +1,9 @@
-package edu.greenblitz.gblib.motors.TalonFX;
+package edu.greenblitz.gblib.motors.brushless.TalonFX;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.AbstractMotor;
+import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 
 public class GBTalonFX extends AbstractMotor {
 	private final TalonFX motor;

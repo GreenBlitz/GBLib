@@ -1,4 +1,6 @@
-package edu.greenblitz.gblib.motors;
+package edu.greenblitz.gblib.motors.brushless;
+
+import edu.greenblitz.gblib.motors.brushless.GBMotor;
 
 public abstract class AbstractMotor implements GBMotor {
 	private double ticksToRotations;

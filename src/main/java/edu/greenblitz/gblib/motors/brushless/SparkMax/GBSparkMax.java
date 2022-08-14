@@ -1,10 +1,10 @@
-package edu.greenblitz.gblib.motors.SparkMax;
+package edu.greenblitz.gblib.motors.brushless.SparkMax;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.AbstractMotor;
+import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 
 public class GBSparkMax extends AbstractMotor {
 	private final CANSparkMax motor;
@@ -12,7 +12,7 @@ public class GBSparkMax extends AbstractMotor {
 	
 	/**
 	 * Constructor:
-	 * Defines motor as the edu.greenblitz.gblib.motors.SparkMax with the given id;
+	 * Defines motor as the edu.greenblitz.gblib.motors.brushless.SparkMax with the given id;
 	 * Sets encoder as the motor's encoder;
 	 * Sets gear ratio as given;
 	 */

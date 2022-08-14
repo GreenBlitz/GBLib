@@ -1,28 +1,27 @@
-package edu.greenblitz.gblib.motors.TalonSRX;
+package edu.greenblitz.gblib.motors.brushed.TalonSRX;
 
-import edu.greenblitz.gblib.motors.AbstractMotor;
-import edu.greenblitz.gblib.motors.GBMotor;
-import edu.greenblitz.gblib.motors.IMotorFactory;
-import edu.greenblitz.gblib.motors.TalonFX.GBTalonFX;
+import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
+import edu.greenblitz.gblib.motors.brushed.IBrushedFactory;
+import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
+import edu.greenblitz.gblib.motors.brushless.GBMotor;
+import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 
-public class TalonSRXFactory implements IMotorFactory {
+public class TalonSRXFactory implements IBrushedFactory {
 
     private int currentLimit = 0;
     private double voltageCompensation = 0;
     private double rampRate = 0;
     private boolean inverted = false;
     private AbstractMotor.IdleMode idleMode = AbstractMotor.IdleMode.Brake;
-    private double ticksToRotations = -1; //todo find real ratio asaf
 
     @Override
-    public GBMotor generate(int id) {
+    public GBBrushedMotor generate(int id) {
         GBTalonSRX motor = new GBTalonSRX(id);
         motor.setCurrentLimit(currentLimit);
         motor.setVoltageCompensation(voltageCompensation);
         motor.setRampRate(rampRate);
         motor.setInverted(inverted);
         motor.setIdleMode(idleMode);
-        motor.setTicksToRotations(ticksToRotations);
         return motor;
     }
 
@@ -51,10 +50,6 @@ public class TalonSRXFactory implements IMotorFactory {
         return this;
     }
 
-    public TalonSRXFactory withTicksToRotations(double ticksToRotations) {
-        this.ticksToRotations = ticksToRotations;
-        return this;
-    }
 }
 
 

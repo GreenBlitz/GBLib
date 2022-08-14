@@ -1,9 +1,9 @@
 package edu.greenblitz.gblib.subsystems.shooter;
 
 import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.AbstractMotor;
-import edu.greenblitz.gblib.motors.GBMotor;
-import edu.greenblitz.gblib.motors.IMotorFactory;
+import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
+import edu.greenblitz.gblib.motors.brushless.GBMotor;
+import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
 
 public class Shooter extends GBSubsystem {
