@@ -23,8 +23,8 @@ public class Localizer {
 	
 	private static final Localizer instance = new Localizer();
 	private final Object LOCK = new Object();
-	private Position m_location = new Position(0, 0, 0); // Positive x direction is left
-	private double m_wheelDistance;
+	private Position location = new Position(0, 0, 0); // Positive x direction is left
+	private double wheelDistance;
 	private double angle0;
 	private double prevDistanceLeft;
 	private double prevDistanceRight;
@@ -58,7 +58,7 @@ public class Localizer {
 	 */
 	public Position getLocationRaw() {
 		synchronized (LOCK) {
-			return m_location.clone();
+			return location.clone();
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class Localizer {
 	 * @param rightDist     The meters counter on the right encoder
 	 */
 	public void configure(double wheelDistance, double leftDist, double rightDist) {
-		m_wheelDistance = wheelDistance;
+		this.wheelDistance = wheelDistance;
 		reset(leftDist, rightDist);
 	}
 	
@@ -94,7 +94,7 @@ public class Localizer {
 			zeroDistanceLeft = currentLeftDistance;
 			zeroDistanceRight = currentRightDistance;
 			angle0 = newPos.getAngle();
-			m_location = newPos.clone();
+			location = newPos.clone();
 		}
 	}
 	
@@ -127,7 +127,7 @@ public class Localizer {
 	 */
 	public void update(double currentLeftDistance, double currentRightDistance) {
 		double ang = (((currentRightDistance - zeroDistanceRight)
-				- (currentLeftDistance - zeroDistanceLeft)) / m_wheelDistance);
+				- (currentLeftDistance - zeroDistanceLeft)) / wheelDistance);
 		
 		update(currentLeftDistance, currentRightDistance, ang);
 	}
@@ -146,11 +146,11 @@ public class Localizer {
 		
 		Point dXdY = calculateMovement(
 				rDist, lDist,
-				m_wheelDistance, m_location.getAngle());
+				wheelDistance, location.getAngle());
 		
 		synchronized (LOCK) {
-			m_location.translate(dXdY);
-			m_location.setAngle(angle + angle0);
+			location.translate(dXdY);
+			location.setAngle(angle + angle0);
 			prevDistanceLeft = currentLeftDistance;
 			prevDistanceRight = currentRightDistance;
 		}

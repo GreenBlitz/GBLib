@@ -38,9 +38,7 @@ public class Chassis extends GBSubsystem {
 	
 	public GBMotor[] getRightMotor() {
 		GBMotor[] right = new GBMotor[motors.length / 2];
-		for (int i = 0; i < motors.length / 2; i++) {
-			right[i] = motors[i];
-		}
+		System.arraycopy(motors, 0, right, 0, motors.length / 2);
 		return right;
 	}
 	
@@ -51,9 +49,7 @@ public class Chassis extends GBSubsystem {
 	
 	public GBMotor[] getLeftMotor() {
 		GBMotor[] left = new GBMotor[motors.length / 2];
-		for (int i = 0; i < motors.length / 2; i++) {
-			left[i] = motors[motors.length / 2 + i];
-		}
+		System.arraycopy(motors, motors.length / 2 + 0, left, 0, motors.length / 2);
 		return left;
 	}
 	

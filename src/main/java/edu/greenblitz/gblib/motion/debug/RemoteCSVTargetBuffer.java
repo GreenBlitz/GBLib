@@ -3,9 +3,9 @@ package edu.greenblitz.gblib.motion.debug;
 import java.util.ArrayList;
 
 public class RemoteCSVTargetBuffer {
+	private final long delay;
 	RemoteCSVTarget target;
 	ArrayList<double[]> buffer;
-	private final long delay;
 	
 	public RemoteCSVTargetBuffer(String fileName, String... names) {
 		this(fileName, 50, names);
@@ -38,7 +38,7 @@ public class RemoteCSVTargetBuffer {
 	public void resolveDupes() {
 		int time = 0;
 		for (int i = 0; i < buffer.get(0).length; i++) {
-			if (target.m_ntNames[i].equals("time")) time = i;
+			if (target.ntNames[i].equals("time")) time = i;
 		}
 		
 		for (int i = 0; i < buffer.size() - 2; i++) {

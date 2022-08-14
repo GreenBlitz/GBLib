@@ -11,9 +11,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class LogObject {
 	
 	private final Object LOCK = new Object();
-	private boolean enabled;
 	private final String name;
 	private final Queue<String> toSend;
+	private boolean enabled;
 	private int logNumber = 1;
 	
 	public LogObject(String name) {

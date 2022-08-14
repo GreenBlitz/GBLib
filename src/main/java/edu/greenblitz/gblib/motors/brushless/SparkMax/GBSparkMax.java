@@ -81,17 +81,17 @@ public class GBSparkMax extends AbstractMotor {
 	}
 	
 	@Override
+	public IdleMode getIdleMode() {
+		return motor.getIdleMode() == CANSparkMax.IdleMode.kBrake ? IdleMode.Brake : IdleMode.Coast;
+	}
+	
+	@Override
 	public void setIdleMode(IdleMode idleMode) {
 		if (idleMode == IdleMode.Brake) {
 			motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 		} else {
 			motor.setIdleMode(CANSparkMax.IdleMode.kCoast);
 		}
-	}
-	
-	@Override
-	public IdleMode getIdleMode() {
-		return motor.getIdleMode() == CANSparkMax.IdleMode.kBrake ? IdleMode.Brake : IdleMode.Coast;
 	}
 	
 	public void setVoltageCompensation(int voltageCompensation) {

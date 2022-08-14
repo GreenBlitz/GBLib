@@ -26,8 +26,8 @@ public class CollapsingPIDController extends PIDController {
 	
 	@Override
 	public double calculatePID(double current) {
-		if (Math.abs(m_goal - current) < ICollapseThreshold) {
-			m_integral = 0;
+		if (Math.abs(goal - current) < ICollapseThreshold) {
+			integral = 0;
 		}
 		
 		return super.calculatePID(current);

@@ -3,15 +3,15 @@ package edu.greenblitz.gblib;
 import edu.wpi.first.wpilibj.Notifier;
 
 public abstract class PeriodicRunner {
-	private final Notifier m_periodicRunner;
+	private final Notifier periodicRunner;
 	
-	private final long m_period;
-	private volatile boolean m_active = false;
+	private final long period;
+	private volatile boolean active = false;
 	
 	public PeriodicRunner(long period) {
-		m_period = period;
-		m_periodicRunner = new Notifier(this::_periodic);
-		m_periodicRunner.startPeriodic(m_period / 1000.0);
+		this.period = period;
+		periodicRunner = new Notifier(this::_periodic);
+		periodicRunner.startPeriodic(this.period / 1000.0);
 	}
 	
 	public PeriodicRunner() {
@@ -19,19 +19,19 @@ public abstract class PeriodicRunner {
 	}
 	
 	public void start() {
-		m_active = true;
+		active = true;
 	}
 	
 	public void stop() {
-		m_active = false;
+		active = false;
 	}
 	
 	public void end() {
-		m_periodicRunner.stop();
+		periodicRunner.stop();
 	}
 	
 	public boolean isActive() {
-		return m_active;
+		return active;
 	}
 	
 	public abstract boolean isFinished();

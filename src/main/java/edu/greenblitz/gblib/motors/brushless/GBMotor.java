@@ -12,7 +12,7 @@ public interface GBMotor extends GBBrushedMotor {
 	/**
 	 *
 	 * */
-
+	
 	/**
 	 * @return raw encoder ticks;
 	 */
@@ -45,6 +45,6 @@ public interface GBMotor extends GBBrushedMotor {
 	void setTargetSpeedByPID(double target);
 	
 	void resetEncoder();
-
+	
 	void setTicksToRotations(double ticksToRotations);
 }

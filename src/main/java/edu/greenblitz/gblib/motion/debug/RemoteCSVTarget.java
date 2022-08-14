@@ -11,16 +11,16 @@ public class RemoteCSVTarget {
 	private static final NetworkTable NAMES = CSV_LOGGER.getSubTable("names");
 	private static final NetworkTable VALUES = CSV_LOGGER.getSubTable("values");
 	private static final Map<String, RemoteCSVTarget> targets = new HashMap<>();
-	protected final String[] m_ntNames;
-	private final String m_remoteFileName;
+	protected final String[] ntNames;
+	private final String remoteFileName;
 	
 	private RemoteCSVTarget(String remoteFileName, String[] ntNames) {
-		m_remoteFileName = remoteFileName;
-		m_ntNames = ntNames;
+		this.remoteFileName = remoteFileName;
+		this.ntNames = ntNames;
 		
 		NAMES.getEntry(remoteFileName).setStringArray(ntNames);
 	}
-
+	
 	public static RemoteCSVTarget initTarget(String fileName, String... names) {
 		if (!targets.containsKey(fileName)) {
 			targets.put(fileName, new RemoteCSVTarget(fileName, names));
@@ -33,10 +33,10 @@ public class RemoteCSVTarget {
 	}
 	
 	public void report(double... record) {
-		if (record.length != m_ntNames.length) {
+		if (record.length != ntNames.length) {
 			System.err.println("Warning unexpected record length");
 		}
 		
-		VALUES.getEntry(m_remoteFileName).setDoubleArray(record);
+		VALUES.getEntry(remoteFileName).setDoubleArray(record);
 	}
 }

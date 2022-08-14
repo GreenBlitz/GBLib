@@ -16,6 +16,7 @@ public class Point {
 	 * the y coordinate: forwards and backwards
 	 */
 	protected double y;
+	
 	public Point(double x, double y) {
 		this.setX(x);
 		this.setY(y);

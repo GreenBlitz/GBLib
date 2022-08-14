@@ -1,6 +1,9 @@
 package edu.greenblitz.gblib.motors.brushless.TalonFX;
 
-import com.ctre.phoenix.motorcontrol.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
@@ -8,7 +11,7 @@ import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 public class GBTalonFX extends AbstractMotor {
 	private final TalonFX motor;
 	
-	private IdleMode idleMode = IdleMode.Brake;
+	private final IdleMode idleMode = IdleMode.Brake;
 	
 	/**
 	 * Constructor:
@@ -97,12 +100,12 @@ public class GBTalonFX extends AbstractMotor {
 	}
 	
 	@Override
-	public void setIdleMode(IdleMode idleMode) {
-
+	public IdleMode getIdleMode() {
+		return idleMode;
 	}
 	
 	@Override
-	public IdleMode getIdleMode() {
-		return idleMode;
+	public void setIdleMode(IdleMode idleMode) {
+	
 	}
 }
