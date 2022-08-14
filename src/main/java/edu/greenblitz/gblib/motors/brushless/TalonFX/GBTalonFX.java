@@ -14,7 +14,7 @@ public class GBTalonFX extends AbstractMotor {
 	 * Constructor:
 	 * Defines motor as the Falcon with the given id;
 	 */
-	public GBTalonFX(int id) {
+	protected GBTalonFX(int id) {
 		motor = new TalonFX(id);
 	}
 	

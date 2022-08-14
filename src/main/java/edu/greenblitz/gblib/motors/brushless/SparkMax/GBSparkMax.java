@@ -10,24 +10,9 @@ public class GBSparkMax extends AbstractMotor {
 	private final CANSparkMax motor;
 	private final RelativeEncoder encoder;
 	
-	/**
-	 * Constructor:
-	 * Defines motor as the edu.greenblitz.gblib.motors.brushless.SparkMax with the given id;
-	 * Sets encoder as the motor's encoder;
-	 * Sets gear ratio as given;
-	 */
-	public GBSparkMax(int id, double ticksToRotations) {
+	protected GBSparkMax(int id) {
 		this.motor = new CANSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless);
 		this.encoder = this.motor.getEncoder();
-		setTicksToRotations(ticksToRotations);
-	}
-	
-	
-	/**
-	 * sets gear ratio is 1 for default, if not given otherwise;
-	 */
-	public GBSparkMax(int id) {
-		this(id, 1);
 	}
 	
 	

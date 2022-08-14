@@ -11,7 +11,7 @@ public class GBTalonSRX implements GBBrushedMotor {
     private IdleMode idleMode = IdleMode.Brake;
     private int isInverted = 1;
 
-    public GBTalonSRX(int id) {
+    protected GBTalonSRX(int id) {
         this.motor = new TalonSRX(id);
     }
 
