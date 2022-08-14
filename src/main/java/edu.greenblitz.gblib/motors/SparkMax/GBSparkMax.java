@@ -16,10 +16,10 @@ public class GBSparkMax extends AbstractMotor {
 	 * Sets encoder as the motor's encoder;
 	 * Sets gear ratio as given;
 	 */
-	public GBSparkMax(int id, double gearRatio) {
+	public GBSparkMax(int id, double ticksToRotations) {
 		this.motor = new CANSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless);
 		this.encoder = this.motor.getEncoder();
-		setGearRatio(gearRatio);
+		setTicksToRotations(ticksToRotations);
 	}
 	
 	

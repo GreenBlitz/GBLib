@@ -62,5 +62,5 @@ public interface GBMotor {
 	
 	AbstractMotor.IdleMode getIdleMode();
 	
-	void setGearRatio(double gearRatio);
+	void setTicksToRotations(double ticksToRotations);
 }

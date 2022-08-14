@@ -11,7 +11,7 @@ public class SparkMaxFactory implements IMotorFactory {
 	private double rampRate = 0;
 	private boolean inverted = false;
 	private AbstractMotor.IdleMode idleMode = AbstractMotor.IdleMode.Brake;
-	private double gearRatio = 1;
+	private double ticksToRotations = 1;
 	
 	@Override
 	public GBMotor generate(int id) {
@@ -21,7 +21,7 @@ public class SparkMaxFactory implements IMotorFactory {
 		motor.setRampRate(rampRate);
 		motor.setInverted(inverted);
 		motor.setIdleMode(idleMode);
-		motor.setGearRatio(gearRatio);
+		motor.setTicksToRotations(ticksToRotations);
 		return motor;
 	}
 	
@@ -50,8 +50,8 @@ public class SparkMaxFactory implements IMotorFactory {
 		return this;
 	}
 	
-	public SparkMaxFactory withGearRatio(double gearRatio) {
-		this.gearRatio = gearRatio;
+	public SparkMaxFactory withTicksToRotations(double ticksToRotations) {
+		this.ticksToRotations = ticksToRotations;
 		return this;
 	}
 	

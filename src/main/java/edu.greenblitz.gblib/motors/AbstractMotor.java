@@ -1,26 +1,26 @@
 package edu.greenblitz.gblib.motors;
 
 public abstract class AbstractMotor implements GBMotor {
-	private double gearRatio;
+	private double ticksToRotations;
 	
-	public double getGearRatio() {
-		return this.gearRatio;
+	public double getTicksToRotations() {
+		return this.ticksToRotations;
 	}
 	
 	@Override
-	public void setGearRatio(double gearRatio) {
-		this.gearRatio = gearRatio;
+	public void setTicksToRotations(double ticksToRotations) {
+		this.ticksToRotations = ticksToRotations;
 	}
 	
 	@Override
 	public double getNormalizedPosition() {
-		return (getRawTicks() / gearRatio);
+		return (getRawTicks() / ticksToRotations);
 	}
 	
 	
 	@Override
 	public double getNormalizedVelocity() {
-		return (getRawVelocity() / gearRatio) * 60;
+		return (getRawVelocity() / ticksToRotations) * 60;
 	}
 	
 	public enum IdleMode {
