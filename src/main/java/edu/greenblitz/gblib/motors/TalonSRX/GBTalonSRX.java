@@ -3,9 +3,10 @@ package edu.greenblitz.gblib.motors.TalonSRX;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.AbstractMotor;
+import edu.greenblitz.gblib.motors.AbstractMotor.*;
+import edu.greenblitz.gblib.motors.GBBrushedMotor;
 
-public class GBTalonSRX extends AbstractMotor {
+public class GBTalonSRX implements GBBrushedMotor {
 
     private final TalonSRX motor;
     private IdleMode idleMode = IdleMode.Brake;
@@ -42,56 +43,6 @@ public class GBTalonSRX extends AbstractMotor {
         }
     }
 
-    /**
-     * @return raw encoder ticks;
-     */
-    @Override
-    public double getRawTicks() {
-        return motor.getSelectedSensorPosition();
-    }
-
-    /**
-     * @return raw velocity in ticks per second
-     */
-    @Override
-    public double getRawVelocity() {
-        return motor.getSelectedSensorVelocity();
-    }
-
-    @Override
-    public void configurePID(PIDObject pidObject) {
-        motor.config_kP(0, pidObject.getKp());
-        motor.config_kI(0, pidObject.getKi());
-        motor.config_kD(0, pidObject.getKd());
-        motor.config_kF(0, pidObject.getKf());
-        motor.config_IntegralZone(0, pidObject.getIZone());
-    }
-
-    @Override
-    public void setTargetByPID(double target, PIDTarget targetType) {
-        switch (targetType) {
-            case Speed:
-                motor.set(TalonSRXControlMode.Velocity, target);
-                break;
-            case Current:
-                motor.set(TalonSRXControlMode.Current, target);
-                break;
-            case Position:
-                motor.set(TalonSRXControlMode.Position, target);
-                break;
-        }
-    }
-
-    @Override
-    public void setTargetSpeedByPID(double target) {
-        motor.set(TalonSRXControlMode.Velocity, target);
-    }
-
-    @Override
-    public void resetEncoder() {
-        motor.setSelectedSensorPosition(0);
-    }
-
     @Override
     public IdleMode getIdleMode() {
         return idleMode;
@@ -108,7 +59,6 @@ public class GBTalonSRX extends AbstractMotor {
 
     }
 
-    @Override
     public void setCurrentLimit(int limit) {
         motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(limit != 0, limit, 0.875 * limit, 100));
     }

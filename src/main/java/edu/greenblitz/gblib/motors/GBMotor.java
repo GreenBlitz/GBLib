@@ -8,24 +8,11 @@ package edu.greenblitz.gblib.motors;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 
-public interface GBMotor {
+public interface GBMotor extends GBBrushedMotor{
+	/**
+	 *
+	 * */
 
-//	public Motor getInstance();
-//
-	
-	/**
-	 * sets motor power from -1 to 1;
-	 */
-	void setPower(double power);
-	
-	
-	/**
-	 * @return true if the motors are inverted;
-	 */
-	boolean getInverted();
-	
-	void setInverted(boolean inverted);
-	
 	/**
 	 * @return raw encoder ticks;
 	 */
@@ -58,12 +45,6 @@ public interface GBMotor {
 	void setTargetSpeedByPID(double target);
 	
 	void resetEncoder();
-	
-	void setIdleMode(AbstractMotor.IdleMode idleMode);
-	
-	AbstractMotor.IdleMode getIdleMode();
-	
-	void setTicksToRotations(double ticksToRotations);
 
-	void setCurrentLimit(int limit);
+	void setTicksToRotations(double ticksToRotations);
 }

@@ -16,7 +16,7 @@ public class TalonSRXFactory implements IMotorFactory {
 
     @Override
     public GBMotor generate(int id) {
-        GBTalonFX motor = new GBTalonFX(id);
+        GBTalonSRX motor = new GBTalonSRX(id);
         motor.setCurrentLimit(currentLimit);
         motor.setVoltageCompensation(voltageCompensation);
         motor.setRampRate(rampRate);
