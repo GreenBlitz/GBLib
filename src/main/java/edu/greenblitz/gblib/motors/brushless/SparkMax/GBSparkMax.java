@@ -40,8 +40,12 @@ public class GBSparkMax extends AbstractMotor {
 	public double getRawVelocity() {
 		return encoder.getVelocity();
 	}
-	
-	
+
+	@Override
+	public double getNormalizedVelocity() {
+		return getRawVelocity() / getTicksToRotations();
+	}
+
 	@Override
 	public void configurePID(PIDObject pidObject) {
 		motor.getPIDController().setP(pidObject.getKp());
