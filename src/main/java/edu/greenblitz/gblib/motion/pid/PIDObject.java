@@ -20,9 +20,13 @@ public class PIDObject {
 		setInverted(inv);
 	}
 
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	public PIDObject(PIDObject p){
+		this.kp = p.getKp();
+		this.kd = p.getKd();
+		this.ki = p.getKi();
+		this.ff = p.getKf();
+		this.iZone = p.getIZone();
+		setInverted(p.getInverted());
 	}
 
 	public PIDObject(double kp, double ki, double kd) {
