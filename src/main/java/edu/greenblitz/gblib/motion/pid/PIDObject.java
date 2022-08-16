@@ -19,7 +19,12 @@ public class PIDObject {
 		this.iZone = iZone;
 		setInverted(inv);
 	}
-	
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
 	public PIDObject(double kp, double ki, double kd) {
 		this(kp, ki, kd, 0.0);
 	}
