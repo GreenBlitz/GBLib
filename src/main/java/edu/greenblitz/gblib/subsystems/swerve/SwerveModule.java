@@ -39,13 +39,13 @@ public class SwerveModule extends GBSubsystem {
 	}
 
 	public void rotateByAngle(double angle) {
-		targetAngle = getCurrentAngle() + angle; //udi: shouldn't this be from target angle instead of current?
+		targetAngle = getCurrentAngle() + angle;
 		angleMotor.setTargetByPID(targetAngle, AbstractMotor.PIDTarget.Position);
 	}
 
 	public void resetAngle() {
 		angleMotor.resetEncoder();
-	} //udi: resetAngleEncoder() no?
+	}
 
 	public void configLinPID(PIDObject pidObject) {
 		linMotor.configurePID(pidObject);
