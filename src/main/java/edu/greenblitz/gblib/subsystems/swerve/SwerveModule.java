@@ -1,6 +1,8 @@
 package edu.greenblitz.gblib.subsystems.swerve;
 
 import edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
+import edu.greenblitz.gblib.motors.brushed.IBrushedFactory;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 import edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
@@ -12,7 +14,7 @@ public class SwerveModule extends GBSubsystem {
 
 
 	private GBMotor angleMotor;
-	private GBMotor linMotor;
+	private GBBrushedMotor linMotor;
 	private static int isReversed;
 	
 	private AnalogInput lamprey;
@@ -20,7 +22,7 @@ public class SwerveModule extends GBSubsystem {
 	public double targetAngle;
 	public double targetVel;
 
-	public SwerveModule(int isReversed, IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL, int lampreyID) {
+	public SwerveModule(int isReversed, IMotorFactory motorFactoryA, IBrushedFactory motorFactoryL, int portA, int portL, int lampreyID) {
 		angleMotor = motorFactoryA.generate(portA);
 		linMotor = motorFactoryL.generate(portL);
 		lamprey = new AnalogInput(lampreyID);
@@ -28,9 +30,10 @@ public class SwerveModule extends GBSubsystem {
 		isReversed = isReversed;
 	}
 
+
 	public void setVelocity(double speed) {
 		speed *= isReversed;
-		linMotor.setTargetByPID(speed, AbstractMotor.PIDTarget.Speed);
+		linMotor.setPower(speed);
 		targetVel = speed;
 	}
 	
@@ -47,9 +50,9 @@ public class SwerveModule extends GBSubsystem {
 		return angleMotor.getNormalizedPosition();
 	}
 
-	public double getCurrentVel() {
-		return linMotor.getNormalizedVelocity();
-	}
+//	public double getCurrentVel() {
+//		return linMotor.getNormalizedVelocity();
+//	}  todo make work
 
 	public void rotateByAngle(double angle) {
 		targetAngle = getCurrentAngle() + angle;
@@ -60,9 +63,9 @@ public class SwerveModule extends GBSubsystem {
 		angleMotor.resetEncoder();
 	}
 
-	public void configLinPID(PIDObject pidObject) {
-		linMotor.configurePID(pidObject);
-	}
+//	public void configLinPID(PIDObject pidObject) {
+//		linMotor.configurePID(pidObject);
+//	} todo make work
 
 	public void configAnglePID(PIDObject pidObject) {
 		angleMotor.configurePID(pidObject);
