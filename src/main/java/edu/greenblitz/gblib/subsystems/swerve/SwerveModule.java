@@ -5,18 +5,27 @@ import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 import edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SwerveModule extends GBSubsystem {
 
-	private final GBMotor angleMotor;
-	private final GBMotor linMotor;
-	private int isReversed = 1;
+
+	private GBMotor angleMotor;
+	private GBMotor linMotor;
+	private static int isReversed;
+	
+	private AnalogInput lamprey;
+	private final int lampreyTicksPerRotation = 4076; //not my fault it's an ugly number
 	public double targetAngle;
 	public double targetVel;
 
-	public SwerveModule(IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL) {
+	public SwerveModule(int isReversed, IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL, int lampreyID) {
 		angleMotor = motorFactoryA.generate(portA);
 		linMotor = motorFactoryL.generate(portL);
+		lamprey = new AnalogInput(lampreyID);
+		lamprey.setAverageBits(2);
+		isReversed = isReversed;
 	}
 
 	public void setVelocity(double speed) {
@@ -24,7 +33,11 @@ public class SwerveModule extends GBSubsystem {
 		linMotor.setTargetByPID(speed, AbstractMotor.PIDTarget.Speed);
 		targetVel = speed;
 	}
-
+	
+	public double getAbsoluteAngle(){ // in degrees;
+		return (((double)lamprey.getAverageValue()) / lampreyTicksPerRotation)  * 360;
+	}
+	
 	public void rotateToAngle(double angle) {
 		angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
 		targetAngle = angle;
@@ -66,6 +79,7 @@ public class SwerveModule extends GBSubsystem {
 	public double getTargetVel() {
 		return targetVel;
 	} //udi: *isReversed
+
 
 
 }
