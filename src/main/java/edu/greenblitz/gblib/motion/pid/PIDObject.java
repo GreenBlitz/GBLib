@@ -7,6 +7,12 @@ public class PIDObject {
 	private double tolerance;
 	private int inverted = 1;
 	
+	private double maxPower;
+	
+	public PIDObject(){
+		this(0);
+	}
+	
 	public PIDObject(double kp, double ki, double kd, double kf, int inv) {
 		this(kp, ki, kd, kf, inv, 0);
 	}
@@ -130,6 +136,11 @@ public class PIDObject {
 		this.tolerance = tolerance;
 	}
 	
+	public double getMaxPower() {
+		return maxPower;
+	}
+	
+	public void setMaxPower(double maxPower){this.maxPower = maxPower;}
 	public PIDObject withKp(double kp) {
 		this.setKp(kp);
 		return this;
@@ -157,6 +168,11 @@ public class PIDObject {
 	
 	public PIDObject withTolerance(double tolerance) {
 		setTolerance(tolerance);
+		return this;
+	}
+	
+	public PIDObject withMaxPower(double maxPower){
+		setMaxPower(maxPower);
 		return this;
 	}
 	
