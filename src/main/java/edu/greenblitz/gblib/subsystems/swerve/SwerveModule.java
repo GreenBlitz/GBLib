@@ -10,7 +10,7 @@ import edu.greenblitz.gblib.subsystems.GBSubsystem;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SwerveModule extends GBSubsystem {
+public class SwerveModule {
 
 
 	private GBMotor angleMotor;
@@ -82,6 +82,7 @@ public class SwerveModule extends GBSubsystem {
 	public double getTargetVel() {
 		return targetVel;
 	} //udi: *isReversed
+
 
 
 
