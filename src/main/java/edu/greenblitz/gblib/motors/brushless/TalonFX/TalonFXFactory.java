@@ -11,7 +11,9 @@ public class TalonFXFactory implements IMotorFactory {
 	private double rampRate = 0;
 	private boolean inverted = false;
 	private AbstractMotor.IdleMode idleMode = AbstractMotor.IdleMode.Brake;
-	private double ticksToRotations = 2048;
+	private double gearRatio = 1;
+	private final static double FALCON_TICKS_IN_ROTATION  = 2048;
+	private final static double FALCON_VELOCITY_UNITS_TO_RPM  = FALCON_TICKS_IN_ROTATION / 600;
 	
 	@Override
 	public GBMotor generate(int id) {
@@ -21,7 +23,8 @@ public class TalonFXFactory implements IMotorFactory {
 		motor.setRampRate(rampRate);
 		motor.setInverted(inverted);
 		motor.setIdleMode(idleMode);
-		motor.setTicksToRotations(ticksToRotations);
+		motor.setTicksToWheelPosition(gearRatio * FALCON_TICKS_IN_ROTATION);
+		motor.setTicksToWheelRPM(gearRatio * FALCON_VELOCITY_UNITS_TO_RPM);
 		return motor;
 	}
 	
@@ -50,8 +53,8 @@ public class TalonFXFactory implements IMotorFactory {
 		return this;
 	}
 	
-	public TalonFXFactory withTicksToRotations(double ticksToRotations) {
-		this.ticksToRotations = ticksToRotations;
+	public TalonFXFactory withGearRatio(double gearRatio) {
+		this.gearRatio = gearRatio;
 		return this;
 	}
 }

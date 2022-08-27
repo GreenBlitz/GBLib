@@ -11,9 +11,11 @@ edu.greenblitz.gblib.motion.debug
 edu.greenblitz.gblib.motion.debug.logger
 edu.greenblitz.gblib.motion.pid
 edu.greenblitz.gblib.motion.tolerance
-edu.greenblitz.gblib.motors
-edu.greenblitz.gblib.motors.SparkMax
-edu.greenblitz.gblib.motors.TalonFX
+edu.greenblitz.gblib.motors.brushed
+edu.greenblitz.gblib.motors.brushed.TalonSRX
+edu.greenblitz.gblib.motors.brushless
+edu.greenblitz.gblib.motors.brushless.SparkMax
+edu.greenblitz.gblib.motors.brushless.TalonFX
 edu.greenblitz.gblib.subsystems
 edu.greenblitz.gblib.subsystems.Chassis
 edu.greenblitz.gblib.subsystems.shooter
