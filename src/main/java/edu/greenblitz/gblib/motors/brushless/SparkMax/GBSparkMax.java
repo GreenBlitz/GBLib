@@ -49,6 +49,7 @@ public class GBSparkMax extends AbstractMotor {
 		motor.getPIDController().setD(pidObject.getKd());
 		motor.getPIDController().setFF(pidObject.getKf());
 		motor.getPIDController().setIZone(pidObject.getIZone());
+		motor.getPIDController().setOutputRange(-pidObject.getMaxPower(), pidObject.getMaxPower());
 	}
 	
 	@Override

@@ -58,6 +58,7 @@ public class GBTalonFX extends AbstractMotor {
 		motor.config_kD(0, pidObject.getKd());
 		motor.config_kF(0, pidObject.getKf());
 		motor.config_IntegralZone(0, pidObject.getIZone());
+		motor.configClosedLoopPeakOutput(0, pidObject.getMaxPower());
 	}
 	
 	@Override
