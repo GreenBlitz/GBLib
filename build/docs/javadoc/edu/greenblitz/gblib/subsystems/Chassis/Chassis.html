@@ -26,8 +26,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10,"i5":9,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -89,13 +89,13 @@ loadScripts(document, 'script');</script>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -147,6 +147,30 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<section role="region">
+<ul class="blockList">
+<li class="blockList"><a id="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(edu.greenblitz.gblib.motors.brushless.IMotorFactory,int%5B%5D,boolean%5B%5D,double)">Chassis</a></span>&#8203;(<a href="../../motors/brushless/IMotorFactory.html" title="interface in edu.greenblitz.gblib.motors.brushless">IMotorFactory</a>&nbsp;motorFactory,
+       int[]&nbsp;ports,
+       boolean[]&nbsp;isInverted,
+       double&nbsp;wheelDistance)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+</section>
 <!-- ========== METHOD SUMMARY =========== -->
 <section role="region">
 <ul class="blockList">
@@ -155,7 +179,7 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
@@ -168,124 +192,112 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>static void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create(edu.greenblitz.gblib.motors.IMotorFactory,int%5B%5D,double)">create</a></span>&#8203;(<a href="../../motors/IMotorFactory.html" title="interface in edu.greenblitz.gblib.motors">IMotorFactory</a>&nbsp;motorFactory,
-      int[]&nbsp;ports,
-      double&nbsp;wheelDistance)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAngle()">getAngle</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAngularVelocityByGyro()">getAngularVelocityByGyro</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAngularVelocityByWheels()">getAngularVelocityByWheels</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>static <a href="Chassis.html" title="class in edu.greenblitz.gblib.subsystems.Chassis">Chassis</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInstance()">getInstance</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLeftMeters()">getLeftMeters</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../motors/GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a>[]</code></td>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../motors/brushless/GBMotor.html" title="interface in edu.greenblitz.gblib.motors.brushless">GBMotor</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLeftMotor()">getLeftMotor</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../motors/GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a></code></td>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="../../motors/brushless/GBMotor.html" title="interface in edu.greenblitz.gblib.motors.brushless">GBMotor</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLeftMotor(int)">getLeftMotor</a></span>&#8203;(int&nbsp;id)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLeftVelocity()">getLeftVelocity</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLinearVelocity()">getLinearVelocity</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../motion/cords/Position.html" title="class in edu.greenblitz.gblib.motion.cords">Position</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLocation()">getLocation</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMeters()">getMeters</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRawAngle()">getRawAngle</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRightMeters()">getRightMeters</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
-<td class="colFirst"><code><a href="../../motors/GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a>[]</code></td>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code><a href="../../motors/brushless/GBMotor.html" title="interface in edu.greenblitz.gblib.motors.brushless">GBMotor</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRightMotor()">getRightMotor</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
-<td class="colFirst"><code><a href="../../motors/GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a></code></td>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code><a href="../../motors/brushless/GBMotor.html" title="interface in edu.greenblitz.gblib.motors.brushless">GBMotor</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRightMotor(int)">getRightMotor</a></span>&#8203;(int&nbsp;id)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRightVelocity()">getRightVelocity</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getWheelDistance()">getWheelDistance</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveMotors(double)">moveMotors</a></span>&#8203;(double&nbsp;power)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveMotors(double,double)">moveMotors</a></span>&#8203;(double&nbsp;powerLeft,
           double&nbsp;powerRight)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetEncoders()">resetEncoders</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetGyro()">resetGyro</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setIdleMode(edu.greenblitz.gblib.motors.AbstractMotor.IdleMode)">setIdleMode</a></span>&#8203;(<a href="../../motors/AbstractMotor.IdleMode.html" title="enum in edu.greenblitz.gblib.motors">AbstractMotor.IdleMode</a>&nbsp;idleMode)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setIdleMode(edu.greenblitz.gblib.motors.brushless.AbstractMotor.IdleMode)">setIdleMode</a></span>&#8203;(<a href="../../motors/brushless/AbstractMotor.IdleMode.html" title="enum in edu.greenblitz.gblib.motors.brushless">AbstractMotor.IdleMode</a>&nbsp;idleMode)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMotorByID(int,double)">setMotorByID</a></span>&#8203;(int&nbsp;id,
             double&nbsp;power)</code></th>
@@ -315,6 +327,28 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<section role="region">
+<ul class="blockList">
+<li class="blockList"><a id="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a id="&lt;init&gt;(edu.greenblitz.gblib.motors.brushless.IMotorFactory,int[],boolean[],double)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Chassis</h4>
+<pre>public&nbsp;Chassis&#8203;(<a href="../../motors/brushless/IMotorFactory.html" title="interface in edu.greenblitz.gblib.motors.brushless">IMotorFactory</a>&nbsp;motorFactory,
+               int[]&nbsp;ports,
+               boolean[]&nbsp;isInverted,
+               double&nbsp;wheelDistance)</pre>
+</li>
+</ul>
+</li>
+</ul>
+</section>
 <!-- ============ METHOD DETAIL ========== -->
 <section role="region">
 <ul class="blockList">
@@ -322,33 +356,13 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="getInstance()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getInstance</h4>
-<pre class="methodSignature">public static&nbsp;<a href="Chassis.html" title="class in edu.greenblitz.gblib.subsystems.Chassis">Chassis</a>&nbsp;getInstance()</pre>
-</li>
-</ul>
-<a id="create(edu.greenblitz.gblib.motors.IMotorFactory,int[],double)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>create</h4>
-<pre class="methodSignature">public static&nbsp;void&nbsp;create&#8203;(<a href="../../motors/IMotorFactory.html" title="interface in edu.greenblitz.gblib.motors">IMotorFactory</a>&nbsp;motorFactory,
-                          int[]&nbsp;ports,
-                          double&nbsp;wheelDistance)</pre>
-</li>
-</ul>
-<a id="setIdleMode(edu.greenblitz.gblib.motors.AbstractMotor.IdleMode)">
+<a id="setIdleMode(edu.greenblitz.gblib.motors.brushless.AbstractMotor.IdleMode)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setIdleMode</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setIdleMode&#8203;(<a href="../../motors/AbstractMotor.IdleMode.html" title="enum in edu.greenblitz.gblib.motors">AbstractMotor.IdleMode</a>&nbsp;idleMode)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;setIdleMode&#8203;(<a href="../../motors/brushless/AbstractMotor.IdleMode.html" title="enum in edu.greenblitz.gblib.motors.brushless">AbstractMotor.IdleMode</a>&nbsp;idleMode)</pre>
 </li>
 </ul>
 <a id="getRightMotor()">
@@ -357,7 +371,7 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <ul class="blockList">
 <li class="blockList">
 <h4>getRightMotor</h4>
-<pre class="methodSignature">public&nbsp;<a href="../../motors/GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a>[]&nbsp;getRightMotor()</pre>
+<pre class="methodSignature">public&nbsp;<a href="../../motors/brushless/GBMotor.html" title="interface in edu.greenblitz.gblib.motors.brushless">GBMotor</a>[]&nbsp;getRightMotor()</pre>
 </li>
 </ul>
 <a id="getRightMotor(int)">
@@ -366,7 +380,7 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <ul class="blockList">
 <li class="blockList">
 <h4>getRightMotor</h4>
-<pre class="methodSignature">public&nbsp;<a href="../../motors/GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a>&nbsp;getRightMotor&#8203;(int&nbsp;id)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../../motors/brushless/GBMotor.html" title="interface in edu.greenblitz.gblib.motors.brushless">GBMotor</a>&nbsp;getRightMotor&#8203;(int&nbsp;id)</pre>
 </li>
 </ul>
 <a id="getLeftMotor()">
@@ -375,7 +389,7 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <ul class="blockList">
 <li class="blockList">
 <h4>getLeftMotor</h4>
-<pre class="methodSignature">public&nbsp;<a href="../../motors/GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a>[]&nbsp;getLeftMotor()</pre>
+<pre class="methodSignature">public&nbsp;<a href="../../motors/brushless/GBMotor.html" title="interface in edu.greenblitz.gblib.motors.brushless">GBMotor</a>[]&nbsp;getLeftMotor()</pre>
 </li>
 </ul>
 <a id="getLeftMotor(int)">
@@ -384,7 +398,7 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <ul class="blockList">
 <li class="blockList">
 <h4>getLeftMotor</h4>
-<pre class="methodSignature">public&nbsp;<a href="../../motors/GBMotor.html" title="interface in edu.greenblitz.gblib.motors">GBMotor</a>&nbsp;getLeftMotor&#8203;(int&nbsp;id)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../../motors/brushless/GBMotor.html" title="interface in edu.greenblitz.gblib.motors.brushless">GBMotor</a>&nbsp;getLeftMotor&#8203;(int&nbsp;id)</pre>
 </li>
 </ul>
 <a id="moveMotors(double,double)">
@@ -605,13 +619,13 @@ extends <a href="../GBSubsystem.html" title="class in edu.greenblitz.gblib.subsy
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

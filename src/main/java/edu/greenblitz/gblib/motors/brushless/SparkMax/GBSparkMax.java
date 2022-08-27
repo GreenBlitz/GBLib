@@ -9,6 +9,7 @@ import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 public class GBSparkMax extends AbstractMotor {
 	private final CANSparkMax motor;
 	private final RelativeEncoder encoder;
+
 	
 	protected GBSparkMax(int id) {
 		this.motor = new CANSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -42,11 +43,6 @@ public class GBSparkMax extends AbstractMotor {
 	}
 
 	@Override
-	public double getNormalizedVelocity() {
-		return getRawVelocity() / getTicksToRotations();
-	}
-
-	@Override
 	public void configurePID(PIDObject pidObject) {
 		motor.getPIDController().setP(pidObject.getKp());
 		motor.getPIDController().setI(pidObject.getKi());
@@ -59,12 +55,14 @@ public class GBSparkMax extends AbstractMotor {
 	public void setTargetByPID(double target, PIDTarget targetType) {
 		switch (targetType) {
 			case Speed:
+				target *= getTicksToWheelRPM();
 				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity);
 				break;
 			case Current:
 				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kCurrent);
 				break;
 			case Position:
+				target *= getTicksToWheelPosition();
 				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kPosition);
 				break;
 		}

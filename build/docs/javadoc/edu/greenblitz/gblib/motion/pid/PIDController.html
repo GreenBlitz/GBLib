@@ -157,58 +157,58 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#absoluteMinimumOut">absoluteMinimumOut</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#configured">configured</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#goal">goal</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected double</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_absoluteMinimumOut">m_absoluteMinimumOut</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#integral">integral</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected double</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_goal">m_goal</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#maximumOutput">maximumOutput</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected double</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_integral">m_integral</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>protected double</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_maximumOutput">m_maximumOutput</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>protected double</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_minimumOutput">m_minimumOutput</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#minimumOutput">minimumOutput</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_obj">m_obj</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pidObject">pidObject</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected double</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_previousError">m_previousError</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#previousError">previousError</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected long</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_previousTime">m_previousTime</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#previousTime">previousTime</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected <a href="../tolerance/ITolerance.html" title="interface in edu.greenblitz.gblib.motion.tolerance">ITolerance</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#m_tolerance">m_tolerance</a></span></code></th>
+<td class="colFirst"><code>protected long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startTime">startTime</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected long</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startTime">startTime</a></span></code></th>
+<td class="colFirst"><code>protected <a href="../tolerance/ITolerance.html" title="interface in edu.greenblitz.gblib.motion.tolerance">ITolerance</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#tolerance">tolerance</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -242,11 +242,11 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(edu.greenblitz.gblib.motion.pid.PIDObject)">PIDController</a></span>&#8203;(<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a>&nbsp;obj)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(edu.greenblitz.gblib.motion.pid.PIDObject)">PIDController</a></span>&#8203;(<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a>&nbsp;pidObject)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(edu.greenblitz.gblib.motion.pid.PIDObject,edu.greenblitz.gblib.motion.tolerance.ITolerance)">PIDController</a></span>&#8203;(<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a>&nbsp;obj,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(edu.greenblitz.gblib.motion.pid.PIDObject,edu.greenblitz.gblib.motion.tolerance.ITolerance)">PIDController</a></span>&#8203;(<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a>&nbsp;pidObject,
              <a href="../tolerance/ITolerance.html" title="interface in edu.greenblitz.gblib.motion.tolerance">ITolerance</a>&nbsp;tolerance)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -355,7 +355,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAbsoluteMinimumOut(double)">setAbsoluteMinimumOut</a></span>&#8203;(double&nbsp;m_absoluteMinimumOut)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAbsoluteMinimumOut(double)">setAbsoluteMinimumOut</a></span>&#8203;(double&nbsp;absoluteMinimumOut)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i17" class="rowColor">
@@ -413,49 +413,49 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Field Detail</h3>
-<a id="m_obj">
+<a id="pidObject">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>m_obj</h4>
-<pre>protected&nbsp;<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a> m_obj</pre>
+<h4>pidObject</h4>
+<pre>protected&nbsp;<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a> pidObject</pre>
 </li>
 </ul>
-<a id="m_previousTime">
+<a id="previousTime">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>m_previousTime</h4>
-<pre>protected&nbsp;long m_previousTime</pre>
+<h4>previousTime</h4>
+<pre>protected&nbsp;long previousTime</pre>
 </li>
 </ul>
-<a id="m_goal">
+<a id="goal">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>m_goal</h4>
-<pre>protected&nbsp;double m_goal</pre>
+<h4>goal</h4>
+<pre>protected&nbsp;double goal</pre>
 </li>
 </ul>
-<a id="m_previousError">
+<a id="previousError">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>m_previousError</h4>
-<pre>protected&nbsp;double m_previousError</pre>
+<h4>previousError</h4>
+<pre>protected&nbsp;double previousError</pre>
 </li>
 </ul>
-<a id="m_integral">
+<a id="integral">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>m_integral</h4>
-<pre>protected&nbsp;double m_integral</pre>
+<h4>integral</h4>
+<pre>protected&nbsp;double integral</pre>
 </li>
 </ul>
 <a id="startTime">
@@ -467,31 +467,31 @@ extends java.lang.Object</pre>
 <pre>protected&nbsp;long startTime</pre>
 </li>
 </ul>
-<a id="m_minimumOutput">
+<a id="minimumOutput">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>m_minimumOutput</h4>
-<pre>protected&nbsp;double m_minimumOutput</pre>
+<h4>minimumOutput</h4>
+<pre>protected&nbsp;double minimumOutput</pre>
 </li>
 </ul>
-<a id="m_maximumOutput">
+<a id="maximumOutput">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>m_maximumOutput</h4>
-<pre>protected&nbsp;double m_maximumOutput</pre>
+<h4>maximumOutput</h4>
+<pre>protected&nbsp;double maximumOutput</pre>
 </li>
 </ul>
-<a id="m_absoluteMinimumOut">
+<a id="absoluteMinimumOut">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>m_absoluteMinimumOut</h4>
-<pre>protected&nbsp;double m_absoluteMinimumOut</pre>
+<h4>absoluteMinimumOut</h4>
+<pre>protected&nbsp;double absoluteMinimumOut</pre>
 </li>
 </ul>
 <a id="configured">
@@ -503,13 +503,13 @@ extends java.lang.Object</pre>
 <pre>protected&nbsp;boolean configured</pre>
 </li>
 </ul>
-<a id="m_tolerance">
+<a id="tolerance">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>m_tolerance</h4>
-<pre>protected&nbsp;<a href="../tolerance/ITolerance.html" title="interface in edu.greenblitz.gblib.motion.tolerance">ITolerance</a> m_tolerance</pre>
+<h4>tolerance</h4>
+<pre>protected&nbsp;<a href="../tolerance/ITolerance.html" title="interface in edu.greenblitz.gblib.motion.tolerance">ITolerance</a> tolerance</pre>
 </li>
 </ul>
 </li>
@@ -528,7 +528,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>PIDController</h4>
-<pre>public&nbsp;PIDController&#8203;(<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a>&nbsp;obj,
+<pre>public&nbsp;PIDController&#8203;(<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a>&nbsp;pidObject,
                      <a href="../tolerance/ITolerance.html" title="interface in edu.greenblitz.gblib.motion.tolerance">ITolerance</a>&nbsp;tolerance)</pre>
 </li>
 </ul>
@@ -538,7 +538,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>PIDController</h4>
-<pre>public&nbsp;PIDController&#8203;(<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a>&nbsp;obj)</pre>
+<pre>public&nbsp;PIDController&#8203;(<a href="PIDObject.html" title="class in edu.greenblitz.gblib.motion.pid">PIDObject</a>&nbsp;pidObject)</pre>
 </li>
 </ul>
 <a id="&lt;init&gt;(double,double,double,double)">
@@ -612,7 +612,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>setAbsoluteMinimumOut</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setAbsoluteMinimumOut&#8203;(double&nbsp;m_absoluteMinimumOut)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;setAbsoluteMinimumOut&#8203;(double&nbsp;absoluteMinimumOut)</pre>
 </li>
 </ul>
 <a id="getGoal()">

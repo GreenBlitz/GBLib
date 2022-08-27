@@ -64,12 +64,14 @@ public class GBTalonFX extends AbstractMotor {
 	public void setTargetByPID(double target, PIDTarget targetType) {
 		switch (targetType) {
 			case Speed:
+				target *= getTicksToWheelRPM();
 				motor.set(TalonFXControlMode.Velocity, target);
 				break;
 			case Current:
 				motor.set(TalonFXControlMode.Current, target);
 				break;
 			case Position:
+				target *= getTicksToWheelPosition();
 				motor.set(TalonFXControlMode.Position, target);
 				break;
 		}
