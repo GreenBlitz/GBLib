@@ -8,19 +8,19 @@ import edu.greenblitz.gblib.subsystems.GBSubsystem;
 
 public class SwerveModule extends GBSubsystem {
 
-	private GBMotor angleMotor;
-	private GBMotor linMotor;
-	private static int isReversed;
+	private final GBMotor angleMotor;
+	private final GBMotor linMotor;
+	private int isReversed = 1;
 	public double targetAngle;
 	public double targetVel;
 
-	public SwerveModule(int isReversed, IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL) {
+	public SwerveModule(IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL) {
 		angleMotor = motorFactoryA.generate(portA);
 		linMotor = motorFactoryL.generate(portL);
-		isReversed = isReversed;
 	}
 
 	public void setVelocity(double speed) {
+		speed *= isReversed;
 		linMotor.setTargetByPID(speed, AbstractMotor.PIDTarget.Speed);
 		targetVel = speed;
 	}
@@ -39,13 +39,13 @@ public class SwerveModule extends GBSubsystem {
 	}
 
 	public void rotateByAngle(double angle) {
-		targetAngle = getCurrentAngle() + angle;
+		targetAngle = getCurrentAngle() + angle; //udi: shouldn't this be from target angle instead of current?
 		angleMotor.setTargetByPID(targetAngle, AbstractMotor.PIDTarget.Position);
 	}
 
 	public void resetAngle() {
 		angleMotor.resetEncoder();
-	}
+	} //udi: resetAngleEncoder() no?
 
 	public void configLinPID(PIDObject pidObject) {
 		linMotor.configurePID(pidObject);
@@ -65,7 +65,7 @@ public class SwerveModule extends GBSubsystem {
 
 	public double getTargetVel() {
 		return targetVel;
-	}
+	} //udi: *isReversed
 
 
 }
