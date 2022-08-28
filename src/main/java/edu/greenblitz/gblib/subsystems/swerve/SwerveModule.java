@@ -84,5 +84,9 @@ public class SwerveModule {
 		return targetVel;
 	} //udi: *isReversed
 
+	public int getIsReversed() {
+		return isReversed;
+	}
+
 
 }
