@@ -1,78 +1,75 @@
 package edu.greenblitz.gblib.motion.angles;
 
 public class DualSidedAngTarget {
+	private double target;
+	private double start;
+	private int direction;
 
-    private double target;
-    private double start;
-    private int direction;
+	private DualSidedAngTarget(double target, double start, int direction) {
+		this.target = target;
+		this.start = start;
+		this.direction = direction;
+	}
 
-    private DualSidedAngTarget(double target, double start, int direction) {
-        this.target = target;
-        this.start = start;
-        this.direction = direction;
-    }
+	public static DualSidedAngTarget getTarget(double target, double head) {
+		double tail = head + 0.5;
 
-    public double getTarget() {
-        return target;
-    }
+		DualSidedAngTarget head_target = chooseAngTarget(head, target);
+		DualSidedAngTarget tail_target = chooseAngTarget(tail, target);
+		tail_target.flip();
+		if (head_target.getError() < tail_target.getError()) {
+			return (head_target);
+		} else {
+			return (tail_target);
+		}
+	}
 
-    private double getStart() {
-        return start;
-    }
+	private static double chooseAngTargetBin(double curr, double target1, double target2) {
+		if (Math.abs(target1 - curr) > Math.abs(target2 - curr)) {
+			return target2;
+		} else {
+			return target1;
+		}
+	}
 
-    public int getDirection() {
-        return direction;
-    }
+	private static DualSidedAngTarget chooseAngTarget(double curr, double target) {
+		return new DualSidedAngTarget(chooseAngTargetBin(curr, chooseAngTargetBin(curr, target, target + 1),
+				target - 1), curr, 1);
+	}
 
-    public void flip() {
-        direction = -direction;
-        start = (start + Math.PI) % (2 * Math.PI);
-        target = (target + Math.PI) % (2 * Math.PI);
-    }
+	//test
+	public static void main(String[] args) {
+		System.out.println(DualSidedAngTarget.getTarget(Double.parseDouble(args[0]), Double.parseDouble(args[1])));
+	}
 
-    public double getError(){
-        return Math.max((target - start)%(Math.PI*2), (start - target)%(Math.PI*2));
-    }
+	public double getTarget() {
+		return target;
+	}
 
-    @Override
-    public String toString() {
-        return "{" +
-                "\"target\":" + target +
-                ", \"start\":" + start +
-                ", \"direction\":" + direction +
-                '}';
-    }
+	private double getStart() {
+		return start;
+	}
 
+	public int getDirection() {
+		return direction;
+	}
 
-    public static DualSidedAngTarget getTarget(double target, double head) {
-        double tail = head + Math.PI;
+	public void flip() {
+		direction = -direction;
+		start = (start + 0.5) % 1;
+		target = (target + 0.5) % 1;
+	}
 
-        DualSidedAngTarget head_target = chooseAngTarget(head, target);
-        DualSidedAngTarget tail_target = chooseAngTarget(tail, target);
-        tail_target.flip();
-        if (head_target.getError() < tail_target.getError()) {
-            return(head_target);
-        } else {
-            return(tail_target);
-        }
-    }
+	public double getError() {
+		return Math.max((target - start) % 1, (start - target) % 1);
+	}
 
-
-    private static double chooseAngTargetBin(double curr, double target1, double target2) {
-        if (Math.abs(target1 - curr) > Math.abs(target2 - curr)) {
-            return target2;
-        } else {
-            return target1;
-        }
-    }
-
-    private static DualSidedAngTarget chooseAngTarget(double curr, double target) {
-        return new DualSidedAngTarget(chooseAngTargetBin(curr, chooseAngTargetBin(curr, target, target + Math.PI * 2),
-                target - Math.PI * 2), curr, 1);
-    }
-
-    //test
-    public static void main(String[] args) {
-        System.out.println(DualSidedAngTarget.getTarget(Double.parseDouble(args[0]), Double.parseDouble(args[1])));
-    }
+	@Override
+	public String toString() {
+		return "{" +
+				"\"target\":" + target +
+				", \"start\":" + start +
+				", \"direction\":" + direction +
+				'}';
+	}
 }
