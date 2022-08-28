@@ -21,14 +21,14 @@ screen = pygame.display.set_mode((SIZE, SIZE))
 
 def line_by_ang(ang, color):
     pygame.draw.line(screen, color, CENTER,
-                     (SIZE / 2 + math.cos(ang) * RADIUS, SIZE / 2 - math.sin(ang) * RADIUS), 3)
+                     (SIZE / 2 + math.cos(2*math.pi*ang) * RADIUS, SIZE / 2 - math.sin(2*math.pi*ang) * RADIUS), 3)
 
 cmd = f"{JAVA_PATH}javac DualSidedAngTarget.java"
 process = subprocess.Popen(cmd)
 process.wait()
 
 head = 0
-target = math.pi/4
+target = 10
 tail = 0
 
 error_q = queue.Queue()
@@ -59,9 +59,9 @@ while running:
     error = (data["target"] - data["start"])
     error_q.put(error)
     head += error_q.get() * KP
-    head %= 2 * math.pi
-    tail = head + math.pi
-    tail %= 2 * math.pi
+    head %= 1
+    tail = head + 0.5
+    tail %= 1
 
 
 
