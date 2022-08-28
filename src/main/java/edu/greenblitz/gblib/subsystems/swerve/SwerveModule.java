@@ -1,5 +1,6 @@
 package edu.greenblitz.gblib.subsystems.swerve;
 
+import edu.greenblitz.gblib.motion.angles.DualSidedAngTarget;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
 import edu.greenblitz.gblib.motors.brushed.IBrushedFactory;
@@ -24,7 +25,7 @@ public class SwerveModule {
 		linMotor = motorFactoryL.generate(portL);
 		lamprey = new AnalogInput(lampreyID);
 		lamprey.setAverageBits(2);
-		isReversed = isReversed;
+		this.isReversed = isReversed;
 	}
 
 
@@ -39,6 +40,9 @@ public class SwerveModule {
 	}
 
 	public void rotateToAngle(double angle) {
+		DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.getTarget(targetAngle, getCurrentAngle());
+		angle = dualSidedAngTarget.getTarget();
+		isReversed = dualSidedAngTarget.getDirection();
 		angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
 		targetAngle = angle;
 	}
