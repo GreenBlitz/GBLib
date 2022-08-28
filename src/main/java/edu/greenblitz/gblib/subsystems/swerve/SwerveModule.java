@@ -40,7 +40,7 @@ public class SwerveModule {
 	}
 
 	public void rotateToAngle(double angle) {
-		DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.getTarget(targetAngle, getCurrentAngle());
+		DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.getTarget(angle, getCurrentAngle());
 		angle = dualSidedAngTarget.getTarget();
 		isReversed = dualSidedAngTarget.getDirection();
 		angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
