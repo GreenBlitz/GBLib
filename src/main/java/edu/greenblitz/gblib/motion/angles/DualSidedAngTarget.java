@@ -14,6 +14,7 @@ public class DualSidedAngTarget {
 	}
 
 	public static DualSidedAngTarget getTarget(double target, double head) {
+		target %= 1;
 		double tail = head + 0.5;
 
 		DualSidedAngTarget head_target = chooseAngTarget(head, target);
