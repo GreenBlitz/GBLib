@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 public class SwerveModule {
 
 
-	private static int isReversed;
+	private int isReversed = 1;
 	private final int lampreyTicksPerRotation = 4076; //not my fault it's an ugly number
 	public double targetAngle;
 	public double targetVel;
@@ -20,12 +20,11 @@ public class SwerveModule {
 	private final GBBrushedMotor linMotor;
 	private final AnalogInput lamprey;
 
-	public SwerveModule(int isReversed, IMotorFactory motorFactoryA, IBrushedFactory motorFactoryL, int portA, int portL, int lampreyID) {
+	public SwerveModule(IMotorFactory motorFactoryA, IBrushedFactory motorFactoryL, int portA, int portL, int lampreyID) {
 		angleMotor = motorFactoryA.generate(portA);
 		linMotor = motorFactoryL.generate(portL);
 		lamprey = new AnalogInput(lampreyID);
 		lamprey.setAverageBits(2);
-		this.isReversed = isReversed;
 	}
 
 
