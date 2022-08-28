@@ -12,8 +12,8 @@ package edu.greenblitz.gblib.gear;
 public class Gear {
 	private static Gear instance;
 	private boolean isPower;
-	
-	
+
+
 	/**
 	 * Constructor method
 	 *
@@ -22,25 +22,25 @@ public class Gear {
 	private Gear(boolean isPower) {
 		this.isPower = isPower;
 	}
-	
+
 	public static Gear getInstance() {
 		if (instance == null) {
 			instance = new Gear(false);
 		}
 		return instance;
 	}
-	
+
 	public boolean getState() {
 		return this.isPower;
 	}
-	
+
 	/**
 	 * @param desiredState - the gear state we wish to change into
 	 */
 	public void setState(boolean desiredState) {
 		this.isPower = desiredState;
 	}
-	
+
 	/**
 	 * Switches between the two gear states regardless of current state
 	 */

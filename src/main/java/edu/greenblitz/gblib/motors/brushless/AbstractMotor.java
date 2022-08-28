@@ -8,12 +8,12 @@ public abstract class AbstractMotor implements GBMotor {
 		return this.ticksToWheelPosition;
 	}
 
-	public double getTicksToWheelRPM() {
-		return ticksToWheelRPM;
-	}
-
 	public void setTicksToWheelPosition(double ticksToWheelPosition) {
 		this.ticksToWheelPosition = ticksToWheelPosition;
+	}
+
+	public double getTicksToWheelRPM() {
+		return ticksToWheelRPM;
 	}
 
 	public void setTicksToWheelRPM(double ticksToWheelRPM) {
@@ -24,18 +24,18 @@ public abstract class AbstractMotor implements GBMotor {
 	public double getNormalizedPosition() {
 		return (getRawTicks() / ticksToWheelPosition);
 	}
-	
-	
+
+
 	@Override
 	public double getNormalizedVelocity() {
 		return (getRawVelocity() / ticksToWheelRPM);
 	}
-	
+
 	public enum IdleMode {
 		Coast,
 		Brake
 	}
-	
+
 	public enum PIDTarget {
 		Speed,
 		Position,

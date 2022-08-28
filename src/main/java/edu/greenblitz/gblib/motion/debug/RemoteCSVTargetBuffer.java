@@ -6,22 +6,22 @@ public class RemoteCSVTargetBuffer {
 	private final long delay;
 	RemoteCSVTarget target;
 	ArrayList<double[]> buffer;
-	
+
 	public RemoteCSVTargetBuffer(String fileName, String... names) {
 		this(fileName, 50, names);
 	}
-	
+
 	public RemoteCSVTargetBuffer(String fileName, long delay, String... names) {
 		target = RemoteCSVTarget.initTarget(fileName, names);
 		buffer = new ArrayList<double[]>();
 		this.delay = delay;
 	}
-	
+
 	public void report(double... record) {
-		
+
 		buffer.add(record);
 	}
-	
+
 	public void passToCSV(boolean resolveDupes) {
 		if (resolveDupes) resolveDupes();
 		target.report(buffer.get(0).clone());
@@ -34,13 +34,13 @@ public class RemoteCSVTargetBuffer {
 			}
 		}
 	}
-	
+
 	public void resolveDupes() {
 		int time = 0;
 		for (int i = 0; i < buffer.get(0).length; i++) {
 			if (target.ntNames[i].equals("time")) time = i;
 		}
-		
+
 		for (int i = 0; i < buffer.size() - 2; i++) {
 			for (int j = 0; j < buffer.get(i).length; j++) {
 				if (buffer.get(i)[j] == buffer.get(i + 1)[j]) {
