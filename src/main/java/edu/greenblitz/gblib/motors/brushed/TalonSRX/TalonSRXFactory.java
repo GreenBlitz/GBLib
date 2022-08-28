@@ -5,13 +5,13 @@ import edu.greenblitz.gblib.motors.brushed.IBrushedFactory;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 
 public class TalonSRXFactory implements IBrushedFactory {
-	
+
 	private int currentLimit = 0;
 	private double voltageCompensation = 0;
 	private double rampRate = 0;
 	private boolean inverted = false;
 	private AbstractMotor.IdleMode idleMode = AbstractMotor.IdleMode.Brake;
-	
+
 	@Override
 	public GBBrushedMotor generate(int id) {
 		GBTalonSRX motor = new GBTalonSRX(id);
@@ -22,32 +22,32 @@ public class TalonSRXFactory implements IBrushedFactory {
 		motor.setIdleMode(idleMode);
 		return motor;
 	}
-	
+
 	public TalonSRXFactory withCurrentLimit(int currentLimit) {
 		this.currentLimit = currentLimit;
 		return this;
 	}
-	
+
 	public TalonSRXFactory withVoltageCompensation(double voltageCompensation) {
 		this.voltageCompensation = voltageCompensation;
 		return this;
 	}
-	
+
 	public TalonSRXFactory withRampRate(double rampRate) {
 		this.rampRate = rampRate;
 		return this;
 	}
-	
+
 	public TalonSRXFactory withInverted(boolean inverted) {
 		this.inverted = inverted;
 		return this;
 	}
-	
+
 	public TalonSRXFactory withIdleMode(AbstractMotor.IdleMode idleMode) {
 		this.idleMode = idleMode;
 		return this;
 	}
-	
+
 }
 
 

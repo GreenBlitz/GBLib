@@ -24,18 +24,18 @@ public abstract class AbstractMotor implements GBMotor {
 	public double getNormalizedPosition() {
 		return (getRawTicks() / ticksToRadians);
 	}
-	
-	
+
+
 	@Override
 	public double getNormalizedVelocity() {
 		return (getRawVelocity() / ticksToWheelRPM);
 	}
-	
+
 	public enum IdleMode {
 		Coast,
 		Brake
 	}
-	
+
 	public enum PIDTarget {
 		Speed,
 		Position,
