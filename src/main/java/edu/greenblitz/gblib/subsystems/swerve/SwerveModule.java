@@ -72,6 +72,10 @@ public class SwerveModule {
         angleMotor.resetEncoder();
     }
 
+	public void restEncoderByLamprey(){
+		angleMotor.setEncoderAng(getLampreyAngle());
+	}
+
 //	public void configLinPID(PIDObject pidObject) {
 //		linMotor.configurePID(pidObject);
 //	} todo make work
