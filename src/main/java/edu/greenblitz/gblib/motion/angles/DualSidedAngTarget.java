@@ -12,13 +12,11 @@ public class DualSidedAngTarget {
 		this.start = start;
 		this.direction = direction;
 	}
-
-	public static DualSidedAngTarget getTarget(double target, double head) {
-		target = GBMath.modulo(target, (Math.PI * 2));
-		double tail = head + Math.PI;
-
-
-		DualSidedAngTarget head_target = chooseAngTarget(head, target);
+	public static DualSidedAngTarget generateTarget(double target, double head) {
+			target = GBMath.modulo(target, (Math.PI * 2));
+			double tail = head + Math.PI;
+			
+			DualSidedAngTarget head_target = chooseAngTarget(head, target);
 		DualSidedAngTarget tail_target = chooseAngTarget(tail, target);
 		tail_target.flip();
 		if (head_target.getError() < tail_target.getError()) {
@@ -43,7 +41,7 @@ public class DualSidedAngTarget {
 
 	//test
 	public static void main(String[] args) {
-		System.out.println(DualSidedAngTarget.getTarget(Double.parseDouble(args[0]), Double.parseDouble(args[1])));
+		System.out.println(DualSidedAngTarget.generateTarget(Double.parseDouble(args[0]), Double.parseDouble(args[1])));
 	}
 
 	public double getTarget() {
