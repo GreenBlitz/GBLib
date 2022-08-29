@@ -9,7 +9,7 @@ public class SwerveChassis extends GBSubsystem {
 	private final PigeonGyro pigeonGyro;
 	private double length;
 	private double width;
-	private enum Module {
+	public enum Module {
 		FRONT_RIGHT,
 		FRONT_LEFT,
 		BACK_RIGHT,
