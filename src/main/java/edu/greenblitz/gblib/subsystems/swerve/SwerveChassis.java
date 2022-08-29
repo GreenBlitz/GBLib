@@ -46,6 +46,8 @@ public class SwerveChassis extends GBSubsystem {
 	
 	/**
 	 * all code below is self-explanatory
+	 *
+	 * ALL IN ROTATIONS, NOT DEGREES
 	 */
 	public void moveSingleModule(Module module, double angle, double power) {
 		getModule(module).rotateToAngle(angle);
@@ -64,7 +66,7 @@ public class SwerveChassis extends GBSubsystem {
     /** rotates the chassis based on given power.
      * the function rotates each module to the tangent of the circle on which it rotates */
 	public void rotateChassis(double power) {
-		double angle = 90 + Math.atan(length / width);
+		double angle =0.25 +  Math.atan(length / width) / 2*Math.PI;
   
 		moveSingleModule(Module.FRONT_RIGHT, angle, power);
         moveSingleModule(Module.FRONT_LEFT, -angle, power);
