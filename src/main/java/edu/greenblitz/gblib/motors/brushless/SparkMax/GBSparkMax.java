@@ -110,4 +110,8 @@ public class GBSparkMax extends AbstractMotor {
 		motor.setClosedLoopRampRate(rampRate);
 	}
 
+	public void setEncoderAng(double angle){
+		encoder.setPosition(angle*getTicksToWheelPosition());
+	}
+
 }

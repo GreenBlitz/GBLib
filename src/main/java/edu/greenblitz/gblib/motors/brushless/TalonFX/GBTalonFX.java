@@ -111,4 +111,8 @@ public class GBTalonFX extends AbstractMotor {
 	public void setIdleMode(IdleMode idleMode) {
 
 	}
+
+	public void setEncoderAng(double angle){
+		motor.setSelectedSensorPosition(angle*getTicksToWheelPosition());
+	}
 }
