@@ -1,10 +1,12 @@
 package edu.greenblitz.gblib.gyro;
 
+import edu.greenblitz.gblib.utils.GBMath;
+
 public abstract class AbstractGyro {
 	protected int inverted;
 	
 	private static double normalize(double angle) {
-		angle %= (2 * Math.PI);
+		angle %=  2 * Math.PI;
 		if (angle > Math.PI)
 			angle -= 2 * Math.PI;
 		if (angle <= -Math.PI)

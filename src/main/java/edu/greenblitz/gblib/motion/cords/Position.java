@@ -1,5 +1,7 @@
 package edu.greenblitz.gblib.motion.cords;
 
+import edu.greenblitz.gblib.utils.GBMath;
+
 /**
  * Represent a position in 2D space (for example of a org.greenblitz.example.robot) that consists of x, y, and angle (heading, the direction the object faces)
  *
@@ -35,7 +37,7 @@ public class Position extends Point {
 	}
 	
 	public static double normalizeAngle(double angle) {
-		angle %= (2 * Math.PI);
+		angle %= 2 * Math.PI;
 		if (angle > Math.PI)
 			angle -= 2 * Math.PI;
 		if (angle <= -Math.PI)

@@ -1,5 +1,7 @@
 package edu.greenblitz.gblib.motion.angles;
 
+import edu.greenblitz.gblib.utils.GBMath;
+
 public class DualSidedAngTarget {
 	private double target;
 	private double start;
@@ -56,12 +58,12 @@ public class DualSidedAngTarget {
 
 	public void flip() {
 		direction = -direction;
-		start = (start + 0.5) % 1;
-		target = (target + 0.5) % 1;
+		start = GBMath.modulo((start + 0.5), 1);
+		target = GBMath.modulo((target + 0.5), 1);
 	}
 
 	public double getError() {
-		return Math.max((target - start) % 1, (start - target) % 1);
+		return Math.max(GBMath.modulo((target - start), 1), GBMath.modulo((start - target), 1));
 	}
 
 	@Override
