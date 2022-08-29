@@ -46,10 +46,18 @@ public class SwerveModule {
         targetAngle = angle;
     }
 
-    public double getCurrentAngle() {
-        return angleMotor.getNormalizedPosition();
-    }
+	public double getRawLampreyAngle(){
+		return (((double) lamprey.getValue()) / lampreyTicksPerRotation) * 360;
+	}
 
+	public double getRawLampreyVoltage(){
+		return lamprey.getVoltage();
+	}
+
+
+	public double getCurrentAngle() {
+		return angleMotor.getNormalizedPosition();
+	}
 //	public double getCurrentVel() {
 //		return linMotor.getNormalizedVelocity();
 //	}  todo make work
