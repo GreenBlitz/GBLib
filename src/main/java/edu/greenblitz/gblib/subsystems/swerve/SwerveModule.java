@@ -16,15 +16,19 @@ public class SwerveModule {
     private static final int lampreyTicksPerRotation = 4076; //not my fault it's an ugly number
     public double targetAngle;
     public double targetVel;
+	private  double maxLampreyVal;
+	private double minLampreyVal;
     private final GBMotor angleMotor;
     private final GBBrushedMotor linearMotor;
     private final AnalogInput lamprey;
 
-    public SwerveModule(IMotorFactory motorFactoryA, IBrushedFactory motorFactoryL, int portA, int portL, int lampreyID) {
+    public SwerveModule(IMotorFactory motorFactoryA, IBrushedFactory motorFactoryL, int portA, int portL, int lampreyID, double maxLampreyVal, double minLampreyVal) {
         angleMotor = motorFactoryA.generate(portA);
         linearMotor = motorFactoryL.generate(portL);
         lamprey = new AnalogInput(lampreyID);
         lamprey.setAverageBits(2);
+		this.maxLampreyVal = maxLampreyVal;
+		this.minLampreyVal = minLampreyVal;
     }
 
 
@@ -34,12 +38,12 @@ public class SwerveModule {
         targetVel = speed;
     }
 
-    public double getAbsoluteAngle() { // in degrees;
-        return (((double) lamprey.getAverageValue()) / lampreyTicksPerRotation) * 360;
+    public double getLampreyAngle() { // in rotations;
+        return (lamprey.getValue()- minLampreyVal)/(maxLampreyVal-minLampreyVal);
     }
 
     public void rotateToAngle(double angle) {
-        DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.getTarget(angle, getCurrentAngle());
+        DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.generateTarget(angle, getMotorAngle());
         angle = dualSidedAngTarget.getTarget();
         isReversed = dualSidedAngTarget.getDirection();
         angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
@@ -47,15 +51,12 @@ public class SwerveModule {
     }
 
 	public double getRawLampreyAngle(){
-		return (((double) lamprey.getValue()) / lampreyTicksPerRotation) * 360;
-	}
-
-	public double getRawLampreyVoltage(){
-		return lamprey.getVoltage();
+		return lamprey.getValue();
 	}
 
 
-	public double getCurrentAngle() {
+
+	public double getMotorAngle() {
 		return angleMotor.getNormalizedPosition();
 	}
 //	public double getCurrentVel() {
@@ -63,7 +64,7 @@ public class SwerveModule {
 //	}  todo make work
 
     public void rotateByAngle(double angle) {
-        targetAngle = getCurrentAngle() + angle;
+        targetAngle = getMotorAngle() + angle;
         angleMotor.setTargetByPID(targetAngle, AbstractMotor.PIDTarget.Position);
     }
 
@@ -82,6 +83,11 @@ public class SwerveModule {
     public void setLinPower(double power) {
         linearMotor.setPower(power);
     }
+
+	public void setRotpower(double power){
+		angleMotor.setPower(power);
+	}
+
 
     public double getTargetAngle() {
         return targetAngle;

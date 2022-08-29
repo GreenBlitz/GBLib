@@ -13,7 +13,7 @@ public class DualSidedAngTarget {
 		this.direction = direction;
 	}
 
-	public static DualSidedAngTarget getTarget(double target, double head) {
+	public static DualSidedAngTarget generateTarget(double target, double head) {
 		target %= 1;
 		double tail = head + 0.5;
 
@@ -42,7 +42,7 @@ public class DualSidedAngTarget {
 
 	//test
 	public static void main(String[] args) {
-		System.out.println(DualSidedAngTarget.getTarget(Double.parseDouble(args[0]), Double.parseDouble(args[1])));
+		System.out.println(DualSidedAngTarget.generateTarget(Double.parseDouble(args[0]), Double.parseDouble(args[1])));
 	}
 
 	public double getTarget() {
