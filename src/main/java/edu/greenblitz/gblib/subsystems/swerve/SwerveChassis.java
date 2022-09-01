@@ -1,6 +1,7 @@
 package edu.greenblitz.gblib.subsystems.swerve;
 
 import edu.greenblitz.gblib.gyro.PigeonGyro;
+import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
 
 public class SwerveChassis extends GBSubsystem {
@@ -9,6 +10,7 @@ public class SwerveChassis extends GBSubsystem {
 	private final PigeonGyro pigeonGyro;
 	private double length;
 	private double width;
+	
 	public enum Module {
 		FRONT_RIGHT,
 		FRONT_LEFT,
@@ -43,25 +45,31 @@ public class SwerveChassis extends GBSubsystem {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * for calibration purposes
 	 */
-	public void rotateModuleByPower(Module module, double power){
+	public void rotateModuleByPower(Module module, double power) {
 		getModule(module).setRotPower(power);
 	}
 	
-	public void brakeModules(Module... modules){
-		for (Module module: modules) {
+	public void brakeModules(Module... modules) {
+		for (Module module : modules) {
 			getModule(module).setLinPower(0);
 			getModule(module).setRotPower(0);
 		}
 	}
 	
-
+	public void configPID(PIDObject pidObject) {
+		getModule(Module.FRONT_LEFT).configAnglePID(pidObject);
+		getModule(Module.FRONT_RIGHT).configAnglePID(pidObject);
+		getModule(Module.BACK_LEFT).configAnglePID(pidObject);
+		getModule(Module.BACK_RIGHT).configAnglePID(pidObject);
+	}
+	
 	/**
 	 * all code below is self-explanatory
-	 *
+	 * <p>
 	 * ALL IN ROTATIONS, NOT DEGREES
 	 */
 	public void moveSingleModule(Module module, double angle, double power) {
@@ -75,32 +83,29 @@ public class SwerveChassis extends GBSubsystem {
 		moveSingleModule(Module.BACK_LEFT, angle, power);
 		moveSingleModule(Module.BACK_RIGHT, angle, power);
 	}
-
-	public double getRawAbsoluteAngle(Module module){
+	
+	public double getRawAbsoluteAngle(Module module) {
 		return getModule(module).getRawLampreyAngle();
 	}
-
-	public double getAbsoluteAngle(Module module){
+	
+	public double getAbsoluteAngle(Module module) {
 		return getModule(module).getLampreyAngle();
 	}
-	 
-    // that's the end of the self-explanatory code
-    
-    /** rotates the chassis based on given power.
-     * the function rotates each module to the tangent of the circle on which it rotates */
+	
+	// that's the end of the self-explanatory code
+	
+	/**
+	 * rotates the chassis based on given power.
+	 * the function rotates each module to the tangent of the circle on which it rotates
+	 */
 	public void rotateChassis(double power) {
-		double angle =0.25 +  Math.atan(length / width) / 2*Math.PI;
-  
+		double angle = 0.25 + Math.atan(length / width) / 2 * Math.PI;
+		
 		moveSingleModule(Module.FRONT_RIGHT, angle, power);
-        moveSingleModule(Module.FRONT_LEFT, -angle, power);
-        moveSingleModule(Module.BACK_RIGHT, -angle, -power);
-        moveSingleModule(Module.BACK_LEFT, angle, -power);
+		moveSingleModule(Module.FRONT_LEFT, -angle, power);
+		moveSingleModule(Module.BACK_RIGHT, -angle, -power);
+		moveSingleModule(Module.BACK_LEFT, angle, -power);
 	}
 	
-	
-	
-	
-	
-
 	
 }
