@@ -90,7 +90,7 @@ public class SwerveModule {
         linearMotor.setPower(power);
     }
 
-	public void setRotpower(double power){
+	public void setRotPower(double power){
 		angleMotor.setPower(power);
 	}
 
