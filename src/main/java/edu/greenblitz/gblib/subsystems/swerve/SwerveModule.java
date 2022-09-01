@@ -87,7 +87,7 @@ public class SwerveModule {
     }
 
     public void setLinPower(double power) {
-        linearMotor.setPower(power);
+        linearMotor.setPower(power* isReversed);
     }
 
 	public void setRotPower(double power){
