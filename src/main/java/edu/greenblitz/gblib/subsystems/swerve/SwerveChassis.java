@@ -48,7 +48,12 @@ public class SwerveChassis extends GBSubsystem {
 	 * for calibration purposes
 	 */
 	public void rotateModuleByPower(Module module, double power){
-		getModule(module).setRotpower(power);
+		getModule(module).setRotPower(power);
+	}
+	
+	public void brakeModule(Module module){
+		getModule(module).setLinPower(0);
+		getModule(module).setRotPower(0);
 	}
 
 	/**
@@ -88,6 +93,8 @@ public class SwerveChassis extends GBSubsystem {
         moveSingleModule(Module.BACK_RIGHT, -angle, -power);
         moveSingleModule(Module.BACK_LEFT, angle, -power);
 	}
+	
+	
 	
 	
 	
