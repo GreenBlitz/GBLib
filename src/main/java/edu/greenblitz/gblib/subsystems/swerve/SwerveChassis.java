@@ -51,10 +51,13 @@ public class SwerveChassis extends GBSubsystem {
 		getModule(module).setRotPower(power);
 	}
 	
-	public void brakeModule(Module module){
-		getModule(module).setLinPower(0);
-		getModule(module).setRotPower(0);
+	public void brakeModules(Module... modules){
+		for (Module module: modules) {
+			getModule(module).setLinPower(0);
+			getModule(module).setRotPower(0);
+		}
 	}
+	
 
 	/**
 	 * all code below is self-explanatory
