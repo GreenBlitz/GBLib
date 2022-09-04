@@ -7,6 +7,7 @@ import edu.greenblitz.gblib.motors.brushed.IBrushedFactory;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 import edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
+import edu.greenblitz.gblib.utils.GBMath;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 public class SwerveModule {
@@ -36,10 +37,10 @@ public class SwerveModule {
 
     public void rotateToAngle(double angle) {
 		//if (Double.isNaN(angle)) return;
-        DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.generateTarget(angle, getMotorAngle());
+        DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.generateTarget(angle, GBMath.modulo(getMotorAngle(), 2*Math.PI));
         angle = dualSidedAngTarget.getTarget() ;
 		
-		angle += getMotorAngle() - (getMotorAngle() % 2*Math.PI);
+		angle += getMotorAngle() - GBMath.modulo(getMotorAngle(), 2*Math.PI);
 		
         isReversed = dualSidedAngTarget.getDirection();
         angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
