@@ -30,14 +30,17 @@ public class SwerveModule {
 		this.minLampreyVal = minLampreyVal;
     }
 
-    public double getLampreyAngle() { // in rotations;
+    public double getLampreyAngle() { // in radians;
         return (lamprey.getValue()- minLampreyVal)/(maxLampreyVal-minLampreyVal) *Math.PI*2;
     }
 
     public void rotateToAngle(double angle) {
 		//if (Double.isNaN(angle)) return;
+		angle += getMotorAngle() - (getMotorAngle() % 2*Math.PI);
+		
         DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.generateTarget(angle, getMotorAngle());
-        angle = dualSidedAngTarget.getTarget();
+        angle = dualSidedAngTarget.getTarget() ;
+		
         isReversed = dualSidedAngTarget.getDirection();
         angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
         targetAngle = angle;

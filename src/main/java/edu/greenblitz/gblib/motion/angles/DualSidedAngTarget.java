@@ -62,7 +62,7 @@ public class DualSidedAngTarget {
 	}
 
 	public double getError() {
-		return Math.max(GBMath.modulo((target - start), (Math.PI * 2)), GBMath.modulo((start - target), (Math.PI * 2)));
+		return Math.min(GBMath.modulo((target - start), (Math.PI * 2)), GBMath.modulo((start - target), (Math.PI * 2)));
 	}
 
 	@Override
