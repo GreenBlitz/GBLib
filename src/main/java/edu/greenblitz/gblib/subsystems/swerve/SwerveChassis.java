@@ -53,11 +53,23 @@ public class SwerveChassis extends GBSubsystem {
 		getModule(module).setRotPower(power);
 	}
 	
+	@Deprecated
 	public void brakeModules(Module... modules) {
 		for (Module module : modules) {
 			getModule(module).setLinPower(0);
 			getModule(module).setRotPower(0);
 		}
+	}
+	
+	public void stop(){
+		frontRight.setLinPower(0);
+		frontRight.setRotPower(0);
+		frontLeft.setLinPower(0);
+		frontLeft.setRotPower(0);
+		backRight.setLinPower(0);
+		backRight.setRotPower(0);
+		backLeft.setLinPower(0);
+		backLeft.setRotPower(0);
 	}
 	
 	public void configPID(PIDObject pidObject) {
