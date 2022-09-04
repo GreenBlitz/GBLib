@@ -20,7 +20,7 @@ import edu.greenblitz.gblib.motion.cords.Position;
  * @author Or Karl
  */
 public class Localizer {
-	
+
 	private static final Localizer instance = new Localizer();
 	private final Object LOCK = new Object();
 	private Position location = new Position(0, 0, 0); // Positive x direction is left
@@ -29,29 +29,29 @@ public class Localizer {
 	private double prevDistanceLeft;
 	private double prevDistanceRight;
 	private double zeroDistanceLeft, zeroDistanceRight;
-	
+
 	private Localizer() {
 		angle0 = 0;
 	}
-	
+
 	public static Localizer getInstance() {
 		return instance;
 	}
-	
+
 	public static Point calculateMovement(double rightDist, double leftDist, double wheelDistance, double robotAng) {
 		if (rightDist == leftDist) {
 			return new Point(0, rightDist).rotate(robotAng);
 		}
-		
+
 		double distance = (rightDist + leftDist) / 2;
 		double angle = (rightDist - leftDist) / wheelDistance;
 		double circleRadius = distance / angle;
-		
+
 		double dy = circleRadius * Math.sin(angle);
 		double dx = circleRadius * (1 - Math.cos(angle));
 		return new Point(dx, dy).rotate(robotAng);
 	}
-	
+
 	/**
 	 * @return The calculated location of the robot such that positive y is forwards, positive x is left. The 0 angle is
 	 * facing positive y and increasing counter-clockwise.
@@ -61,7 +61,7 @@ public class Localizer {
 			return location.clone();
 		}
 	}
-	
+
 	/**
 	 * @return The calculated location of the robot such that positive y is forwards, positive x is right. The 0 angle is
 	 * facing positive y and increasing counter-clockwise.
@@ -71,7 +71,7 @@ public class Localizer {
 		pos.setX(-pos.getX());
 		return pos;
 	}
-	
+
 	/**
 	 * @param wheelDistance The distance between the left and right wheel set
 	 * @param leftDist      The meters counted on the left encoder
@@ -81,7 +81,7 @@ public class Localizer {
 		this.wheelDistance = wheelDistance;
 		reset(leftDist, rightDist);
 	}
-	
+
 	/**
 	 * @param currentLeftDistance  The meters counted on the left encoder
 	 * @param currentRightDistance The meters counter on the right encoder
@@ -97,7 +97,7 @@ public class Localizer {
 			location = newPos.clone();
 		}
 	}
-	
+
 	/**
 	 * This keeps the same location as before, only resetting encoders. Use this when
 	 * you reset your own encoders to avoid localizer jumps.
@@ -108,7 +108,7 @@ public class Localizer {
 	public void resetEncoders(double currLeft, double currRight) {
 		reset(currLeft, currRight, getLocationRaw());
 	}
-	
+
 	/**
 	 * rests the encoders and set the location to 0, 0, 0
 	 *
@@ -118,7 +118,7 @@ public class Localizer {
 	public void reset(double currentLeftDistance, double currentRightDistance) {
 		reset(currentLeftDistance, currentRightDistance, new Position(0, 0, 0));
 	}
-	
+
 	/**
 	 * Angle is calculated using the encoders.
 	 *
@@ -128,10 +128,10 @@ public class Localizer {
 	public void update(double currentLeftDistance, double currentRightDistance) {
 		double ang = (((currentRightDistance - zeroDistanceRight)
 				- (currentLeftDistance - zeroDistanceLeft)) / wheelDistance);
-		
+
 		update(currentLeftDistance, currentRightDistance, ang);
 	}
-	
+
 	/**
 	 * @param currentLeftDistance  Current left wheel distance
 	 * @param currentRightDistance Current right wheel distance
@@ -143,18 +143,18 @@ public class Localizer {
 			rDist = currentRightDistance - prevDistanceRight;
 			lDist = currentLeftDistance - prevDistanceLeft;
 		}
-		
+
 		Point dXdY = calculateMovement(
 				rDist, lDist,
 				wheelDistance, location.getAngle());
-		
+
 		synchronized (LOCK) {
 			location.translate(dXdY);
 			location.setAngle(angle + angle0);
 			prevDistanceLeft = currentLeftDistance;
 			prevDistanceRight = currentRightDistance;
 		}
-		
+
 	}
-	
+
 }

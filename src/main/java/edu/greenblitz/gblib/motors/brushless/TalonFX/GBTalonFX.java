@@ -10,9 +10,9 @@ import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 
 public class GBTalonFX extends AbstractMotor {
 	private final TalonFX motor;
-	
+
 	private final IdleMode idleMode = IdleMode.Brake;
-	
+
 	/**
 	 * Constructor:
 	 * Defines motor as the Falcon with the given id;
@@ -20,18 +20,18 @@ public class GBTalonFX extends AbstractMotor {
 	protected GBTalonFX(int id) {
 		motor = new TalonFX(id);
 	}
-	
-	
+
+
 	@Override
 	public void setPower(double power) {
 		motor.set(ControlMode.PercentOutput, power);
 	}
-	
+
 	@Override
 	public boolean getInverted() {
 		return (motor.getInverted()); /*getInverted is also a talon method*/
 	}
-	
+
 	@Override
 	public void setInverted(boolean inverted) {
 		if (inverted) {
@@ -40,17 +40,17 @@ public class GBTalonFX extends AbstractMotor {
 			motor.setInverted(TalonFXInvertType.Clockwise);
 		}
 	}
-	
+
 	@Override
 	public double getRawTicks() {
 		return motor.getSelectedSensorPosition();
 	}
-	
+
 	@Override
 	public double getRawVelocity() {
 		return motor.getSelectedSensorVelocity();
 	}
-	
+
 	@Override
 	public void configurePID(PIDObject pidObject) {
 		motor.config_kP(0, pidObject.getKp());
@@ -59,7 +59,7 @@ public class GBTalonFX extends AbstractMotor {
 		motor.config_kF(0, pidObject.getKf());
 		motor.config_IntegralZone(0, pidObject.getIZone());
 	}
-	
+
 	@Override
 	public void setTargetByPID(double target, PIDTarget targetType) {
 		switch (targetType) {
@@ -75,39 +75,39 @@ public class GBTalonFX extends AbstractMotor {
 				motor.set(TalonFXControlMode.Position, target);
 				break;
 		}
-		
+
 	}
-	
+
 	@Override
 	public void setTargetSpeedByPID(double target) {
 		motor.set(TalonFXControlMode.Velocity, target);
 	}
-	
+
 	@Override
 	public void resetEncoder() {
 		motor.setSelectedSensorPosition(0);
 	}
-	
+
 	public void setCurrentLimit(int limit) {
 		motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(limit != 0, limit, 0.875 * limit, 100));
 	}
-	
+
 	public void setVoltageCompensation(double voltage) {
 		motor.enableVoltageCompensation(voltage != 0);
 		motor.configVoltageCompSaturation(voltage);
 	}
-	
+
 	public void setRampRate(double rampRate) {
 		motor.configOpenloopRamp(rampRate);
 	}
-	
+
 	@Override
 	public IdleMode getIdleMode() {
 		return idleMode;
 	}
-	
+
 	@Override
 	public void setIdleMode(IdleMode idleMode) {
-	
+
 	}
 }

@@ -31,7 +31,7 @@ public class SmartJoystick {
 			POV_LEFT;
 	private final double deadzone;
 	private Joystick joystick;
-	
+
 	/**
 	 * This constructor constructs the joystick based on the joystick port we give it.
 	 *
@@ -41,7 +41,7 @@ public class SmartJoystick {
 	public SmartJoystick(int joystick_port, double deadzone) {
 		this(new Joystick(joystick_port), deadzone);
 	}
-	
+
 	/**
 	 * This constructor constructs the joystick based on the joystick port we give it.
 	 *
@@ -50,7 +50,7 @@ public class SmartJoystick {
 	public SmartJoystick(int joystick_port) {
 		this(new Joystick(joystick_port));
 	}
-	
+
 	/**
 	 * This constructor uses a joystick and assigns it button values and numbers.
 	 *
@@ -75,16 +75,16 @@ public class SmartJoystick {
 		POV_DOWN = new POVButton(joystick, 180);
 		POV_LEFT = new POVButton(joystick, 270);
 	}
-	
+
 	public SmartJoystick(Joystick stick) {
 		this(stick, DEADZONE);
 	}
-	
+
 	private double deadzone(double power) {
 		if (Math.abs(power) < deadzone) return 0;
 		return (Math.abs(power) - deadzone) / (1 - deadzone) * Math.signum(power);
 	}
-	
+
 	/**
 	 * This function binds a joystick using a joystick object.
 	 *
@@ -93,7 +93,7 @@ public class SmartJoystick {
 	public void bind(Joystick stick) {
 		joystick = stick;
 	}
-	
+
 	/**
 	 * This function binds a joystick using a joystick port.
 	 *
@@ -102,7 +102,7 @@ public class SmartJoystick {
 	public void bind(int port) {
 		bind(new Joystick(port));
 	}
-	
+
 	/**
 	 * This function returns the axis based on an axis number.
 	 *
@@ -113,7 +113,7 @@ public class SmartJoystick {
 		if (joystick == null) return 0;
 		return joystick.getRawAxis(raw_axis);
 	}
-	
+
 	/**
 	 * This function returns a joystick
 	 *
@@ -122,13 +122,13 @@ public class SmartJoystick {
 	public Joystick getRawJoystick() {
 		return joystick;
 	}
-	
+
 	public double getAxisValue(Axis axis) {
 		if (axis != Axis.LEFT_TRIGGER && axis != Axis.RIGHT_TRIGGER)
 			return deadzone(axis.getValue(this));
 		return axis.getValue(this);
 	}
-	
+
 	/**
 	 * Rumbles the controller at a certain side
 	 *
@@ -139,7 +139,7 @@ public class SmartJoystick {
 		joystick.setRumble(left ? GenericHID.RumbleType.kLeftRumble : GenericHID.RumbleType.kRightRumble, power);
 		SmartDashboard.putNumber((left ? "left" : "right") + " rumble", power);
 	}
-	
+
 	public enum Axis {
 		LEFT_X(0, false),
 		LEFT_Y(1, true),
@@ -147,19 +147,19 @@ public class SmartJoystick {
 		RIGHT_TRIGGER(3, false),
 		RIGHT_X(4, false),
 		RIGHT_Y(5, true);
-		
+
 		private final int axis;
 		private int inverted;
-		
+
 		Axis(int axis, boolean isInverted) {
 			this.axis = axis;
 			setInverted(isInverted);
 		}
-		
+
 		public void setInverted(boolean isInverted) {
 			inverted = isInverted ? -1 : 1;
 		}
-		
+
 		public double getValue(SmartJoystick stick) {
 			return inverted * stick.getRawAxis(axis);
 		}

@@ -10,33 +10,33 @@ public class GBSparkMax extends AbstractMotor {
 	private final CANSparkMax motor;
 	private final RelativeEncoder encoder;
 
-	
+
 	protected GBSparkMax(int id) {
 		this.motor = new CANSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless);
 		this.encoder = this.motor.getEncoder();
 	}
-	
-	
+
+
 	@Override
 	public void setPower(double power) {
 		motor.set(power);
 	}
-	
+
 	@Override
 	public boolean getInverted() {
 		return motor.getInverted();
 	}
-	
+
 	@Override
 	public void setInverted(boolean inverted) {
 		motor.setInverted(inverted);
 	}
-	
+
 	@Override
 	public double getRawTicks() {
 		return encoder.getPosition();
 	}
-	
+
 	@Override
 	public double getRawVelocity() {
 		return encoder.getVelocity();
@@ -50,7 +50,7 @@ public class GBSparkMax extends AbstractMotor {
 		motor.getPIDController().setFF(pidObject.getKf());
 		motor.getPIDController().setIZone(pidObject.getIZone());
 	}
-	
+
 	@Override
 	public void setTargetByPID(double target, PIDTarget targetType) {
 		switch (targetType) {
@@ -67,26 +67,26 @@ public class GBSparkMax extends AbstractMotor {
 				break;
 		}
 	}
-	
+
 	@Override
 	public void setTargetSpeedByPID(double target) {
 		motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity);
 	}
-	
+
 	public void setCurrentLimit(int limit) {
 		motor.setSmartCurrentLimit(limit);
 	}
-	
+
 	@Override
 	public void resetEncoder() {
 		motor.getEncoder().setPosition(0);
 	}
-	
+
 	@Override
 	public IdleMode getIdleMode() {
 		return motor.getIdleMode() == CANSparkMax.IdleMode.kBrake ? IdleMode.Brake : IdleMode.Coast;
 	}
-	
+
 	@Override
 	public void setIdleMode(IdleMode idleMode) {
 		if (idleMode == IdleMode.Brake) {
@@ -95,7 +95,7 @@ public class GBSparkMax extends AbstractMotor {
 			motor.setIdleMode(CANSparkMax.IdleMode.kCoast);
 		}
 	}
-	
+
 	public void setVoltageCompensation(int voltageCompensation) {
 		if (voltageCompensation != 0) {
 			motor.enableVoltageCompensation(voltageCompensation);
@@ -103,10 +103,10 @@ public class GBSparkMax extends AbstractMotor {
 			motor.disableVoltageCompensation();
 		}
 	}
-	
+
 	public void setRampRate(double rampRate) {
 		motor.setOpenLoopRampRate(rampRate);
 		motor.setClosedLoopRampRate(rampRate);
 	}
-	
+
 }
