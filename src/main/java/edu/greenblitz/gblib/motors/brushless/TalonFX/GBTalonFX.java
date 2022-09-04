@@ -113,6 +113,6 @@ public class GBTalonFX extends AbstractMotor {
 	}
 
 	public void setEncoderAng(double angle){
-		motor.setSelectedSensorPosition(angle*getTicksToWheelPosition());
+		motor.setSelectedSensorPosition(angle*getTicksToRadians());
 	}
 }
