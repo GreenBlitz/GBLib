@@ -31,7 +31,7 @@ public class SwerveModule {
     }
 
     public double getLampreyAngle() { // in rotations;
-        return (lamprey.getValue()- minLampreyVal)/(maxLampreyVal-minLampreyVal);
+        return (lamprey.getValue()- minLampreyVal)/(maxLampreyVal-minLampreyVal) *Math.PI*2;
     }
 
     public void rotateToAngle(double angle) {
