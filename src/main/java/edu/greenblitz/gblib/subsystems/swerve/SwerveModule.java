@@ -13,7 +13,6 @@ public class SwerveModule {
 
 
     private int isReversed = 1;
-    private static final int lampreyTicksPerRotation = 4076; //not my fault it's an ugly number
     public double targetAngle;
     public double targetVel;
 	private  double maxLampreyVal;
@@ -29,13 +28,6 @@ public class SwerveModule {
         lamprey.setAverageBits(2);
 		this.maxLampreyVal = maxLampreyVal;
 		this.minLampreyVal = minLampreyVal;
-    }
-
-
-    public void setVelocity(double speed) {
-        speed *= isReversed;
-        linearMotor.setPower(speed);
-        targetVel = speed;
     }
 
     public double getLampreyAngle() { // in rotations;
@@ -60,14 +52,13 @@ public class SwerveModule {
 	public double getMotorAngle() {
 		return angleMotor.getNormalizedPosition();
 	}
+	
 //	public double getCurrentVel() {
 //		return linMotor.getNormalizedVelocity();
 //	}  todo make work
 
     public void rotateByAngle(double angle) {
-		//if (Double.isNaN(angle)) return;
-        targetAngle = getMotorAngle() + angle;
-        angleMotor.setTargetByPID(targetAngle, AbstractMotor.PIDTarget.Position);
+		//todo make using rotate to angle
     }
 
     public void resetAngle() {

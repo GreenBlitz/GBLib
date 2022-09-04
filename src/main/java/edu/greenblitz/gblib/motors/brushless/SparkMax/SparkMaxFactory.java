@@ -5,7 +5,6 @@ import edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 
 public class SparkMaxFactory implements IMotorFactory {
-
 	private int currentLimit = 0;
 	private int voltageCompensation = 0;
 	private double rampRate = 0;

@@ -15,7 +15,6 @@ public class DualSidedAngTarget {
 	public static DualSidedAngTarget generateTarget(double target, double head) {
 			target = GBMath.modulo(target, (Math.PI * 2));
 			double tail = head + Math.PI;
-			
 			DualSidedAngTarget head_target = chooseAngTarget(head, target);
 		DualSidedAngTarget tail_target = chooseAngTarget(tail, target);
 		tail_target.flip();

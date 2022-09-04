@@ -8,12 +8,13 @@ public abstract class AbstractMotor implements GBMotor {
 		return this.ticksToRadians;
 	}
 
-	public double getTicksToWheelRPM() {
-		return ticksToWheelRPM;
-	}
 
 	public void setTicksToRadians(double ticksToRadians) {
 		this.ticksToRadians = ticksToRadians;
+	}
+
+	public double getTicksToWheelRPM() {
+		return ticksToWheelRPM;
 	}
 
 	public void setTicksToWheelRPM(double ticksToWheelRPM) {
