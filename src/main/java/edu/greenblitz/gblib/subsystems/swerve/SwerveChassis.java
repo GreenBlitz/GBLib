@@ -79,6 +79,15 @@ public class SwerveChassis extends GBSubsystem {
 		getModule(Module.BACK_RIGHT).configAnglePID(pidObject);
 	}
 	
+	public void resetAllEncoders (){
+		
+		getModule(Module.FRONT_LEFT).resetEncoderByLamprey();
+		getModule(Module.FRONT_RIGHT).resetEncoderByLamprey();
+		getModule(Module.BACK_LEFT).resetEncoderByLamprey();
+		getModule(Module.BACK_RIGHT).resetEncoderByLamprey();
+		
+	}
+	
 	/**
 	 * all code below is self-explanatory
 	 * <p>

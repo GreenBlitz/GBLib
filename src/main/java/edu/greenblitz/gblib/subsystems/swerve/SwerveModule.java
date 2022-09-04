@@ -69,7 +69,7 @@ public class SwerveModule {
         angleMotor.resetEncoder();
     }
 
-	public void restEncoderByLamprey(){
+	public void resetEncoderByLamprey(){
 		angleMotor.setEncoderAng(getLampreyAngle());
 	}
 
