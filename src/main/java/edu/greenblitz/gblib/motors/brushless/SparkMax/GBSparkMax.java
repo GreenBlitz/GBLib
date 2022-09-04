@@ -62,7 +62,7 @@ public class GBSparkMax extends AbstractMotor {
 				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kCurrent);
 				break;
 			case Position:
-				target *= getTicksToWheelPosition();
+				target *= getTicksToRadians();
 				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kPosition);
 				break;
 		}

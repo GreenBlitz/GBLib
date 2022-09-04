@@ -12,8 +12,8 @@ public class TalonFXFactory implements IMotorFactory {
 	private boolean inverted = false;
 	private AbstractMotor.IdleMode idleMode = AbstractMotor.IdleMode.Brake;
 	private double gearRatio = 1;
-	private final static double FALCON_TICKS_IN_ROTATION  = 2048;
-	private final static double FALCON_VELOCITY_UNITS_TO_RPM  = FALCON_TICKS_IN_ROTATION / 600;
+	private final static double FALCON_TICKS_PER_RADIAN = 2048 /(Math.PI * 2) ;
+	private final static double FALCON_VELOCITY_UNITS_TO_RPM  = FALCON_TICKS_PER_RADIAN /(600 * 2 * Math.PI);
 	
 	@Override
 	public GBMotor generate(int id) {
@@ -23,7 +23,7 @@ public class TalonFXFactory implements IMotorFactory {
 		motor.setRampRate(rampRate);
 		motor.setInverted(inverted);
 		motor.setIdleMode(idleMode);
-		motor.setTicksToWheelPosition(gearRatio * FALCON_TICKS_IN_ROTATION);
+		motor.setTicksToRadians(gearRatio * FALCON_TICKS_PER_RADIAN);
 		motor.setTicksToWheelRPM(gearRatio * FALCON_VELOCITY_UNITS_TO_RPM);
 		return motor;
 	}

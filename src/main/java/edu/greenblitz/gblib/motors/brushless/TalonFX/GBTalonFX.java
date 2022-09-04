@@ -71,7 +71,7 @@ public class GBTalonFX extends AbstractMotor {
 				motor.set(TalonFXControlMode.Current, target);
 				break;
 			case Position:
-				target *= getTicksToWheelPosition();
+				target *= getTicksToRadians();
 				motor.set(TalonFXControlMode.Position, target);
 				break;
 		}

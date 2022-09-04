@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.subsystems.Chassis;
+package edu.greenblitz.gblib.subsystems.chassis;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.greenblitz.gblib.gyro.PigeonGyro;

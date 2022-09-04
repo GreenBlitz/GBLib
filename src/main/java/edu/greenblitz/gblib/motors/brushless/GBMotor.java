@@ -19,9 +19,9 @@ public interface GBMotor extends GBBrushedMotor {
 	double getRawTicks();
 	
 	/**
-	 * normalizes encoder ticks to rotations using the gear ratio;
+	 * normalizes encoder ticks to radians using the gear ratio;
 	 *
-	 * @return position in parts of a rotation as in 0.5 is a half rotation;
+	 * @return position in radians;
 	 */
 	
 	double getNormalizedPosition();

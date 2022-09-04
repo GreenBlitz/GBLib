@@ -1,19 +1,19 @@
 package edu.greenblitz.gblib.motors.brushless;
 
 public abstract class AbstractMotor implements GBMotor {
-	private double ticksToWheelPosition;
+	private double ticksToRadians;
 	private double ticksToWheelRPM;
 
-	public double getTicksToWheelPosition() {
-		return this.ticksToWheelPosition;
+	public double getTicksToRadians() {
+		return this.ticksToRadians;
 	}
 
 	public double getTicksToWheelRPM() {
 		return ticksToWheelRPM;
 	}
 
-	public void setTicksToWheelPosition(double ticksToWheelPosition) {
-		this.ticksToWheelPosition = ticksToWheelPosition;
+	public void setTicksToRadians(double ticksToRadians) {
+		this.ticksToRadians = ticksToRadians;
 	}
 
 	public void setTicksToWheelRPM(double ticksToWheelRPM) {
@@ -22,7 +22,7 @@ public abstract class AbstractMotor implements GBMotor {
 
 	@Override
 	public double getNormalizedPosition() {
-		return (getRawTicks() / ticksToWheelPosition);
+		return (getRawTicks() / ticksToRadians);
 	}
 	
 	

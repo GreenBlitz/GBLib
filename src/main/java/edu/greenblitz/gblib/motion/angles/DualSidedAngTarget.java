@@ -14,7 +14,7 @@ public class DualSidedAngTarget {
 	}
 
 	public static DualSidedAngTarget getTarget(double target, double head) {
-		double tail = head + 0.5;
+		double tail = head + Math.PI;
 
 		DualSidedAngTarget head_target = chooseAngTarget(head, target);
 		DualSidedAngTarget tail_target = chooseAngTarget(tail, target);
@@ -35,8 +35,8 @@ public class DualSidedAngTarget {
 	}
 
 	private static DualSidedAngTarget chooseAngTarget(double curr, double target) {
-		return new DualSidedAngTarget(chooseAngTargetBin(curr, chooseAngTargetBin(curr, target, target + 1),
-				target - 1), curr, 1);
+		return new DualSidedAngTarget(chooseAngTargetBin(curr, chooseAngTargetBin(curr, target, target + (Math.PI * 2)),
+				target - (Math.PI * 2)), curr, 1);
 	}
 
 	//test
@@ -58,12 +58,12 @@ public class DualSidedAngTarget {
 
 	public void flip() {
 		direction = -direction;
-		start = GBMath.modulo((start + 0.5), 1);
-		target = GBMath.modulo((target + 0.5), 1);
+		start = GBMath.modulo((start + Math.PI), (Math.PI * 2));
+		target = GBMath.modulo((target + Math.PI), (Math.PI * 2));
 	}
 
 	public double getError() {
-		return Math.max(GBMath.modulo((target - start), 1), GBMath.modulo((start - target), 1));
+		return Math.max(GBMath.modulo((target - start), (Math.PI * 2)), GBMath.modulo((start - target), (Math.PI * 2)));
 	}
 
 	@Override
