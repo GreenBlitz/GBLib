@@ -14,7 +14,7 @@ public class DualSidedAngTarget {
 	}
 	public static DualSidedAngTarget generateTarget(double target, double head) {
 			target = GBMath.modulo(target, (Math.PI * 2));
-			double tail = head + Math.PI;
+			double tail = GBMath.modulo(head + Math.PI, 2*Math.PI);
 			DualSidedAngTarget head_target = chooseAngTarget(head, target);
 		DualSidedAngTarget tail_target = chooseAngTarget(tail, target);
 		tail_target.flip();
@@ -62,7 +62,7 @@ public class DualSidedAngTarget {
 	}
 
 	public double getError() {
-		return Math.min(GBMath.modulo((target - start), (Math.PI * 2)), GBMath.modulo((start - target), (Math.PI * 2)));
+		return Math.max(GBMath.modulo((target - start), (Math.PI * 2)), GBMath.modulo((start - target), (Math.PI * 2)));
 	}
 
 	@Override

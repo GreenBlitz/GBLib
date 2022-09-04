@@ -36,10 +36,10 @@ public class SwerveModule {
 
     public void rotateToAngle(double angle) {
 		//if (Double.isNaN(angle)) return;
-		angle += getMotorAngle() - (getMotorAngle() % 2*Math.PI);
-		
         DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.generateTarget(angle, getMotorAngle());
         angle = dualSidedAngTarget.getTarget() ;
+		
+		angle += getMotorAngle() - (getMotorAngle() % 2*Math.PI);
 		
         isReversed = dualSidedAngTarget.getDirection();
         angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
