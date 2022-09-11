@@ -12,14 +12,22 @@ public class Shooter extends GBSubsystem {
 	private final GBMotor motor;
 	private boolean preparedToShoot;
 	private boolean isShooter;
+	private Shooter instance;
 
-	public Shooter(IMotorFactory motorFactory, int id) {
+	private Shooter(IMotorFactory motorFactory, int id) {
 		this.motor = motorFactory.generate(id);
 //		//leader.setClosedLoopRampRate(1);
 //
 		preparedToShoot = false;
 	}
 
+	public void create(IMotorFactory motorFactory, int id){
+		instance = new Shooter(motorFactory,id);
+	}
+
+	public Shooter getInstance(){
+		return instance;
+	}
 
 	public void setPower(double power) {
 		this.motor.setPower(power);
