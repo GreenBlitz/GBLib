@@ -12,7 +12,7 @@ public class Shooter extends GBSubsystem {
 	private final GBMotor motor;
 	private boolean preparedToShoot;
 	private boolean isShooter;
-	private Shooter instance;
+	private static Shooter instance;
 
 	private Shooter(IMotorFactory motorFactory, int id) {
 		this.motor = motorFactory.generate(id);
@@ -21,11 +21,11 @@ public class Shooter extends GBSubsystem {
 		preparedToShoot = false;
 	}
 
-	public void create(IMotorFactory motorFactory, int id){
+	public static void create(IMotorFactory motorFactory, int id){
 		instance = new Shooter(motorFactory,id);
 	}
 
-	public Shooter getInstance(){
+	public static Shooter getInstance(){
 		return instance;
 	}
 

@@ -13,7 +13,7 @@ public class Chassis extends GBSubsystem {
 	private final PigeonGyro gyroscope;
 	private final double wheelDistance;
 	private final GBMotor[] motors;
-	private Chassis instance;
+	private static Chassis instance;
 
 
 	private Chassis(IMotorFactory motorFactory, int[] ports, boolean[] isInverted, double wheelDistance) {
@@ -30,11 +30,11 @@ public class Chassis extends GBSubsystem {
 		this.wheelDistance = wheelDistance;
 	}
 
-	public void create(IMotorFactory motorFactory, int[] ports, boolean[] isInverted, double wheelDistance){
+	public static void create(IMotorFactory motorFactory, int[] ports, boolean[] isInverted, double wheelDistance){
 		instance = new Chassis(motorFactory,ports,isInverted,wheelDistance);
 	}
 
-	public Chassis getInstance(){
+	public static Chassis getInstance(){
 		return instance;
 	}
 
