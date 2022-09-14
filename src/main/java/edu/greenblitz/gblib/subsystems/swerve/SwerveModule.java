@@ -22,13 +22,14 @@ public class SwerveModule {
     private final GBBrushedMotor linearMotor;
     private final AnalogInput lamprey;
 
-    public SwerveModule(IMotorFactory motorFactoryA, IBrushedFactory motorFactoryL, int portA, int portL, int lampreyID, double maxLampreyVal, double minLampreyVal) {
+    public SwerveModule(IMotorFactory motorFactoryA, IBrushedFactory motorFactoryL, int portA, int portL, int lampreyID, double maxLampreyVal, double minLampreyVal, PIDObject pid) {
         angleMotor = motorFactoryA.generate(portA);
         linearMotor = motorFactoryL.generate(portL);
         lamprey = new AnalogInput(lampreyID);
         lamprey.setAverageBits(2);
 		this.maxLampreyVal = maxLampreyVal;
 		this.minLampreyVal = minLampreyVal;
+		configAnglePID(pid);
     }
 
     public double getLampreyAngle() { // in radians;
