@@ -8,7 +8,6 @@ public abstract class AbstractMotor implements GBMotor {
 		return this.ticksToRadians;
 	}
 
-
 	public void setTicksToRadians(double ticksToRadians) {
 		this.ticksToRadians = ticksToRadians;
 	}

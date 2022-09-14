@@ -5,6 +5,7 @@ import edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 
 public class TalonFXFactory implements IMotorFactory {
+
 	private int currentLimit = 0;
 	private double voltageCompensation = 0;
 	private double rampRate = 0;

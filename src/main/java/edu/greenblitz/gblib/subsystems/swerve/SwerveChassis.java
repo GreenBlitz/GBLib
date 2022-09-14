@@ -2,7 +2,9 @@ package edu.greenblitz.gblib.subsystems.swerve;
 
 import edu.greenblitz.gblib.gyro.PigeonGyro;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
+import edu.greenblitz.gblib.subsystems.shooter.Shooter;
 
 public class SwerveChassis extends GBSubsystem {
 	
@@ -18,7 +20,7 @@ public class SwerveChassis extends GBSubsystem {
 		BACK_LEFT
 	}
 	
-	public SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, double length, double width) {
+	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, double length, double width) {
 		this.frontRight = frontRight;
 		this.frontLeft = frontLeft;
 		this.backRight = backRight;
@@ -27,6 +29,17 @@ public class SwerveChassis extends GBSubsystem {
 		this.width = width;
 		this.length = length;
 		
+	}
+
+	private static SwerveChassis instance;
+
+
+	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, double length, double width){
+		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro, length, width);
+	}
+
+	public static SwerveChassis getInstance(){
+		return instance;
 	}
 	
 	/**
