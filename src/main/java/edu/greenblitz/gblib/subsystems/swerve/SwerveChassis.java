@@ -119,14 +119,8 @@ public class SwerveChassis extends GBSubsystem {
 	}
 
 
-	@Deprecated
-	public double getRawLampreeeeeeeeeeeeeeeeeeeeeeeeeeAngle(Module module) {
+	public double getRawLampreyAngle(Module module) {
 		return getModule(module).getRawLampreyAngle();
-	}
-
-	@Deprecated
-	public double getLampreeeeeeeeeeeeeeeeeeeeeeeeeeAngle(Module module) {
-		return getModule(module).getLampreyAngle();
 	}
 
 	public double getAngle(Module module){
