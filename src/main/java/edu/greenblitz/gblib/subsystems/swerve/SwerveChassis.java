@@ -126,7 +126,10 @@ public class SwerveChassis extends GBSubsystem {
 	public double getAngle(Module module){
 		return getModule(module).getMotorAngle();
 	}
-	
+
+	public double getTarget(Module module){
+		return getModule(module).getTargetAngle();
+	}
 	// that's the end of the self-explanatory code
 	
 	/**
