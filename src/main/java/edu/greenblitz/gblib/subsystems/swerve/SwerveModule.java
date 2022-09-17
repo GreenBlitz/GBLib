@@ -37,7 +37,6 @@ public class SwerveModule {
     }
 
     public void rotateToAngle(double angle) {
-		//if (Double.isNaN(angle)) return;
         DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.generateTarget(angle, GBMath.modulo(getMotorAngle(), 2*Math.PI));
         angle = dualSidedAngTarget.getTarget() ;
 		
@@ -51,19 +50,17 @@ public class SwerveModule {
 	public double getRawLampreyAngle(){
 		return lamprey.getValue();
 	}
-
-
-
+	
 	public double getMotorAngle() {
 		return angleMotor.getNormalizedPosition();
 	}
 	
 //	public double getCurrentVel() {
-//		return linMotor.getNormalizedVelocity();
-//	}  todo make work
+//		return linearMotor.getNormalizedVelocity();
+//	}  todo make brushless
 
     public void rotateByAngle(double angle) {
-		//todo make using rotate to angle
+		angleMotor.setTargetByPID(getMotorAngle() + angle, AbstractMotor.PIDTarget.Position);
     }
 
     public void resetAngle() {
@@ -76,7 +73,7 @@ public class SwerveModule {
 
 //	public void configLinPID(PIDObject pidObject) {
 //		linMotor.configurePID(pidObject);
-//	} todo make work
+//	} todo brushless
 
     public void configAnglePID(PIDObject pidObject) {
         angleMotor.configurePID(pidObject);
@@ -84,20 +81,21 @@ public class SwerveModule {
 
     public void setLinPower(double power) {
         linearMotor.setPower(power* isReversed);
-    }
+    } //todo delete when pid exists
 
+	
 	public void setRotPower(double power){
 		angleMotor.setPower(power);
 	}
-
+	//only for debugging
 
     public double getTargetAngle() {
         return targetAngle;
     }
 
     public double getTargetVel() {
-        return targetVel;
-    } //udi: *isReversed
+        return targetVel* isReversed;
+    }
 
     public int getIsReversed() {
         return isReversed;

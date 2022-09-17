@@ -109,6 +109,7 @@ public class SwerveChassis extends GBSubsystem {
 	public void moveSingleModule(Module module, double angle, double power) {
 		getModule(module).rotateToAngle(angle);
 		getModule(module).setLinPower(power);
+		//todo make lin pid when brushless
 	}
 	
 	public void moveChassisLin(double angle, double power) {
@@ -116,6 +117,7 @@ public class SwerveChassis extends GBSubsystem {
 		moveSingleModule(Module.FRONT_RIGHT, angle, power);
 		moveSingleModule(Module.BACK_LEFT, angle, power);
 		moveSingleModule(Module.BACK_RIGHT, angle, power);
+		//todo make pid when brushless
 	}
 
 
@@ -129,21 +131,10 @@ public class SwerveChassis extends GBSubsystem {
 
 	public double getTarget(Module module){
 		return getModule(module).getTargetAngle();
+
 	}
-	// that's the end of the self-explanatory code
+
 	
-	/**
-	 * rotates the chassis based on given power.
-	 * the function rotates each module to the tangent of the circle on which it rotates
-	 */
-	public void rotateChassis(double power) {
-		double angle = Math.PI/4 + Math.atan(length / width) ;
-		
-		moveSingleModule(Module.FRONT_RIGHT, angle, power);
-		moveSingleModule(Module.FRONT_LEFT, -angle, power);
-		moveSingleModule(Module.BACK_RIGHT, -angle, -power);
-		moveSingleModule(Module.BACK_LEFT, angle, -power);
-	}
 	
 	
 }
