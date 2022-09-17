@@ -19,17 +19,18 @@ public class SwerveModule {
 	private  double maxLampreyVal;
 	private double minLampreyVal;
     private final GBMotor angleMotor;
-    private final GBBrushedMotor linearMotor;
+    private final GBMotor linearMotor;
     private final AnalogInput lamprey;
 
-    public SwerveModule(IMotorFactory motorFactoryA, IBrushedFactory motorFactoryL, int portA, int portL, int lampreyID, double maxLampreyVal, double minLampreyVal, PIDObject pid) {
+    public SwerveModule(IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL, int lampreyID, double maxLampreyVal, double minLampreyVal, PIDObject pidAng , PIDObject pidLin) {
         angleMotor = motorFactoryA.generate(portA);
         linearMotor = motorFactoryL.generate(portL);
         lamprey = new AnalogInput(lampreyID);
         lamprey.setAverageBits(2);
 		this.maxLampreyVal = maxLampreyVal;
 		this.minLampreyVal = minLampreyVal;
-		configAnglePID(pid);
+		configAnglePID(pidAng);
+		configLinPID(pidLin);
     }
 
     public double getLampreyAngle() { // in radians;
@@ -55,9 +56,9 @@ public class SwerveModule {
 		return angleMotor.getNormalizedPosition();
 	}
 	
-//	public double getCurrentVel() {
-//		return linearMotor.getNormalizedVelocity();
-//	}  todo make brushless
+	public double getCurrentVel() {
+		return linearMotor.getNormalizedVelocity();
+	}
 
     public void rotateByAngle(double angle) {
 		angleMotor.setTargetByPID(getMotorAngle() + angle, AbstractMotor.PIDTarget.Position);
@@ -71,18 +72,18 @@ public class SwerveModule {
 		angleMotor.setEncoderAng(getLampreyAngle());
 	}
 
-//	public void configLinPID(PIDObject pidObject) {
-//		linMotor.configurePID(pidObject);
-//	} todo brushless
+	public void configLinPID(PIDObject pidObject) {
+		linearMotor.configurePID(pidObject);
+	}
 
     public void configAnglePID(PIDObject pidObject) {
         angleMotor.configurePID(pidObject);
     }
 
-    public void setLinPower(double power) {
-        linearMotor.setPower(power* isReversed);
-    } //todo delete when pid exists
-
+	
+	public void moveLinPID(double speed){
+		linearMotor.setTargetSpeedByPID(speed);
+	}
 	
 	public void setRotPower(double power){
 		angleMotor.setPower(power);
@@ -96,6 +97,10 @@ public class SwerveModule {
     public double getTargetVel() {
         return targetVel* isReversed;
     }
+	
+	public void setLinPower(double power){
+		linearMotor.setPower(power);
+	}
 
     public int getIsReversed() {
         return isReversed;

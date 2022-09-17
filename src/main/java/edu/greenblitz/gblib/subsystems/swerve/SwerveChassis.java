@@ -85,11 +85,15 @@ public class SwerveChassis extends GBSubsystem {
 		backLeft.setRotPower(0);
 	}
 	
-	public void configPID(PIDObject pidObject) {
-		getModule(Module.FRONT_LEFT).configAnglePID(pidObject);
-		getModule(Module.FRONT_RIGHT).configAnglePID(pidObject);
-		getModule(Module.BACK_LEFT).configAnglePID(pidObject);
-		getModule(Module.BACK_RIGHT).configAnglePID(pidObject);
+	public void configPID(PIDObject pidObjectAng, PIDObject pidObjectLin) {
+		getModule(Module.FRONT_LEFT).configAnglePID(pidObjectAng);
+		getModule(Module.FRONT_LEFT).configLinPID(pidObjectLin);
+		getModule(Module.FRONT_RIGHT).configAnglePID(pidObjectAng);
+		getModule(Module.FRONT_RIGHT).configLinPID(pidObjectLin);
+		getModule(Module.BACK_LEFT).configAnglePID(pidObjectAng);
+		getModule(Module.BACK_LEFT).configLinPID(pidObjectLin);
+		getModule(Module.BACK_RIGHT).configAnglePID(pidObjectAng);
+		getModule(Module.BACK_RIGHT).configLinPID(pidObjectLin);
 	}
 	
 	public void resetAllEncoders (){
@@ -106,18 +110,16 @@ public class SwerveChassis extends GBSubsystem {
 	 * <p>
 	 * ALL IN RADIANS, NOT DEGREES
 	 */
-	public void moveSingleModule(Module module, double angle, double power) {
+	public void moveSingleModule(Module module, double angle, double speed) {
 		getModule(module).rotateToAngle(angle);
-		getModule(module).setLinPower(power);
-		//todo make lin pid when brushless
+		getModule(module).moveLinPID(speed);
 	}
 	
-	public void moveChassisLin(double angle, double power) {
-		moveSingleModule(Module.FRONT_LEFT, angle, power);
-		moveSingleModule(Module.FRONT_RIGHT, angle, power);
-		moveSingleModule(Module.BACK_LEFT, angle, power);
-		moveSingleModule(Module.BACK_RIGHT, angle, power);
-		//todo make pid when brushless
+	public void moveChassisLin(double angle, double speed) {
+		moveSingleModule(Module.FRONT_LEFT, angle, speed);
+		moveSingleModule(Module.FRONT_RIGHT, angle, speed);
+		moveSingleModule(Module.BACK_LEFT, angle, speed);
+		moveSingleModule(Module.BACK_RIGHT, angle, speed);
 	}
 
 
