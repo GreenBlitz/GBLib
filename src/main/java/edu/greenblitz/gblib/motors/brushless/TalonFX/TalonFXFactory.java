@@ -14,6 +14,7 @@ public class TalonFXFactory implements IMotorFactory {
 	private double gearRatio = 1;
 	private final static double FALCON_TICKS_PER_RADIAN = 2048 /(Math.PI * 2) ;
 	private final static double FALCON_VELOCITY_UNITS_TO_RPM  = FALCON_TICKS_PER_RADIAN /(600 * 2 * Math.PI);
+	
 	@Override
 	public GBMotor generate(int id) {
 		GBTalonFX motor = new GBTalonFX(id);

@@ -12,7 +12,10 @@ public class Shooter extends GBSubsystem {
 	private final GBMotor motor;
 	private boolean preparedToShoot;
 	private boolean isShooter;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 	private static Shooter instance;
 
 	private Shooter(IMotorFactory motorFactory, int id) {
