@@ -7,15 +7,14 @@ public class PIDObject {
 	private double tolerance;
 	private int inverted = 1;
 
-<<<<<<< Updated upstream
+
 	private double maxPower;
 
 	public PIDObject() {
 		this(0);
 	}
 
-=======
->>>>>>> Stashed changes
+
 	public PIDObject(double kp, double ki, double kd, double kf, int inv) {
 		this(kp, ki, kd, kf, inv, 0);
 	}
@@ -139,7 +138,7 @@ public class PIDObject {
 		this.tolerance = tolerance;
 	}
 
-<<<<<<< Updated upstream
+
 	public double getMaxPower() {
 		return maxPower;
 	}
@@ -148,8 +147,7 @@ public class PIDObject {
 		this.maxPower = maxPower;
 	}
 
-=======
->>>>>>> Stashed changes
+
 	public PIDObject withKp(double kp) {
 		this.setKp(kp);
 		return this;
@@ -180,13 +178,12 @@ public class PIDObject {
 		return this;
 	}
 
-<<<<<<< Updated upstream
+
 	public PIDObject withMaxPower(double maxPower) {
 		setMaxPower(maxPower);
 		return this;
 	}
 
-=======
->>>>>>> Stashed changes
+
 
 }
