@@ -5,13 +5,19 @@ import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
 import edu.greenblitz.gblib.subsystems.shooter.Shooter;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 
 public class SwerveChassis extends GBSubsystem {
 	
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
 	private final PigeonGyro pigeonGyro;
-	private double length;
-	private double width;
+	
+	private Translation2d[] swerveLocations;
+	
+	
 	
 	public enum Module {
 		FRONT_RIGHT,
@@ -20,22 +26,21 @@ public class SwerveChassis extends GBSubsystem {
 		BACK_LEFT
 	}
 	
-	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, double length, double width) {
+	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro,Translation2d[] swerveLocations) {
 		this.frontRight = frontRight;
 		this.frontLeft = frontLeft;
 		this.backRight = backRight;
 		this.backLeft = backLeft;
 		this.pigeonGyro = pigeonGyro;
-		this.width = width;
-		this.length = length;
+		this.swerveLocations = swerveLocations;
 		
 	}
 
 	private static SwerveChassis instance;
 
 
-	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, double length, double width){
-		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro, length, width);
+	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro,Translation2d[] swerveLocations){
+		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro,swerveLocations);
 	}
 
 	public static SwerveChassis getInstance(){
@@ -115,11 +120,17 @@ public class SwerveChassis extends GBSubsystem {
 		getModule(module).moveLinPID(speed);
 	}
 	
+	public void moveSingleModule(Module module, SwerveModuleState state){
+		moveSingleModule(module,state.angle.getRadians(),state.speedMetersPerSecond);
+	}
+	
+	
+	
 	public void moveChassisLin(double angle, double speed) {
-		moveSingleModule(Module.FRONT_LEFT, angle, speed);
 		moveSingleModule(Module.FRONT_RIGHT, angle, speed);
-		moveSingleModule(Module.BACK_LEFT, angle, speed);
+		moveSingleModule(Module.FRONT_LEFT, angle, speed);
 		moveSingleModule(Module.BACK_RIGHT, angle, speed);
+		moveSingleModule(Module.BACK_LEFT, angle, speed);
 	}
 
 
@@ -134,6 +145,34 @@ public class SwerveChassis extends GBSubsystem {
 	public double getTarget(Module module){
 		return getModule(module).getTargetAngle();
 
+	}
+	
+	public void holonomicDrive(ChassisSpeeds speeds){
+		
+
+		SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
+				swerveLocations
+		);
+
+		SwerveModuleState[] moduleStates = kinematics.toSwerveModuleStates(speeds);
+
+
+
+		
+		SwerveModuleState frontRight = moduleStates[0];
+		moveSingleModule(Module.FRONT_RIGHT,frontRight);
+		
+		SwerveModuleState frontLeft = moduleStates[1];
+		moveSingleModule(Module.FRONT_LEFT,frontLeft);
+		
+		SwerveModuleState backRight = moduleStates[2];
+		moveSingleModule(Module.BACK_RIGHT,backRight);
+		
+		SwerveModuleState backLeft = moduleStates[3];
+		moveSingleModule(Module.BACK_LEFT,backLeft);
+		
+		
+		
 	}
 
 	
