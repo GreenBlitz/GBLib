@@ -15,8 +15,8 @@ public class SwerveChassis extends GBSubsystem {
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
 	private final PigeonGyro pigeonGyro;
 	
-	private Translation2d[] swerveLocations;
 	
+	SwerveDriveKinematics kinematics;
 	
 	
 	public enum Module {
@@ -32,7 +32,9 @@ public class SwerveChassis extends GBSubsystem {
 		this.backRight = backRight;
 		this.backLeft = backLeft;
 		this.pigeonGyro = pigeonGyro;
-		this.swerveLocations = swerveLocations;
+		SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
+				swerveLocations
+		);
 		
 	}
 
@@ -149,10 +151,7 @@ public class SwerveChassis extends GBSubsystem {
 	
 	public void holonomicDrive(ChassisSpeeds speeds){
 		
-
-		SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
-				swerveLocations
-		);
+		
 
 		SwerveModuleState[] moduleStates = kinematics.toSwerveModuleStates(speeds);
 
