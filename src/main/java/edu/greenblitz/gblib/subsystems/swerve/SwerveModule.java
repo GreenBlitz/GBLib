@@ -21,11 +21,10 @@ public class SwerveModule {
     private final GBMotor linearMotor;
     private final AnalogInput lamprey;
 	private final SimpleMotorFeedforward feedforward;
-	private final double wheelParameter;
 
     public SwerveModule(IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL,
                         int lampreyID, double maxLampreyVal, double minLampreyVal,
-                        PIDObject pidAng , PIDObject pidLin, SimpleMotorFeedforward feedforward, double wheelParameter) {
+                        PIDObject pidAng , PIDObject pidLin, SimpleMotorFeedforward feedforward) {
         angleMotor = motorFactoryA.generate(portA);
         linearMotor = motorFactoryL.generate(portL);
         lamprey = new AnalogInput(lampreyID);
@@ -35,7 +34,6 @@ public class SwerveModule {
 		configAnglePID(pidAng);
 		configLinPID(pidLin);
 		this.feedforward = feedforward;
-		this.wheelParameter = wheelParameter;
     }
 
     public double getLampreyAngle() { // in radians;
