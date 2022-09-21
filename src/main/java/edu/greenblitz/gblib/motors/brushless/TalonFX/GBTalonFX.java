@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
+import edu.wpi.first.wpilibj.RobotController;
 
 public class GBTalonFX extends AbstractMotor {
 	private final TalonFX motor;
@@ -82,6 +83,11 @@ public class GBTalonFX extends AbstractMotor {
 	@Override
 	public void setTargetSpeedByPID(double target) {
 		motor.set(TalonFXControlMode.Velocity, target);
+	}
+
+	@Override
+	public void setVoltage(double voltage) {
+		motor.set(TalonFXControlMode.PercentOutput, voltage / RobotController.getBatteryVoltage());
 	}
 
 	@Override

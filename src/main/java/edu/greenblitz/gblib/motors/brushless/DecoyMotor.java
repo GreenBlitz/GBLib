@@ -54,6 +54,11 @@ public class DecoyMotor extends AbstractMotor{
 	}
 
 	@Override
+	public void setVoltage(double voltage) {
+
+	}
+
+	@Override
 	public void resetEncoder() {
 
 	}

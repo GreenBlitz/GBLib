@@ -1,10 +1,12 @@
 package edu.greenblitz.gblib.motors.brushless.SparkMax;
 
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
+import edu.wpi.first.wpilibj.RobotController;
 
 public class GBSparkMax extends AbstractMotor {
 	private final CANSparkMax motor;
@@ -67,6 +69,11 @@ public class GBSparkMax extends AbstractMotor {
 				motor.getPIDController().setReference(target, CANSparkMax.ControlType.kPosition);
 				break;
 		}
+	}
+
+	@Override
+	public void setVoltage(double voltage) {
+		motor.set(voltage / RobotController.getBatteryVoltage());
 	}
 
 	@Override
