@@ -2,12 +2,11 @@ package edu.greenblitz.gblib.subsystems.swerve;
 
 import edu.greenblitz.gblib.motion.angles.DualSidedAngTarget;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
-import edu.greenblitz.gblib.motors.brushed.IBrushedFactory;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 import edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 import edu.greenblitz.gblib.utils.GBMath;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 public class SwerveModule {
@@ -21,8 +20,11 @@ public class SwerveModule {
     private final GBMotor angleMotor;
     private final GBMotor linearMotor;
     private final AnalogInput lamprey;
+	private final SimpleMotorFeedforward feedforward;
 
-    public SwerveModule(IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL, int lampreyID, double maxLampreyVal, double minLampreyVal, PIDObject pidAng , PIDObject pidLin) {
+    public SwerveModule(IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL,
+                        int lampreyID, double maxLampreyVal, double minLampreyVal,
+                        PIDObject pidAng , PIDObject pidLin, SimpleMotorFeedforward feedforward) {
         angleMotor = motorFactoryA.generate(portA);
         linearMotor = motorFactoryL.generate(portL);
         lamprey = new AnalogInput(lampreyID);
@@ -31,6 +33,7 @@ public class SwerveModule {
 		this.minLampreyVal = minLampreyVal;
 		configAnglePID(pidAng);
 		configLinPID(pidLin);
+		this.feedforward = feedforward;
     }
 
     public double getLampreyAngle() { // in radians;
@@ -81,8 +84,8 @@ public class SwerveModule {
     }
 
 	
-	public void moveLinPID(double speed){
-		linearMotor.setTargetSpeedByPID(speed);
+	public void setLinSpeed(double speed){
+		linearMotor.setTargetSpeedByPID(feedforward.calculate(speed));
 	}
 	
 	public void setRotPower(double power){
@@ -97,7 +100,7 @@ public class SwerveModule {
     public double getTargetVel() {
         return targetVel* isReversed;
     }
-	
+
 	public void setLinPower(double power){
 		linearMotor.setPower(power);
 	}
@@ -105,5 +108,6 @@ public class SwerveModule {
     public int getIsReversed() {
         return isReversed;
     }
+
 
 }

@@ -2,9 +2,7 @@ package edu.greenblitz.gblib.subsystems.swerve;
 
 import edu.greenblitz.gblib.gyro.PigeonGyro;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
-import edu.greenblitz.gblib.subsystems.shooter.Shooter;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -119,7 +117,7 @@ public class SwerveChassis extends GBSubsystem {
 	 */
 	public void moveSingleModule(Module module, double angle, double speed) {
 		getModule(module).rotateToAngle(angle);
-		getModule(module).moveLinPID(speed);
+		getModule(module).setLinSpeed(speed);
 	}
 	
 	public void moveSingleModule(Module module, SwerveModuleState state){
