@@ -44,6 +44,8 @@ public interface GBMotor extends GBBrushedMotor {
 
 	void setTargetSpeedByPID(double target);
 
+	void setTargetSpeedByPID(double target, double voltageFF);
+
 	void setVoltage(double voltage);
 
 	void resetEncoder();

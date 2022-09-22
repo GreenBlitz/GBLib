@@ -85,7 +85,8 @@ public class SwerveModule {
 
 
 	public void setLinSpeed(double speed) {
-		linearMotor.setVoltage(feedforward.calculate(speed * isReversed));
+		speed *=isReversed;
+		linearMotor.setTargetSpeedByPID(speed,feedforward.calculate(speed));
 	}
 
 	public void setRotPower(double power) {

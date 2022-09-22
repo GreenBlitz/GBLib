@@ -1,9 +1,6 @@
 package edu.greenblitz.gblib.motors.brushless.TalonFX;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
@@ -83,6 +80,11 @@ public class GBTalonFX extends AbstractMotor {
 	@Override
 	public void setTargetSpeedByPID(double target) {
 		motor.set(TalonFXControlMode.Velocity, target);
+	}
+
+	@Override
+	public void setTargetSpeedByPID(double target, double voltageFF) {
+		motor.set(ControlMode.Velocity, target, DemandType.ArbitraryFeedForward, voltageFF / RobotController.getBatteryVoltage());
 	}
 
 	@Override

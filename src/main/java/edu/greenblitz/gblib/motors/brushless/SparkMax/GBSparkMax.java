@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 import edu.wpi.first.wpilibj.RobotController;
@@ -79,6 +80,11 @@ public class GBSparkMax extends AbstractMotor {
 	@Override
 	public void setTargetSpeedByPID(double target) {
 		motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity);
+	}
+
+	@Override
+	public void setTargetSpeedByPID(double target, double voltageFF) {
+		motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity, 0, voltageFF, SparkMaxPIDController.ArbFFUnits.kVoltage);
 	}
 
 	public void setCurrentLimit(int limit) {
