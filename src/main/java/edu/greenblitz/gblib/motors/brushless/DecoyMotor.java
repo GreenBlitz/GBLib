@@ -54,6 +54,11 @@ public class DecoyMotor extends AbstractMotor{
 	}
 
 	@Override
+	public void setTargetSpeedByPID(double target, double voltageFF) {
+
+	}
+
+	@Override
 	public void setVoltage(double voltage) {
 
 	}
