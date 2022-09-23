@@ -25,7 +25,7 @@ public class SwerveChassis extends GBSubsystem {
 		BACK_LEFT
 	}
 	
-	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro,Translation2d[] swerveLocations) {
+	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, Translation2d[] swerveLocations) {
 		this.frontRight = frontRight;
 		this.frontLeft = frontLeft;
 		this.backRight = backRight;
@@ -36,15 +36,15 @@ public class SwerveChassis extends GBSubsystem {
 		);
 		
 	}
-
+	
 	private static SwerveChassis instance;
-
-
-	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro,Translation2d[] swerveLocations){
-		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro,swerveLocations);
+	
+	
+	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, Translation2d[] swerveLocations) {
+		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro, swerveLocations);
 	}
-
-	public static SwerveChassis getInstance(){
+	
+	public static SwerveChassis getInstance() {
 		return instance;
 	}
 	
@@ -80,7 +80,7 @@ public class SwerveChassis extends GBSubsystem {
 		}
 	}
 	
-	public void stop(){
+	public void stop() {
 		frontRight.setLinPower(0);
 		frontRight.setRotPower(0);
 		frontLeft.setLinPower(0);
@@ -102,7 +102,7 @@ public class SwerveChassis extends GBSubsystem {
 		getModule(Module.BACK_RIGHT).configLinPID(pidObjectLin);
 	}
 	
-	public void resetAllEncoders (){
+	public void resetAllEncoders() {
 		
 		getModule(Module.FRONT_LEFT).resetEncoderByLamprey();
 		getModule(Module.FRONT_RIGHT).resetEncoderByLamprey();
@@ -116,15 +116,16 @@ public class SwerveChassis extends GBSubsystem {
 	 * <p>
 	 * ALL IN RADIANS, NOT DEGREES
 	 */
-	public void moveSingleModule(Module module, double angle, double speed) {
-		getModule(module).rotateToAngle(angle);
-		getModule(module).setLinSpeed(speed);
+	public void moveSingleModule(Module module, double radians, double speed) {
+		if (getModule(module) != null) { //IntelliJ is being dumb here, this should fix it - nitzan.b
+			getModule(module).rotateToAngle(radians);
+			getModule(module).setLinSpeed(speed);
+		}
 	}
 	
-	public void moveSingleModule(Module module, SwerveModuleState state){
-		moveSingleModule(module,state.angle.getRadians(),state.speedMetersPerSecond);
+	public void moveSingleModule(Module module, SwerveModuleState state) {
+		moveSingleModule(module, state.angle.getRadians(), state.speedMetersPerSecond);
 	}
-	
 	
 	
 	public void moveChassisLin(double angle, double speed) {
@@ -133,60 +134,57 @@ public class SwerveChassis extends GBSubsystem {
 		moveSingleModule(Module.BACK_RIGHT, angle, speed);
 		moveSingleModule(Module.BACK_LEFT, angle, speed);
 	}
-
-
+	
+	
 	public double getRawLampreyAngle(Module module) {
 		return getModule(module).getRawLampreyAngle();
 	}
+	
 	public double getLampreyAngle(Module module) {
 		return getModule(module).getLampreyAngle();
 	}
-
-	public double getAngle(Module module){
+	
+	public double getAngle(Module module) {
 		return getModule(module).getMotorAngle();
 	}
-
-	public double getTarget(Module module){
+	
+	public double getTarget(Module module) {
 		return getModule(module).getTargetAngle();
-
+		
 	}
 	
-	public void holonomicDrive(ChassisSpeeds speeds){
+	public void holonomicDrive(ChassisSpeeds speeds) {
 		
 		
-
 		SwerveModuleState[] moduleStates = kinematics.toSwerveModuleStates(speeds);
-
-
-
+		
 		
 		SwerveModuleState frontRight = moduleStates[0];
-		moveSingleModule(Module.FRONT_RIGHT,frontRight);
+		moveSingleModule(Module.FRONT_RIGHT, frontRight);
 		
 		SwerveModuleState frontLeft = moduleStates[1];
-		moveSingleModule(Module.FRONT_LEFT,frontLeft);
+		moveSingleModule(Module.FRONT_LEFT, frontLeft);
 		
 		SwerveModuleState backRight = moduleStates[2];
-		moveSingleModule(Module.BACK_RIGHT,backRight);
+		moveSingleModule(Module.BACK_RIGHT, backRight);
 		
 		SwerveModuleState backLeft = moduleStates[3];
-		moveSingleModule(Module.BACK_LEFT,backLeft);
+		moveSingleModule(Module.BACK_LEFT, backLeft);
 	}
-	public void MoveByChassisSpeeds(double ForwardSpeed, double RightwardSpeed, double AngSpeed, double CurrentAng){
+	
+	public void MoveByChassisSpeeds(double ForwardSpeed, double RightwardSpeed, double AngSpeed, double CurrentAng) {
 		ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
 				ForwardSpeed,
 				-RightwardSpeed,
 				AngSpeed,
 				Rotation2d.fromDegrees(Math.toDegrees(CurrentAng)));
-		SwerveModuleState[]  states = kinematics.toSwerveModuleStates(chassisSpeeds);
-		moveSingleModule(Module.FRONT_RIGHT,states[0]);
-		moveSingleModule(Module.FRONT_LEFT,states[1]);
-		moveSingleModule(Module.BACK_RIGHT,states[2]);
-		moveSingleModule(Module.BACK_LEFT,states[3]);
-
+		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
+		moveSingleModule(Module.FRONT_RIGHT, states[0]);
+		moveSingleModule(Module.FRONT_LEFT, states[1]);
+		moveSingleModule(Module.BACK_RIGHT, states[2]);
+		moveSingleModule(Module.BACK_LEFT, states[3]);
+		
 	}
-
-	
 	
 	
 }

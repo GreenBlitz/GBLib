@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 public class SwerveModule {
 	
 	
-	//	private int isReversed = 1;
+	private int isReversed = 1;
 	public double targetAngle;
 	public double targetVel;
 	private double maxLampreyVal;
@@ -45,8 +45,8 @@ public class SwerveModule {
 		angle = dualSidedAngTarget.getTarget();
 		
 		angle += getMotorAngle() - GBMath.modulo(getMotorAngle(), 2 * Math.PI);
-
-//		isReversed = dualSidedAngTarget.get Direction();
+		
+		isReversed = dualSidedAngTarget.getDirection();
 		angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
 		targetAngle = angle;
 	}
@@ -85,7 +85,7 @@ public class SwerveModule {
 	
 	
 	public void setLinSpeed(double speed) {
-//		speed *=isReversed;
+		speed *= isReversed;
 		linearMotor.setTargetSpeedByPID(speed, feedforward.calculate(speed));
 	}
 	
@@ -98,16 +98,17 @@ public class SwerveModule {
 		return targetAngle;
 	}
 	
-	//	public double getTargetVel() {
-//		return targetVel * isReversed;
-//	}
-	public void setLinPower(double power) {
-		linearMotor.setPower(power);// * isReversed);
+	public double getTargetVel() {
+		return targetVel * isReversed;
 	}
-
-//	public int getIsReversed() {
-//		return isReversed;
-//	}
-
-
+	
+	public void setLinPower(double power) {
+		linearMotor.setPower(power * isReversed);
+	}
+	
+	public int getIsReversed() {
+		return isReversed;
+	}
+	
+	
 }
