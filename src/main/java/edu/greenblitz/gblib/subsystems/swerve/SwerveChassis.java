@@ -3,6 +3,7 @@ package edu.greenblitz.gblib.subsystems.swerve;
 import edu.greenblitz.gblib.gyro.PigeonGyro;
 import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.subsystems.GBSubsystem;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -30,7 +31,7 @@ public class SwerveChassis extends GBSubsystem {
 		this.backRight = backRight;
 		this.backLeft = backLeft;
 		this.pigeonGyro = pigeonGyro;
-		SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
+		this.kinematics = new SwerveDriveKinematics(
 				swerveLocations
 		);
 		
@@ -170,9 +171,19 @@ public class SwerveChassis extends GBSubsystem {
 		
 		SwerveModuleState backLeft = moduleStates[3];
 		moveSingleModule(Module.BACK_LEFT,backLeft);
-		
-		
-		
+	}
+	public void MoveByChassisSpeeds(double ForwardSpeed, double RightwardSpeed, double AngSpeed, double CurrentAng){
+		ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
+				ForwardSpeed,
+				-RightwardSpeed,
+				AngSpeed,
+				Rotation2d.fromDegrees(Math.toDegrees(CurrentAng)));
+		SwerveModuleState[]  states = kinematics.toSwerveModuleStates(chassisSpeeds);
+		moveSingleModule(Module.FRONT_RIGHT,states[0]);
+		moveSingleModule(Module.FRONT_LEFT,states[1]);
+		moveSingleModule(Module.BACK_RIGHT,states[2]);
+		moveSingleModule(Module.BACK_LEFT,states[3]);
+
 	}
 
 	
