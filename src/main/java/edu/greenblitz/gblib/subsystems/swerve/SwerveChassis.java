@@ -25,14 +25,14 @@ public class SwerveChassis extends GBSubsystem {
 		BACK_LEFT
 	}
 	
-	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro,Translation2d[] swerveLocations) {
+	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro,Translation2d[] swerveLocationsInSwerveKinematicsCoordinates) {
 		this.frontRight = frontRight;
 		this.frontLeft = frontLeft;
 		this.backRight = backRight;
 		this.backLeft = backLeft;
 		this.pigeonGyro = pigeonGyro;
 		this.kinematics = new SwerveDriveKinematics(
-				swerveLocations
+				swerveLocationsInSwerveKinematicsCoordinates
 		);
 		
 	}
@@ -40,8 +40,8 @@ public class SwerveChassis extends GBSubsystem {
 	private static SwerveChassis instance;
 
 
-	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro,Translation2d[] swerveLocations){
-		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro,swerveLocations);
+	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro,Translation2d[] swerveLocationsInSwerveKinematicsCoordinates){
+		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro,swerveLocationsInSwerveKinematicsCoordinates);
 	}
 
 	public static SwerveChassis getInstance(){
