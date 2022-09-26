@@ -144,8 +144,11 @@ public class SwerveChassis extends GBSubsystem {
 		return getModule(module).getLampreyAngle();
 	}
 	
-	public double getAngle(Module module) {
+	public double getModuleAngle(Module module) {
 		return getModule(module).getMotorAngle();
+	}
+	public double getChassisAngle (){
+		return pigeonGyro.getNormalizedYaw();
 	}
 	
 	public double getTarget(Module module) {
