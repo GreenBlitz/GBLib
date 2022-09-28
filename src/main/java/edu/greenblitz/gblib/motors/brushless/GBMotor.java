@@ -9,9 +9,6 @@ import edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
 
 public interface GBMotor extends GBBrushedMotor {
-	/**
-	 *
-	 * */
 
 	/**
 	 * @return raw encoder ticks;
@@ -32,7 +29,7 @@ public interface GBMotor extends GBBrushedMotor {
 	double getRawVelocity();
 
 	/**
-	 * normalizes encoder ticks to rotations using the gear ratio
+	 * gets normalized velocity, ticks per second/gear ratio
 	 *
 	 * @return velocity in RPM;
 	 */
@@ -44,7 +41,15 @@ public interface GBMotor extends GBBrushedMotor {
 
 	void setTargetSpeedByPID(double target);
 
+	/**
+	 * @param voltageFF - feed forward, used in swerve
+	 */
 	void setTargetSpeedByPID(double target, double voltageFF);
+
+	/**
+	 * @return setting the voltage
+	 *
+	 */
 
 	void setVoltage(double voltage);
 

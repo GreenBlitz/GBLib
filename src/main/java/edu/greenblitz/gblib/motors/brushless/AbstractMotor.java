@@ -25,7 +25,6 @@ public abstract class AbstractMotor implements GBMotor {
 		return (getRawTicks() / ticksToRadians);
 	}
 
-
 	@Override
 	public double getNormalizedVelocity() {
 		return (getRawVelocity() / ticksToWheelRPM);

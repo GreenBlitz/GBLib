@@ -51,7 +51,6 @@ public class Shooter extends GBSubsystem {
 		motor.configurePID(obj);
 	}
 
-
 	public double getShooterSpeed() {
 		return motor.getNormalizedVelocity();
 	}

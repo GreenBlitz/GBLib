@@ -17,19 +17,11 @@ public class GBTalonSRX implements GBBrushedMotor {
 		this.motor = new TalonSRX(id);
 	}
 
-	/**
-	 * sets motor power from -1 to 1;
-	 *
-	 * @param power
-	 */
 	@Override
 	public void setPower(double power) {
 		motor.set(ControlMode.PercentOutput, power * isInverted);
 	}
 
-	/**
-	 * @return true if the motors are inverted;
-	 */
 	@Override
 	public boolean getInverted() {
 		return (motor.getInverted()); /*getInverted is also a talon method*/

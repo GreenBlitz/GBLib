@@ -4,9 +4,6 @@ import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 
 public interface GBBrushedMotor {
 
-	/**
-	 * sets motor power from -1 to 1;
-	 */
 	void setPower(double power);
 
 	/**
