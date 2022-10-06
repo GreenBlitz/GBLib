@@ -50,7 +50,7 @@ public class SwerveChassis extends GBSubsystem {
 	}
 	
 	/**
-	 * returns the swerve module based on its name
+	 * @return returns the swerve module based on its name
 	 */
 	private SwerveModule getModule(Module module) {
 		switch (module) {

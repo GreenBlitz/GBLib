@@ -3,7 +3,7 @@ package edu.greenblitz.gblib.motion.pid;
 import edu.greenblitz.gblib.motion.debug.RemoteCSVTargetBuffer;
 import edu.greenblitz.gblib.motion.tolerance.ITolerance;
 
-public class PIDController {
+public class PIDController  {
 
 	protected PIDObject pidObject;
 	protected long previousTime;
