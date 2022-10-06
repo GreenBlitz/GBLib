@@ -1,5 +1,6 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.swerve;
 
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.angles.DualSidedAngTarget;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.IMotorFactory;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor;
@@ -44,7 +45,9 @@ public class SwerveModule {
 		//DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.generateTarget(angle, GBMath.modulo(getMotorAngle(), 2 * Math.PI));
 		//angle = dualSidedAngTarget.getTarget();
 
-		angle += getMotorAngle() - GBMath.modulo(getMotorAngle(), 2 * Math.PI);
+		double diff = GBMath.modulo(angle - getMotorAngle(), 2 * Math.PI);
+		diff -= diff > Math.PI ? 2*Math.PI : 0;
+		angle = getMotorAngle() + diff;
 
 		//isReversed = dualSidedAngTarget.getDirection();
 		angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
