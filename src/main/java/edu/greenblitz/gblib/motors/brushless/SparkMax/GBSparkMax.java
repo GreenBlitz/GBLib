@@ -19,7 +19,6 @@ public class GBSparkMax extends AbstractMotor {
 		this.encoder = this.motor.getEncoder();
 	}
 
-
 	@Override
 	public void setPower(double power) {
 		motor.set(power);
