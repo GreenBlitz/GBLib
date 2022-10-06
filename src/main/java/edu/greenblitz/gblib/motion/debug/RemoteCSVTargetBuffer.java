@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.debug;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.debug;
 
 import java.util.ArrayList;
 

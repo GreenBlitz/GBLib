@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motors.brushed;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushed;
 
 public interface IBrushedFactory {
 

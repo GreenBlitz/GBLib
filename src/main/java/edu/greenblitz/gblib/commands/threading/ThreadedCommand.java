@@ -1,6 +1,6 @@
-package edu.greenblitz.gblib.commands.threading;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.commands.threading;
 
-import edu.greenblitz.gblib.base.GBCommand;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.base.GBCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class ThreadedCommand extends GBCommand {

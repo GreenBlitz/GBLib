@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.cords;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.cords;
 
 /**
  * Represents a simple 2D point
@@ -222,7 +222,7 @@ public class Point {
 		throw new IllegalArgumentException("Roses are red, Violets are blue, I don't know this enum, what should I do???");
 	}
 
-	@Deprecated
+//	@Deprecated
 	public Point mathToFrcCoords() {
 		return changeCoords(CoordinateSystems.MATH, CoordinateSystems.LOCALIZER);
 	}

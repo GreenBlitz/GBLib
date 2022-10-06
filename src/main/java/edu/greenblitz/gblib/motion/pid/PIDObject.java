@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.pid;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid;
 
 public class PIDObject {
 

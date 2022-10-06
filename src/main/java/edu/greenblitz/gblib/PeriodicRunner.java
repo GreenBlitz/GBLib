@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib;
 
 import edu.wpi.first.wpilibj.Notifier;
 

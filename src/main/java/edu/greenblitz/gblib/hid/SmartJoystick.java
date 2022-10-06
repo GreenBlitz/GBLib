@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.hid;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.hid;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;

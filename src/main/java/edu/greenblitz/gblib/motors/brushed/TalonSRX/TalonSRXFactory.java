@@ -1,8 +1,8 @@
-package edu.greenblitz.gblib.motors.brushed.TalonSRX;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushed.TalonSRX;
 
-import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
-import edu.greenblitz.gblib.motors.brushed.IBrushedFactory;
-import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushed.IBrushedFactory;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 
 public class TalonSRXFactory implements IBrushedFactory {
 

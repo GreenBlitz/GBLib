@@ -1,10 +1,10 @@
-package edu.greenblitz.gblib.subsystems.shooter;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.shooter;
 
-import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
-import edu.greenblitz.gblib.motors.brushless.GBMotor;
-import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
-import edu.greenblitz.gblib.subsystems.GBSubsystem;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.IMotorFactory;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.GBMotor;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.GBSubsystem;
 
 public class Shooter extends GBSubsystem {
 

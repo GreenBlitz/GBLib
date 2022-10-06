@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.utils;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils;
 
 public class GBMath {
 

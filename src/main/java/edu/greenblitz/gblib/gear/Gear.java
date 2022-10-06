@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.gear;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.gear;
 
 /**
  * This class represents the gear box on the robot's chassis

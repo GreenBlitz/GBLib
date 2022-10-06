@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.commands.threading;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.commands.threading;
 
 public interface IThreadable {
 

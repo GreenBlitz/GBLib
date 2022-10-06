@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.gyro;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.gyro;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 

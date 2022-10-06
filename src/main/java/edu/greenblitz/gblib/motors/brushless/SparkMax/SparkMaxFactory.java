@@ -1,8 +1,8 @@
-package edu.greenblitz.gblib.motors.brushless.SparkMax;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.SparkMax;
 
-import edu.greenblitz.gblib.motors.brushless.AbstractMotor;
-import edu.greenblitz.gblib.motors.brushless.GBMotor;
-import edu.greenblitz.gblib.motors.brushless.IMotorFactory;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.IMotorFactory;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.GBMotor;
 
 public class SparkMaxFactory implements IMotorFactory {
 	private int currentLimit = 0;

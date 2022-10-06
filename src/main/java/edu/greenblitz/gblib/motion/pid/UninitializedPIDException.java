@@ -1,5 +1,6 @@
-package edu.greenblitz.gblib.motion.pid;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid;
 
+@SuppressWarnings("serial")
 public class UninitializedPIDException extends IllegalStateException {
 	public UninitializedPIDException() {
 	}
@@ -16,7 +17,7 @@ public class UninitializedPIDException extends IllegalStateException {
 		super(cause);
 	}
 
-	public UninitializedPIDException(PIDController pid) {
-		this("PID " + pid + " isn't initialized yet");
-	}
+//	public UninitializedPIDException(edu.greenblitz.gblib.motion.pid.PIDController pid) {
+//		this("PID " + pid + " isn't initialized yet");
+//	}
 }

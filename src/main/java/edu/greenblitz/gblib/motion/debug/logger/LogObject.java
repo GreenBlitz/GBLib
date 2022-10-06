@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.debug.logger;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.debug.logger;
 
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.EntryNotification;

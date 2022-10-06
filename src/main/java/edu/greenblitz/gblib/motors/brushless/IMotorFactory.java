@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motors.brushless;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless;
 
 public interface IMotorFactory {
 

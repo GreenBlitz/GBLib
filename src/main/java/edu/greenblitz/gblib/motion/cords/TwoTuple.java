@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.cords;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.cords;
 
 import java.util.Objects;
 

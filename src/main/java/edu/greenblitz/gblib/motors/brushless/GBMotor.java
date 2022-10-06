@@ -3,10 +3,10 @@
  * @author Tal
  */
 
-package edu.greenblitz.gblib.motors.brushless;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless;
 
-import edu.greenblitz.gblib.motion.pid.PIDObject;
-import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
 
 public interface GBMotor extends GBBrushedMotor {
 

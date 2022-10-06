@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.base;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.base;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;

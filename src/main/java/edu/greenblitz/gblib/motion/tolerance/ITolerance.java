@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.tolerance;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.tolerance;
 
 @FunctionalInterface
 public interface ITolerance {

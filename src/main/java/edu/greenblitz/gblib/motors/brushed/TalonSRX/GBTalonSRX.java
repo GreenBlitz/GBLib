@@ -1,11 +1,11 @@
-package edu.greenblitz.gblib.motors.brushed.TalonSRX;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushed.TalonSRX;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
-import edu.greenblitz.gblib.motors.brushless.AbstractMotor.IdleMode;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor.IdleMode;
 
 public class GBTalonSRX implements GBBrushedMotor {
 

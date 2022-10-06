@@ -1,4 +1,4 @@
-package edu.greenblitz.gblib.motion.cords;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.cords;
 
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ public class /*united*/State extends Position {
 
 	protected double linearVelocity /* meter/sec */, angularVelocity /* radians/sec */;
 	protected double linearAccel /* meter/sec^2 */, angularAccel /* radians/sec^2 */;
-	protected Vector2D velocity;
+	protected edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.cords.Vector2D velocity;
 
 	//<editor-fold desc="usless constructors">
 	public State(double x, double y, double angle, double linearVelocity, double angularVelocity) {

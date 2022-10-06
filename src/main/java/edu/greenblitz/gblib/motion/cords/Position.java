@@ -1,11 +1,11 @@
-package edu.greenblitz.gblib.motion.cords;
+package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.cords;
 
 /**
  * Represent a position in 2D space (for example of a org.greenblitz.example.robot) that consists of x, y, and angle (heading, the direction the object faces)
  *
  * @author Alexey
  */
-public class Position extends Point {
+public class Position extends Point	{
 
 	/**
 	 * The angle of this position.
