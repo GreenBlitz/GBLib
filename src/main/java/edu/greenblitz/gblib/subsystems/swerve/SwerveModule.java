@@ -6,7 +6,10 @@ import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObj
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils.GBMath;
+import edu.greenblitz.pegasus.RobotMap;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 public class SwerveModule {
@@ -21,10 +24,11 @@ public class SwerveModule {
 	private final GBMotor linearMotor;
 	private final AnalogInput lamprey;
 	private final SimpleMotorFeedforward feedforward;
+	private final double wheelCirc;
 
 	public SwerveModule(IMotorFactory motorFactoryA, IMotorFactory motorFactoryL, int portA, int portL,
 	                    int lampreyID, double maxLampreyVal, double minLampreyVal,
-	                    PIDObject pidAng, PIDObject pidLin, SimpleMotorFeedforward feedforward) {
+	                    PIDObject pidAng, PIDObject pidLin, SimpleMotorFeedforward feedforward, double wheelCirc) {
 		angleMotor = motorFactoryA.generate(portA);
 		linearMotor = motorFactoryL.generate(portL);
 		lamprey = new AnalogInput(lampreyID);
@@ -34,6 +38,7 @@ public class SwerveModule {
 		configAnglePID(pidAng);
 		configLinPID(pidLin);
 		this.feedforward = feedforward;
+		this.wheelCirc = wheelCirc;
 	}
 
 	public double getLampreyAngle() { // in radians;
@@ -63,7 +68,7 @@ public class SwerveModule {
 	}
 
 	public double getCurrentVel() {
-		return linearMotor.getNormalizedVelocity();
+		return linearMotor.getNormalizedVelocity() / 60 * wheelCirc;
 	}
 
 	public void rotateByAngle(double angle) {
@@ -111,6 +116,10 @@ public class SwerveModule {
 
 	public int getIsReversed() {
 		return isReversed;
+	}
+	
+	public SwerveModuleState getModuleState (){
+		return new SwerveModuleState(getCurrentVel(),new Rotation2d(this.getMotorAngle()));
 	}
 
 
