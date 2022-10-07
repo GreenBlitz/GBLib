@@ -12,9 +12,10 @@ public class PigeonGyro extends AbstractGyro {
 
 	@Override
 	public double getRawYaw() {
-		double[] vals = new double[3];
-		bird.getYawPitchRoll(vals);
-		return Math.toRadians(vals[0]) * inverted;
+//		double[] vals = new double[3];
+//		bird.getYawPitchRoll(vals);
+//		return Math.toRadians(vals[0]) * inverted;
+		return Math.toRadians(bird.getYaw()) * inverted;
 	}
 
 

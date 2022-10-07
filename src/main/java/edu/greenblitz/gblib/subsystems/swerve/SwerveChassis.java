@@ -1,8 +1,9 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.swerve;
 
-import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.gyro.PigeonGyro;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.GBSubsystem;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils.GBMath;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -13,7 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SwerveChassis extends GBSubsystem {
 
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
-	private final PigeonGyro pigeonGyro;
+//	private final PigeonGyro pigeonGyro;
+	private PigeonIMU pigeonIMU;
 
 
 	SwerveDriveKinematics kinematics;
@@ -26,23 +28,27 @@ public class SwerveChassis extends GBSubsystem {
 		BACK_LEFT
 	}
 
-	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates) {
+	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates) {
 		this.frontRight = frontRight;
 		this.frontLeft = frontLeft;
+
 		this.backRight = backRight;
 		this.backLeft = backLeft;
-		this.pigeonGyro = pigeonGyro;
+//		this.pigeonGyro = pigeonGyro;
+		this.pigeonIMU = pigeonIMU;
 		this.kinematics = new SwerveDriveKinematics(
 				swerveLocationsInSwerveKinematicsCoordinates
 		);
 
 	}
 
+
+
 	private static SwerveChassis instance;
 
 
-	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates) {
-		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro, swerveLocationsInSwerveKinematicsCoordinates);
+	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates) {
+		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonIMU, swerveLocationsInSwerveKinematicsCoordinates);
 	}
 
 	public static SwerveChassis getInstance() {
@@ -150,7 +156,7 @@ public class SwerveChassis extends GBSubsystem {
 	}
 
 	public double getChassisAngle() {
-		return pigeonGyro.getNormalizedYaw();
+		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()),2*Math.PI);
 	}
 
 	public double getTarget(Module module) {
