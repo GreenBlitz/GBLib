@@ -14,8 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SwerveChassis extends GBSubsystem {
 
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
-//	private final PigeonGyro pigeonGyro;
+	//	private final PigeonGyro pigeonGyro;
 	private PigeonIMU pigeonIMU;
+	public double pigeonAngleOffset = 0.0;
 
 
 	SwerveDriveKinematics kinematics;
@@ -41,7 +42,6 @@ public class SwerveChassis extends GBSubsystem {
 		);
 
 	}
-
 
 
 	private static SwerveChassis instance;
@@ -155,8 +155,12 @@ public class SwerveChassis extends GBSubsystem {
 		return getModule(module).getMotorAngle();
 	}
 
+	public void resetChassisAngle() {
+		pigeonAngleOffset = getChassisAngle();
+	}
+
 	public double getChassisAngle() {
-		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()),2*Math.PI);
+		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset, 2 * Math.PI);
 	}
 
 	public double getTarget(Module module) {
