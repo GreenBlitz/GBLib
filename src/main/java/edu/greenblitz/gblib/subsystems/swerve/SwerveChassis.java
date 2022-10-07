@@ -189,10 +189,10 @@ public class SwerveChassis extends GBSubsystem {
 		moveSingleModule(Module.BACK_RIGHT, states[2]);
 		moveSingleModule(Module.BACK_LEFT, states[3]);
 
-		SmartDashboard.putNumber("fr-lin-vel-", states[0].speedMetersPerSecond);
-		SmartDashboard.putNumber("fl-lin-vel", states[1].speedMetersPerSecond);
-		SmartDashboard.putNumber("br-lin-vel", states[2].speedMetersPerSecond);
-		SmartDashboard.putNumber("bl-lin-vel", states[3].speedMetersPerSecond);
+		SmartDashboard.putNumber("FR-lin-vel", states[0].speedMetersPerSecond);
+		SmartDashboard.putNumber("FL-lin-vel", states[1].speedMetersPerSecond);
+		SmartDashboard.putNumber("BR-lin-vel", states[2].speedMetersPerSecond);
+		SmartDashboard.putNumber("BL-lin-vel", states[3].speedMetersPerSecond);
 	}
 
 
