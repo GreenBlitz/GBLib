@@ -1,7 +1,6 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.swerve;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
-import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.Localizer;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.GBSubsystem;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils.GBMath;
@@ -235,5 +234,6 @@ public class SwerveChassis extends GBSubsystem {
 	public Pose2d getLocation(){
 		return this.localizer.getPoseMeters();
 	}
+	public void resetLocalizer(){localizer.resetPosition(new Pose2d(),new Rotation2d());}
 	
 }
