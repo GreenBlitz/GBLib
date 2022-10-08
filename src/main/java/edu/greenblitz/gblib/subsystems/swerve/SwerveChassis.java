@@ -15,10 +15,10 @@ public class SwerveChassis extends GBSubsystem {
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
 	//	private final PigeonGyro pigeonGyro;
 	private PigeonIMU pigeonIMU;
+	private SwerveDriveOdometry localizer;
 
 	public double pigeonAngleOffset = 0.0;
 
-	private SwerveDriveOdometry localizer;
 
 
 
