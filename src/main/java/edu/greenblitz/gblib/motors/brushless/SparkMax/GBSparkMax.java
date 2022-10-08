@@ -12,7 +12,6 @@ public class GBSparkMax extends AbstractMotor {
 	private final CANSparkMax motor;
 	private final RelativeEncoder encoder;
 
-
 	protected GBSparkMax(int id) {
 		this.motor = new CANSparkMax(id, CANSparkMaxLowLevel.MotorType.kBrushless);
 		this.encoder = this.motor.getEncoder();

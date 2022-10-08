@@ -5,6 +5,7 @@ import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObj
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.GBSubsystem;
+import edu.greenblitz.pegasus.RobotMap;
 
 public class Shooter extends GBSubsystem {
 
@@ -18,6 +19,7 @@ public class Shooter extends GBSubsystem {
 	private Shooter(IMotorFactory motorFactory, int id) {
 		this.motor = motorFactory.generate(id);
 //		//leader.setClosedLoopRampRate(1);
+		motor.configurePID(RobotMap.Pegasus.Shooter.ShooterMotor.pid);
 //
 		preparedToShoot = false;
 	}
@@ -44,6 +46,7 @@ public class Shooter extends GBSubsystem {
 	 * @param target the target speed in rpm
 	 */
 	public void setSpeedByPID(double target) {
+		System.out.println(target);
 		motor.setTargetSpeedByPID(target);
 	}
 
@@ -52,7 +55,7 @@ public class Shooter extends GBSubsystem {
 	}
 
 	public double getShooterSpeed() {
-		return motor.getNormalizedVelocity();
+		return motor.getRawVelocity();
 	}
 
 	public void resetEncoder() {
@@ -66,6 +69,8 @@ public class Shooter extends GBSubsystem {
 	public void setPreparedToShoot(boolean preparedToShoot) {
 		this.preparedToShoot = preparedToShoot;
 	}
+
+
 
 
 }
