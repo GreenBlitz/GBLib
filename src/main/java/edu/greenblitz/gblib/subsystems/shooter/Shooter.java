@@ -47,7 +47,7 @@ public class Shooter extends GBSubsystem {
 	 */
 	public void setSpeedByPID(double target) {
 		System.out.println(target);
-		motor.setTargetSpeedByPID(target/*,RobotMap.Pegasus.Shooter.ShooterMotor.feedforward.calculate(target)*/);
+		motor.setTargetSpeedByPID(target,RobotMap.Pegasus.Shooter.ShooterMotor.feedforward.calculate(target));
 	}
 
 	public void setPIDConsts(PIDObject obj) {
