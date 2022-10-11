@@ -42,6 +42,9 @@ public class SwerveModule {
 	}
 
 	public double getLampreyAngle() { // in radians;
+		int val = lamprey.getValue();
+		if(val < minLampreyVal) minLampreyVal = val;
+		if(val > maxLampreyVal) maxLampreyVal = val;
 		return (lamprey.getValue() - minLampreyVal) / (maxLampreyVal - minLampreyVal) * Math.PI * 2;
 	}
 
