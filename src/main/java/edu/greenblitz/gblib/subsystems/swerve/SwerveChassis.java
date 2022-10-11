@@ -8,17 +8,19 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.*;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SwerveChassis extends GBSubsystem {
-
+	
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
 	//	private final PigeonGyro pigeonGyro;
 	private PigeonIMU pigeonIMU;
 	private SwerveDriveOdometry localizer;
-
+	
 	public double pigeonAngleOffset = 0.0;
-
+	static final double blueAllianceOffset = (DriverStation.getAlliance() == DriverStation.Alliance.Blue) ? Math.PI : 0;
+	
 
 
 
@@ -33,6 +35,7 @@ public class SwerveChassis extends GBSubsystem {
 	}
 
 	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates, Pose2d initialPose) {
+		
 		this.frontRight = frontRight;
 		this.frontLeft = frontLeft;
 
@@ -122,9 +125,17 @@ public class SwerveChassis extends GBSubsystem {
 		getModule(Module.BACK_RIGHT).configAnglePID(pidObjectAng);
 		getModule(Module.BACK_RIGHT).configLinPID(pidObjectLin);
 	}
-
-	public void resetAllEncoders() {
-
+	
+	
+	public void resetAllEncodersByValues() {
+		getModule(Module.FRONT_LEFT).resetEncoderByValue(Math.PI);
+		getModule(Module.FRONT_RIGHT).resetEncoderByValue(0);
+		getModule(Module.BACK_LEFT).resetEncoderByValue(0);
+		getModule(Module.BACK_RIGHT).resetEncoderByValue(Math.PI);
+	}
+	
+	
+	public void resetAllEncodersByLamprey() {
 		getModule(Module.FRONT_LEFT).resetEncoderByLamprey();
 		getModule(Module.FRONT_RIGHT).resetEncoderByLamprey();
 		getModule(Module.BACK_LEFT).resetEncoderByLamprey();
@@ -174,7 +185,7 @@ public class SwerveChassis extends GBSubsystem {
 	}
 
 	public double getChassisAngle() {
-		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset, 2 * Math.PI);
+		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset - blueAllianceOffset, 2 * Math.PI);
 	}
 
 	public double getTarget(Module module) {
@@ -243,4 +254,7 @@ public class SwerveChassis extends GBSubsystem {
 	}
 	public void resetLocalizer(){localizer.resetPosition(new Pose2d(),new Rotation2d());}
 	
+	public PigeonIMU getPigeonIMU() {
+		return pigeonIMU;
+	}
 }

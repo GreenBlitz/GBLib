@@ -82,6 +82,10 @@ public class SwerveModule {
 	public void resetEncoderByLamprey() {
 		angleMotor.setEncoderAng(getLampreyAngle());
 	}
+	
+	public void resetEncoderByValue(double angle) {
+		angleMotor.setEncoderAng(angle);
+	}
 
 	public void configLinPID(PIDObject pidObject) {
 		linearMotor.configurePID(pidObject);
