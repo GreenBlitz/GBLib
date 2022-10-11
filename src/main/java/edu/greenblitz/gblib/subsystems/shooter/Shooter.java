@@ -10,6 +10,7 @@ import edu.greenblitz.pegasus.RobotMap;
 public class Shooter extends GBSubsystem {
 
 	private final static double RPM = 3000;
+	private int flipped = 1;
 	private final GBMotor motor;
 	private boolean preparedToShoot;
 	private boolean isShooter;
@@ -47,7 +48,7 @@ public class Shooter extends GBSubsystem {
 	 */
 	public void setSpeedByPID(double target) {
 		System.out.println(target);
-		motor.setTargetSpeedByPID(target,RobotMap.Pegasus.Shooter.ShooterMotor.feedforward.calculate(target));
+		motor.setTargetSpeedByPID(target * flipped,RobotMap.Pegasus.Shooter.ShooterMotor.feedforward.calculate(target));
 	}
 
 	public void setPIDConsts(PIDObject obj) {
@@ -70,7 +71,13 @@ public class Shooter extends GBSubsystem {
 		this.preparedToShoot = preparedToShoot;
 	}
 
+	public void flip() {
+		this.flipped *= -1;
+	}
 
+	public int getFlipped() {
+		return this.flipped;
+	}
 
 
 }

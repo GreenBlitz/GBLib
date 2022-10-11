@@ -1,5 +1,6 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.angles;
 
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.shooter.Shooter;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils.GBMath;
 
 public class DualSidedAngTarget {
@@ -8,7 +9,7 @@ public class DualSidedAngTarget {
 	private int direction;
 
 	private DualSidedAngTarget(double target, double start, int direction) {
-		this.target = target;
+		this.target = target * Shooter.getInstance().getFlipped();
 		this.start = start;
 		this.direction = direction;
 	}
