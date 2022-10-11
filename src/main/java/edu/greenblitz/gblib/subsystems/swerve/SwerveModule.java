@@ -134,5 +134,9 @@ public class SwerveModule {
 		return lamprey.getValue();
 	}
 
+	public double getAngMotorTicks(){
+		return this.angleMotor.getRawTicks();
+	}
+
 
 }

@@ -11,6 +11,8 @@ import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import javax.swing.plaf.PanelUI;
+
 public class SwerveChassis extends GBSubsystem {
 	
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
@@ -272,5 +274,8 @@ public class SwerveChassis extends GBSubsystem {
 	
 	public PigeonIMU getPigeonIMU() {
 		return pigeonIMU;
+	}
+	public double getAngMotorTicks (Module m){
+		return this.getModule(m).getAngMotorTicks();
 	}
 }
