@@ -4,11 +4,10 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.GBSubsystem;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils.GBMath;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SwerveChassis extends GBSubsystem {
@@ -16,10 +15,14 @@ public class SwerveChassis extends GBSubsystem {
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
 	//	private final PigeonGyro pigeonGyro;
 	private PigeonIMU pigeonIMU;
+	private SwerveDriveOdometry localizer;
+
 	public double pigeonAngleOffset = 0.0;
 
 
-	SwerveDriveKinematics kinematics;
+
+
+	private SwerveDriveKinematics kinematics;
 
 
 	public enum Module {
@@ -29,7 +32,7 @@ public class SwerveChassis extends GBSubsystem {
 		BACK_LEFT
 	}
 
-	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates) {
+	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates, Pose2d initialPose) {
 		this.frontRight = frontRight;
 		this.frontLeft = frontLeft;
 
@@ -40,21 +43,32 @@ public class SwerveChassis extends GBSubsystem {
 		this.kinematics = new SwerveDriveKinematics(
 				swerveLocationsInSwerveKinematicsCoordinates
 		);
-
+		this.localizer = new SwerveDriveOdometry(
+				this.kinematics,
+				new Rotation2d(this.getChassisAngle()),
+				initialPose
+		);
 	}
 
 
 	private static SwerveChassis instance;
 
 
-	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates) {
-		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonIMU, swerveLocationsInSwerveKinematicsCoordinates);
+	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates, Pose2d initialPose) {
+		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonIMU, swerveLocationsInSwerveKinematicsCoordinates, initialPose);
 	}
 
 	public static SwerveChassis getInstance() {
 		return instance;
 	}
-
+	
+	@Override
+	public void periodic() {
+		localizer.update(new Rotation2d(getChassisAngle()),
+				frontLeft.getModuleState(), frontRight.getModuleState(),
+				backLeft.getModuleState(), backRight.getModuleState());
+	}
+	
 	/**
 	 * @return returns the swerve module based on its name
 	 */
@@ -187,6 +201,18 @@ public class SwerveChassis extends GBSubsystem {
 		moveSingleModule(Module.BACK_LEFT, backLeft);
 	}
 
+	public void setModuleStates(SwerveModuleState[] states){
+		moveSingleModule(Module.FRONT_RIGHT, states[0]);
+		moveSingleModule(Module.FRONT_LEFT, states[1]);
+		moveSingleModule(Module.BACK_RIGHT, states[2]);
+		moveSingleModule(Module.BACK_LEFT, states[3]);
+		
+		SmartDashboard.putNumber("FR-lin-vel", states[0].speedMetersPerSecond);
+		SmartDashboard.putNumber("FL-lin-vel", states[1].speedMetersPerSecond);
+		SmartDashboard.putNumber("BR-lin-vel", states[2].speedMetersPerSecond);
+		SmartDashboard.putNumber("BL-lin-vel", states[3].speedMetersPerSecond);
+	}
+	
 	public void MoveByChassisSpeeds(double ForwardSpeed, double RightwardSpeed, double AngSpeed, double CurrentAng) {
 		ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
 				ForwardSpeed,
@@ -194,16 +220,27 @@ public class SwerveChassis extends GBSubsystem {
 				AngSpeed,
 				Rotation2d.fromDegrees(Math.toDegrees(CurrentAng)));
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-		moveSingleModule(Module.FRONT_RIGHT, states[0]);
-		moveSingleModule(Module.FRONT_LEFT, states[1]);
-		moveSingleModule(Module.BACK_RIGHT, states[2]);
-		moveSingleModule(Module.BACK_LEFT, states[3]);
-
-		SmartDashboard.putNumber("FR-lin-vel", states[0].speedMetersPerSecond);
-		SmartDashboard.putNumber("FL-lin-vel", states[1].speedMetersPerSecond);
-		SmartDashboard.putNumber("BR-lin-vel", states[2].speedMetersPerSecond);
-		SmartDashboard.putNumber("BL-lin-vel", states[3].speedMetersPerSecond);
+		setModuleStates(states);
+//		moveSingleModule(Module.FRONT_RIGHT, states[0]);
+//		moveSingleModule(Module.FRONT_LEFT, states[1]);
+//		moveSingleModule(Module.BACK_RIGHT, states[2]);
+//		moveSingleModule(Module.BACK_LEFT, states[3]);
+//
+//		SmartDashboard.putNumber("FR-lin-vel", states[0].speedMetersPerSecond);
+//		SmartDashboard.putNumber("FL-lin-vel", states[1].speedMetersPerSecond);
+//		SmartDashboard.putNumber("BR-lin-vel", states[2].speedMetersPerSecond);
+//		SmartDashboard.putNumber("BL-lin-vel", states[3].speedMetersPerSecond);
 	}
-
-
+	
+	public SwerveDriveKinematics getKinematics(){
+		return this.kinematics;
+	}
+	public SwerveDriveOdometry getLocalizer (){
+		return this.localizer;
+	}
+	public Pose2d getLocation(){
+		return this.localizer.getPoseMeters();
+	}
+	public void resetLocalizer(){localizer.resetPosition(new Pose2d(),new Rotation2d());}
+	
 }
