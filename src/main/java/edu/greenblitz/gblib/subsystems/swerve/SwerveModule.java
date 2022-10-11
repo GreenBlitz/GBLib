@@ -86,6 +86,10 @@ public class SwerveModule {
 	public void resetEncoderByValue(double angle) {
 		angleMotor.setEncoderAng(angle);
 	}
+	
+	public void resetEncoderToZero(){
+		angleMotor.setEncoderAng(0);
+	}
 
 	public void configLinPID(PIDObject pidObject) {
 		linearMotor.configurePID(pidObject);
@@ -124,6 +128,10 @@ public class SwerveModule {
 	
 	public SwerveModuleState getModuleState (){
 		return new SwerveModuleState(getCurrentVel(),new Rotation2d(this.getMotorAngle()));
+	}
+	
+	public double getLampreyValue(){
+		return lamprey.getValue();
 	}
 
 

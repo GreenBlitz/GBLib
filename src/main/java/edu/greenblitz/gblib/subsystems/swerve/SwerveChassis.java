@@ -95,7 +95,7 @@ public class SwerveChassis extends GBSubsystem {
 	public void rotateModuleByPower(Module module, double power) {
 		getModule(module).setRotPower(power);
 	}
-
+	
 	@Deprecated
 	public void brakeModules(Module... modules) {
 		for (Module module : modules) {
@@ -142,7 +142,17 @@ public class SwerveChassis extends GBSubsystem {
 		getModule(Module.BACK_RIGHT).resetEncoderByLamprey();
 
 	}
-
+	
+	public void resetAllEncodersToZero() {
+		getModule(Module.FRONT_LEFT).resetEncoderToZero();
+		getModule(Module.FRONT_RIGHT).resetEncoderToZero();
+		getModule(Module.BACK_LEFT).resetEncoderToZero();
+		getModule(Module.BACK_RIGHT).resetEncoderToZero();
+	}
+	
+	public void resetModuleToZero(Module module){
+		getModule(module).resetEncoderToZero();
+	}
 	/**
 	 * all code below is self-explanatory
 	 * <p>
@@ -174,6 +184,10 @@ public class SwerveChassis extends GBSubsystem {
 
 	public double getLampreyAngle(Module module) {
 		return getModule(module).getLampreyAngle();
+	}
+	
+	public double getLampreyValue(Module module) {
+		return getModule(module).getLampreyValue();
 	}
 
 	public double getModuleAngle(Module module) {
