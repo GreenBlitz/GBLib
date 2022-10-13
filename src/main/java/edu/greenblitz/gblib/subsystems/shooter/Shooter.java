@@ -47,7 +47,7 @@ public class Shooter extends GBSubsystem {
 	 * @param target the target speed in rpm
 	 */
 	public void setSpeedByPID(double target) {
-		System.out.println(target);
+//		System.out.println(target);
 		motor.setTargetSpeedByPID(target * flipped,RobotMap.Pegasus.Shooter.ShooterMotor.feedforward.calculate(target));
 	}
 
