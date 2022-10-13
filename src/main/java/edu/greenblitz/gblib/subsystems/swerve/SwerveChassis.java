@@ -197,10 +197,14 @@ public class SwerveChassis extends GBSubsystem {
 	}
 
 	public void resetChassisAngle(double angInDeegres) {
-//		pigeonAngleOffset = getChassisAngle();
+
 		pigeonIMU.setYaw(angInDeegres);
 	}
-	
+
+	public void resetChassisAngle(){
+		pigeonAngleOffset += getChassisAngle();
+	}
+
 
 	public double getChassisAngle() {
 		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset - blueAllianceOffset, 2 * Math.PI);
