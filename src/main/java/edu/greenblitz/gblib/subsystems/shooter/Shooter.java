@@ -13,7 +13,7 @@ public class Shooter extends GBSubsystem {
 	private int flipped = 1;
 	private final GBMotor motor;
 	private boolean preparedToShoot;
-	private boolean isShooter;
+	private boolean isShooter; //todo
 
 	private static Shooter instance;
 
@@ -63,7 +63,7 @@ public class Shooter extends GBSubsystem {
 		motor.resetEncoder();
 	}
 
-	public boolean isPreparedToShoot() {
+	public boolean isPreparedToShoot() { //todo make this shooter independent
 		return preparedToShoot;
 	}
 

@@ -17,11 +17,12 @@ public class SwerveChassis extends GBSubsystem {
 	
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
 	//	private final PigeonGyro pigeonGyro;
-	private PigeonIMU pigeonIMU;
+	private PigeonIMU pigeonIMU; //todo decide on whether to use our pijen;
 	private SwerveDriveOdometry localizer;
 	
 	public double pigeonAngleOffset = 0.0;
 	static final double blueAllianceOffset = (DriverStation.getAlliance() == DriverStation.Alliance.Blue) ? Math.PI : 0;
+	//todo make not exist
 	
 
 
@@ -130,7 +131,7 @@ public class SwerveChassis extends GBSubsystem {
 	
 	
 	public void resetAllEncodersByValues() {
-		getModule(Module.FRONT_LEFT).resetEncoderByValue(Math.PI);
+		getModule(Module.FRONT_LEFT).resetEncoderByValue(Math.PI); //todo MAGIC numbers
 		getModule(Module.FRONT_RIGHT).resetEncoderByValue(0);
 		getModule(Module.BACK_LEFT).resetEncoderByValue(0);
 		getModule(Module.BACK_RIGHT).resetEncoderByValue(Math.PI);
@@ -161,7 +162,7 @@ public class SwerveChassis extends GBSubsystem {
 	 * ALL IN RADIANS, NOT DEGREES
 	 */
 	public void moveSingleModule(Module module, double radians, double speed) {
-		if (getModule(module) != null) { //IntelliJ is being dumb here, this should fix it - nitzan.b
+		if (getModule(module) != null) { //IntelliJ is being dumb here, this should fix it - nitzan.b todo ignore intellij
 			getModule(module).rotateToAngle(radians);
 			getModule(module).setLinSpeed(speed);
 		}
@@ -196,7 +197,7 @@ public class SwerveChassis extends GBSubsystem {
 		return getModule(module).getMotorAngle();
 	}
 
-	public void resetChassisAngle(double angInDeegres) {
+	public void resetChassisAngle(double angInDeegres) {//todo make with our reset
 
 		pigeonIMU.setYaw(angInDeegres);
 	}
@@ -208,14 +209,14 @@ public class SwerveChassis extends GBSubsystem {
 
 	public double getChassisAngle() {
 		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset - blueAllianceOffset, 2 * Math.PI);
-	}
+	}//todo delete blue offset;
 
-	public double getTarget(Module module) {
+	public double getTarget(Module module) {//todo make more informative name
 		return getModule(module).getTargetAngle();
 
 	}
 
-	public void holonomicDrive(ChassisSpeeds speeds) {
+	public void holonomicDrive(ChassisSpeeds speeds) {//todo deprecated?
 
 
 		SwerveModuleState[] moduleStates = kinematics.toSwerveModuleStates(speeds);
@@ -254,15 +255,6 @@ public class SwerveChassis extends GBSubsystem {
 				Rotation2d.fromDegrees(Math.toDegrees(CurrentAng)));
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		setModuleStates(states);
-//		moveSingleModule(Module.FRONT_RIGHT, states[0]);
-//		moveSingleModule(Module.FRONT_LEFT, states[1]);
-//		moveSingleModule(Module.BACK_RIGHT, states[2]);
-//		moveSingleModule(Module.BACK_LEFT, states[3]);
-//
-//		SmartDashboard.putNumber("FR-lin-vel", states[0].speedMetersPerSecond);
-//		SmartDashboard.putNumber("FL-lin-vel", states[1].speedMetersPerSecond);
-//		SmartDashboard.putNumber("BR-lin-vel", states[2].speedMetersPerSecond);
-//		SmartDashboard.putNumber("BL-lin-vel", states[3].speedMetersPerSecond);
 	}
 	
 	public SwerveDriveKinematics getKinematics(){

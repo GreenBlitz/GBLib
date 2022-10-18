@@ -49,15 +49,11 @@ public class SwerveModule {
 	}
 
 	public void rotateToAngle(double angle) {
-		//TODO: Make good PID.
-		//DualSidedAngTarget dualSidedAngTarget = DualSidedAngTarget.generateTarget(angle, GBMath.modulo(getMotorAngle(), 2 * Math.PI));
-		//angle = dualSidedAngTarget.getTarget();
 
 		double diff = GBMath.modulo(angle - getMotorAngle(), 2 * Math.PI);
 		diff -= diff > Math.PI ? 2*Math.PI : 0;
 		angle = getMotorAngle() + diff;
 
-		//isReversed = dualSidedAngTarget.getDirection();
 		angleMotor.setTargetByPID(angle, AbstractMotor.PIDTarget.Position);
 		targetAngle = angle;
 	}
@@ -88,7 +84,7 @@ public class SwerveModule {
 	
 	public void resetEncoderByValue(double angle) {
 		angleMotor.setEncoderAng(angle);
-	}
+	} //todo combine both into same overload
 	
 	public void resetEncoderToZero(){
 		angleMotor.setEncoderAng(0);
