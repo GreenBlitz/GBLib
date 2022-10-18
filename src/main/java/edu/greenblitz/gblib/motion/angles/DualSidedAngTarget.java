@@ -9,7 +9,7 @@ public class DualSidedAngTarget {
 	private int direction;
 
 	private DualSidedAngTarget(double target, double start, int direction) {
-		this.target = target * Shooter.getInstance().getFlipped();
+		this.target = target;
 		this.start = start;
 		this.direction = direction;
 	}

@@ -79,11 +79,13 @@ public class GBTalonFX extends AbstractMotor {
 
 	@Override
 	public void setTargetSpeedByPID(double target) {
+		target *= getTicksToWheelRPM();
 		motor.set(TalonFXControlMode.Velocity, target);
 	}
 
 	@Override
 	public void setTargetSpeedByPID(double target, double voltageFF) {
+		target *= getTicksToWheelRPM();
 		motor.set(ControlMode.Velocity, target, DemandType.ArbitraryFeedForward, voltageFF / RobotController.getBatteryVoltage());
 	}
 
@@ -124,4 +126,5 @@ public class GBTalonFX extends AbstractMotor {
 		motor.setSelectedSensorPosition(angle*getTicksToRadians());
 
 	}
+
 }

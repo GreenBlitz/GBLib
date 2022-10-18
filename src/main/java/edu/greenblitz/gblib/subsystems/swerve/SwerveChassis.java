@@ -8,10 +8,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.*;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import javax.swing.plaf.PanelUI;
 
 public class SwerveChassis extends GBSubsystem {
 	
@@ -21,8 +18,6 @@ public class SwerveChassis extends GBSubsystem {
 	private SwerveDriveOdometry localizer;
 	
 	public double pigeonAngleOffset = 0.0;
-	static final double blueAllianceOffset = (DriverStation.getAlliance() == DriverStation.Alliance.Blue) ? Math.PI : 0;
-	//todo make not exist
 	
 
 
@@ -98,14 +93,7 @@ public class SwerveChassis extends GBSubsystem {
 	public void rotateModuleByPower(Module module, double power) {
 		getModule(module).setRotPower(power);
 	}
-	
-	@Deprecated
-	public void brakeModules(Module... modules) {
-		for (Module module : modules) {
-			getModule(module).setLinPower(0);
-			getModule(module).setRotPower(0);
-		}
-	}
+
 
 	public void stop() {
 		frontRight.setLinPower(0);
@@ -131,10 +119,10 @@ public class SwerveChassis extends GBSubsystem {
 	
 	
 	public void resetAllEncodersByValues() {
-		getModule(Module.FRONT_LEFT).resetEncoderByValue(Math.PI); //todo MAGIC numbers
-		getModule(Module.FRONT_RIGHT).resetEncoderByValue(0);
-		getModule(Module.BACK_LEFT).resetEncoderByValue(0);
-		getModule(Module.BACK_RIGHT).resetEncoderByValue(Math.PI);
+		getModule(Module.FRONT_LEFT).resetEncoder(Math.PI); //todo MAGIC numbers
+		getModule(Module.FRONT_RIGHT).resetEncoder(0);
+		getModule(Module.BACK_LEFT).resetEncoder(0);
+		getModule(Module.BACK_RIGHT).resetEncoder(Math.PI);
 	}
 	
 	
@@ -147,14 +135,14 @@ public class SwerveChassis extends GBSubsystem {
 	}
 	
 	public void resetAllEncodersToZero() {
-		getModule(Module.FRONT_LEFT).resetEncoderToZero();
-		getModule(Module.FRONT_RIGHT).resetEncoderToZero();
-		getModule(Module.BACK_LEFT).resetEncoderToZero();
-		getModule(Module.BACK_RIGHT).resetEncoderToZero();
+		getModule(Module.FRONT_LEFT).resetEncoder();
+		getModule(Module.FRONT_RIGHT).resetEncoder();
+		getModule(Module.BACK_LEFT).resetEncoder();
+		getModule(Module.BACK_RIGHT).resetEncoder();
 	}
 	
 	public void resetModuleToZero(Module module){
-		getModule(module).resetEncoderToZero();
+		getModule(module).resetEncoder();
 	}
 	/**
 	 * all code below is self-explanatory
@@ -162,10 +150,8 @@ public class SwerveChassis extends GBSubsystem {
 	 * ALL IN RADIANS, NOT DEGREES
 	 */
 	public void moveSingleModule(Module module, double radians, double speed) {
-		if (getModule(module) != null) { //IntelliJ is being dumb here, this should fix it - nitzan.b todo ignore intellij
 			getModule(module).rotateToAngle(radians);
 			getModule(module).setLinSpeed(speed);
-		}
 	}
 
 	public void moveSingleModule(Module module, SwerveModuleState state) {
@@ -208,31 +194,12 @@ public class SwerveChassis extends GBSubsystem {
 
 
 	public double getChassisAngle() {
-		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset - blueAllianceOffset, 2 * Math.PI);
-	}//todo delete blue offset;
-
-	public double getTarget(Module module) {//todo make more informative name
-		return getModule(module).getTargetAngle();
-
+		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset, 2 * Math.PI);
 	}
 
-	public void holonomicDrive(ChassisSpeeds speeds) {//todo deprecated?
+	public double getModuleAngTarget(Module module) {
+		return getModule(module).getTargetAngle();
 
-
-		SwerveModuleState[] moduleStates = kinematics.toSwerveModuleStates(speeds);
-
-
-		SwerveModuleState frontRight = moduleStates[0];
-		moveSingleModule(Module.FRONT_RIGHT, frontRight);
-
-		SwerveModuleState frontLeft = moduleStates[1];
-		moveSingleModule(Module.FRONT_LEFT, frontLeft);
-
-		SwerveModuleState backRight = moduleStates[2];
-		moveSingleModule(Module.BACK_RIGHT, backRight);
-
-		SwerveModuleState backLeft = moduleStates[3];
-		moveSingleModule(Module.BACK_LEFT, backLeft);
 	}
 
 	public void setModuleStates(SwerveModuleState[] states){

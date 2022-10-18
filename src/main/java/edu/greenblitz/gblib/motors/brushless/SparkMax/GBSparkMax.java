@@ -76,11 +76,13 @@ public class GBSparkMax extends AbstractMotor {
 
 	@Override
 	public void setTargetSpeedByPID(double target) {
+		target *= getTicksToWheelRPM();
 		motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity);
 	}
 
 	@Override
 	public void setTargetSpeedByPID(double target, double voltageFF) {
+		target *= getTicksToWheelRPM();
 		motor.getPIDController().setReference(target, CANSparkMax.ControlType.kVelocity, 0, voltageFF, SparkMaxPIDController.ArbFFUnits.kVoltage);
 	}
 
@@ -107,7 +109,7 @@ public class GBSparkMax extends AbstractMotor {
 		}
 	}
 
-	public void setVoltageCompensation(int voltageCompensation) {
+	public void setVoltageCompensation(double voltageCompensation) {
 		if (voltageCompensation != 0) {
 			motor.enableVoltageCompensation(voltageCompensation);
 		} else {
@@ -123,5 +125,6 @@ public class GBSparkMax extends AbstractMotor {
 	public void setEncoderAng(double angle){
 		encoder.setPosition(angle*getTicksToRadians());
 	}
+
 
 }

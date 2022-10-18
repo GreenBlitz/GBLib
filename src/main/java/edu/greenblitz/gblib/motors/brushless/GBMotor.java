@@ -56,4 +56,5 @@ public interface GBMotor extends GBBrushedMotor {
 	void resetEncoder();
 
 	void setEncoderAng(double angle);
+
 }

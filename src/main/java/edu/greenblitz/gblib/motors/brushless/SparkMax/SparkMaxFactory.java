@@ -6,7 +6,7 @@ import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.
 
 public class SparkMaxFactory implements IMotorFactory {
 	private int currentLimit = 0;
-	private int voltageCompensation = 0;
+	private double voltageCompensation = 0;
 	private double rampRate = 0;
 	private boolean inverted = false;
 	private AbstractMotor.IdleMode idleMode = AbstractMotor.IdleMode.Brake;
@@ -32,7 +32,7 @@ public class SparkMaxFactory implements IMotorFactory {
 		return this;
 	}
 
-	public SparkMaxFactory withVoltageCompensation(int voltageCompensation) {
+	public SparkMaxFactory withVoltageCompensation(double voltageCompensation) {
 		this.voltageCompensation = voltageCompensation;
 		return this;
 	}

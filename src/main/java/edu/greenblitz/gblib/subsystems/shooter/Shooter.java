@@ -6,23 +6,19 @@ import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.GBMotor;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.GBSubsystem;
 import edu.greenblitz.pegasus.RobotMap;
+import edu.greenblitz.pegasus.commands.shooter.ShooterCommand;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Shooter extends GBSubsystem {
 
 	private final static double RPM = 3000;
-	private int flipped = 1;
 	private final GBMotor motor;
-	private boolean preparedToShoot;
-	private boolean isShooter; //todo
 
 	private static Shooter instance;
 
 	private Shooter(IMotorFactory motorFactory, int id) {
 		this.motor = motorFactory.generate(id);
-//		//leader.setClosedLoopRampRate(1);
 		motor.configurePID(RobotMap.Pegasus.Shooter.ShooterMotor.pid);
-//
-		preparedToShoot = false;
 	}
 
 	public static void create(IMotorFactory motorFactory, int id){
@@ -48,7 +44,7 @@ public class Shooter extends GBSubsystem {
 	 */
 	public void setSpeedByPID(double target) {
 //		System.out.println(target);
-		motor.setTargetSpeedByPID(target * flipped,RobotMap.Pegasus.Shooter.ShooterMotor.feedforward.calculate(target));
+		motor.setTargetSpeedByPID(target,RobotMap.Pegasus.Shooter.ShooterMotor.feedforward.calculate(target));
 	}
 
 	public void setPIDConsts(PIDObject obj) {
@@ -63,21 +59,10 @@ public class Shooter extends GBSubsystem {
 		motor.resetEncoder();
 	}
 
-	public boolean isPreparedToShoot() { //todo make this shooter independent
-		return preparedToShoot;
+	public boolean isPreparedToShoot(){
+		return ((ShooterCommand) getCurrentCommand()).isPreparedToShoot();
 	}
 
-	public void setPreparedToShoot(boolean preparedToShoot) {
-		this.preparedToShoot = preparedToShoot;
-	}
-
-	public void flip() {
-		this.flipped *= -1;
-	}
-
-	public int getFlipped() {
-		return this.flipped;
-	}
 
 
 }
