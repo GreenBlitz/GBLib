@@ -17,8 +17,8 @@ public class SwerveChassis extends GBSubsystem {
 	
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
 	//	private final PigeonGyro pigeonGyro;
-	private PigeonIMU pigeonIMU; //todo decide on whether to use our pijen;
-	private SwerveDriveOdometry localizer;
+	private final PigeonIMU pigeonIMU; //todo decide on whether to use our pijen;
+	private final SwerveDriveOdometry localizer;
 	
 	public double pigeonAngleOffset = 0.0;
 	static final double blueAllianceOffset = (DriverStation.getAlliance() == DriverStation.Alliance.Blue) ? Math.PI : 0;
@@ -27,7 +27,7 @@ public class SwerveChassis extends GBSubsystem {
 
 
 
-	private SwerveDriveKinematics kinematics;
+	private final SwerveDriveKinematics kinematics;
 
 
 	public enum Module {
@@ -180,6 +180,9 @@ public class SwerveChassis extends GBSubsystem {
 		moveSingleModule(Module.BACK_LEFT, angle, speed);
 	}
 
+	public void moveByAngle(double angle, SwerveModule module){
+
+	}
 
 	public double getRawLampreyAngle(Module module) {
 		return getModule(module).getRawLampreyAngle();
@@ -236,10 +239,15 @@ public class SwerveChassis extends GBSubsystem {
 	}
 
 	public void setModuleStates(SwerveModuleState[] states){
-		moveSingleModule(Module.FRONT_RIGHT, states[0]);
-		moveSingleModule(Module.FRONT_LEFT, states[1]);
-		moveSingleModule(Module.BACK_RIGHT, states[2]);
-		moveSingleModule(Module.BACK_LEFT, states[3]);
+		new SwerveModuleState();
+		moveSingleModule(Module.FRONT_RIGHT,
+				SwerveModuleState.optimize(states[0],new Rotation2d(getModuleAngle(Module.FRONT_RIGHT))));
+		moveSingleModule(Module.FRONT_LEFT,
+				SwerveModuleState.optimize(states[1],new Rotation2d(getModuleAngle(Module.FRONT_LEFT))));
+		moveSingleModule(Module.BACK_RIGHT,
+				SwerveModuleState.optimize(states[2],new Rotation2d(getModuleAngle(Module.BACK_RIGHT))));
+		moveSingleModule(Module.BACK_LEFT,
+				SwerveModuleState.optimize(states[3],new Rotation2d(getModuleAngle(Module.BACK_LEFT))));
 		
 		SmartDashboard.putNumber("FR-lin-vel", states[0].speedMetersPerSecond);
 		SmartDashboard.putNumber("FL-lin-vel", states[1].speedMetersPerSecond);
