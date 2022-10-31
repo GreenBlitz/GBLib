@@ -1,42 +1,57 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.gyro;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils.GBMath;
 
-public class PigeonGyro extends AbstractGyro {
+public class PigeonGyro extends PigeonIMU {
+	//fixme noam - reminder for myself. if pigeon not working problem is prob here;
 
-	private final PigeonIMU bird;
-
-	public PigeonGyro(PigeonIMU bird) {
-		this.bird = bird;
+	public PigeonGyro (int id){
+		super(id);
 	}
 
-	@Override
-	public double getRawYaw() {
-//		double[] vals = new double[3];
-//		bird.getYawPitchRoll(vals);
-//		return Math.toRadians(vals[0]) * inverted;
-		return Math.toRadians(bird.getYaw()) * inverted;
+	double yawOffset = 0.0;
+	double pitchOffset = 0.0;
+	double rollOffset = 0.0;
+
+
+	/**
+	 * the offset sets himself the current angle + the offset
+	 * because idk but we do it like this
+	 * */
+
+	public void setYawOffset (double offset){
+		yawOffset += offset;
+	}
+
+	public void setPitchOffset (double offset){
+		pitchOffset += offset;
+	}
+
+	public void setRollOffset (double offset){
+		rollOffset += offset;
 	}
 
 
-	@Override
-	public double getYawRate() {
-		double[] vals = new double[3];
-		bird.getRawGyro(vals);
-		return Math.toRadians(vals[0]);
+	public void resetYawAngle(double angInDeegres) {//todo make with our reset
+
+		yawOffset += angInDeegres;
+		super.setYaw(angInDeegres);
 	}
 
-	@Override
-	public double getNormalizedYaw() {
-		return super.getNormalizedYaw();
+
+	public double getYawAngle(){
+		return GBMath.modulo(Math.toRadians(super.getYaw()) - yawOffset, 2 * Math.PI);
 	}
 
-	@Override
-	public void reset() {
-		bird.setYaw(0);
+	public double getPitchAngle(){
+		return GBMath.modulo(Math.toRadians(super.getYaw()) - pitchOffset, 2 * Math.PI);
 	}
 
-	public PigeonIMU getPigeon() {
-		return bird;
+	public double getRollAngle(){
+		return GBMath.modulo(Math.toRadians(super.getYaw()) - rollOffset, 2 * Math.PI);
 	}
+
+
+
 }

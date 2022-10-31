@@ -1,6 +1,7 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.swerve;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
+import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.gyro.PigeonGyro;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.GBSubsystem;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils.GBMath;
@@ -17,11 +18,10 @@ public class SwerveChassis extends GBSubsystem {
 	
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
 	//	private final PigeonGyro pigeonGyro;
-	private final PigeonIMU pigeonIMU; //todo decide on whether to use our pijen;
+	private final PigeonGyro pigeonIMU; //todo decide on whether to use our pijen;
 	private final SwerveDriveOdometry localizer;
 	
 	public double pigeonAngleOffset = 0.0;
-	static final double blueAllianceOffset = (DriverStation.getAlliance() == DriverStation.Alliance.Blue) ? Math.PI : 0;
 	//todo make not exist
 	
 
@@ -37,7 +37,7 @@ public class SwerveChassis extends GBSubsystem {
 		BACK_LEFT
 	}
 
-	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates, Pose2d initialPose) {
+	private SwerveChassis(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates, Pose2d initialPose) {
 		
 		this.frontRight = frontRight;
 		this.frontLeft = frontLeft;
@@ -45,7 +45,7 @@ public class SwerveChassis extends GBSubsystem {
 		this.backRight = backRight;
 		this.backLeft = backLeft;
 //		this.pigeonGyro = pigeonGyro;
-		this.pigeonIMU = pigeonIMU;
+		this.pigeonIMU = pigeonGyro;
 		this.kinematics = new SwerveDriveKinematics(
 				swerveLocationsInSwerveKinematicsCoordinates
 		);
@@ -60,8 +60,8 @@ public class SwerveChassis extends GBSubsystem {
 	private static SwerveChassis instance;
 
 
-	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonIMU pigeonIMU, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates, Pose2d initialPose) {
-		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonIMU, swerveLocationsInSwerveKinematicsCoordinates, initialPose);
+	public static void create(SwerveModule frontRight, SwerveModule frontLeft, SwerveModule backRight, SwerveModule backLeft, PigeonGyro pigeonGyro, Translation2d[] swerveLocationsInSwerveKinematicsCoordinates, Pose2d initialPose) {
+		instance = new SwerveChassis(frontRight, frontLeft, backRight, backLeft, pigeonGyro, swerveLocationsInSwerveKinematicsCoordinates, initialPose);
 	}
 
 	public static SwerveChassis getInstance() {
@@ -180,6 +180,8 @@ public class SwerveChassis extends GBSubsystem {
 		moveSingleModule(Module.BACK_LEFT, angle, speed);
 	}
 
+
+	@Deprecated
 	public void moveByAngle(double angle, SwerveModule module){
 
 	}
@@ -191,6 +193,7 @@ public class SwerveChassis extends GBSubsystem {
 	public double getLampreyAngle(Module module) {
 		return getModule(module).getLampreyAngle();
 	}
+
 	
 	public double getLampreyValue(Module module) {
 		return getModule(module).getLampreyValue();
@@ -211,42 +214,23 @@ public class SwerveChassis extends GBSubsystem {
 
 
 	public double getChassisAngle() {
-		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset - blueAllianceOffset, 2 * Math.PI);
-	}//todo delete blue offset;
+		return GBMath.modulo(Math.toRadians(pigeonIMU.getYaw()) - pigeonAngleOffset, 2 * Math.PI);
+	}
 
 	public double getTarget(Module module) {//todo make more informative name
 		return getModule(module).getTargetAngle();
 
 	}
 
-	public void holonomicDrive(ChassisSpeeds speeds) {//todo deprecated?
-
-
-		SwerveModuleState[] moduleStates = kinematics.toSwerveModuleStates(speeds);
-
-
-		SwerveModuleState frontRight = moduleStates[0];
-		moveSingleModule(Module.FRONT_RIGHT, frontRight);
-
-		SwerveModuleState frontLeft = moduleStates[1];
-		moveSingleModule(Module.FRONT_LEFT, frontLeft);
-
-		SwerveModuleState backRight = moduleStates[2];
-		moveSingleModule(Module.BACK_RIGHT, backRight);
-
-		SwerveModuleState backLeft = moduleStates[3];
-		moveSingleModule(Module.BACK_LEFT, backLeft);
-	}
-
 	public void setModuleStates(SwerveModuleState[] states){
 		new SwerveModuleState();
-		moveSingleModule(Module.FRONT_RIGHT,
-				SwerveModuleState.optimize(states[0],new Rotation2d(getModuleAngle(Module.FRONT_RIGHT))));
 		moveSingleModule(Module.FRONT_LEFT,
+				SwerveModuleState.optimize(states[0],new Rotation2d(getModuleAngle(Module.FRONT_RIGHT))));
+		moveSingleModule(Module.FRONT_RIGHT,
 				SwerveModuleState.optimize(states[1],new Rotation2d(getModuleAngle(Module.FRONT_LEFT))));
-		moveSingleModule(Module.BACK_RIGHT,
-				SwerveModuleState.optimize(states[2],new Rotation2d(getModuleAngle(Module.BACK_RIGHT))));
 		moveSingleModule(Module.BACK_LEFT,
+				SwerveModuleState.optimize(states[2],new Rotation2d(getModuleAngle(Module.BACK_RIGHT))));
+		moveSingleModule(Module.BACK_RIGHT,
 				SwerveModuleState.optimize(states[3],new Rotation2d(getModuleAngle(Module.BACK_LEFT))));
 		
 		SmartDashboard.putNumber("FR-lin-vel", states[0].speedMetersPerSecond);
