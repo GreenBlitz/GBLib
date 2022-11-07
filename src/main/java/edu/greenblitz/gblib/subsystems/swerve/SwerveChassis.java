@@ -12,8 +12,6 @@ import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import javax.swing.plaf.PanelUI;
-
 public class SwerveChassis extends GBSubsystem {
 	
 	private final SwerveModule frontRight, frontLeft, backRight, backLeft;
@@ -131,10 +129,10 @@ public class SwerveChassis extends GBSubsystem {
 	
 	
 	public void resetAllEncodersByValues() {
-		getModule(Module.FRONT_LEFT).resetEncoderByValue(Math.PI); //todo MAGIC numbers
+		getModule(Module.FRONT_LEFT).resetEncoderByValue(0); //todo MAGIC numbers
 		getModule(Module.FRONT_RIGHT).resetEncoderByValue(0);
 		getModule(Module.BACK_LEFT).resetEncoderByValue(0);
-		getModule(Module.BACK_RIGHT).resetEncoderByValue(Math.PI);
+		getModule(Module.BACK_RIGHT).resetEncoderByValue(0);
 	}
 	
 	
@@ -221,30 +219,30 @@ public class SwerveChassis extends GBSubsystem {
 		return getModule(module).getTargetAngle();
 
 	}
-
+	
 	public void setModuleStates(SwerveModuleState[] states){
-		new SwerveModuleState();
 		moveSingleModule(Module.FRONT_LEFT,
-				SwerveModuleState.optimize(states[0],new Rotation2d(getModuleAngle(Module.FRONT_RIGHT))));
+				SwerveModuleState.optimize(states[0],new Rotation2d(getModuleAngle(Module.FRONT_LEFT))));
 		moveSingleModule(Module.FRONT_RIGHT,
-				SwerveModuleState.optimize(states[1],new Rotation2d(getModuleAngle(Module.FRONT_LEFT))));
+				SwerveModuleState.optimize(states[1],new Rotation2d(getModuleAngle(Module.FRONT_RIGHT))));
 		moveSingleModule(Module.BACK_LEFT,
-				SwerveModuleState.optimize(states[2],new Rotation2d(getModuleAngle(Module.BACK_RIGHT))));
+				SwerveModuleState.optimize(states[2],new Rotation2d(getModuleAngle(Module.BACK_LEFT))));
 		moveSingleModule(Module.BACK_RIGHT,
-				SwerveModuleState.optimize(states[3],new Rotation2d(getModuleAngle(Module.BACK_LEFT))));
+				SwerveModuleState.optimize(states[3],new Rotation2d(getModuleAngle(Module.BACK_RIGHT))));
 		
-		SmartDashboard.putNumber("FR-lin-vel", states[0].speedMetersPerSecond);
-		SmartDashboard.putNumber("FL-lin-vel", states[1].speedMetersPerSecond);
-		SmartDashboard.putNumber("BR-lin-vel", states[2].speedMetersPerSecond);
-		SmartDashboard.putNumber("BL-lin-vel", states[3].speedMetersPerSecond);
+		SmartDashboard.putNumber("FL-lin-vel", states[0].speedMetersPerSecond);
+		SmartDashboard.putNumber("FR-lin-vel", states[1].speedMetersPerSecond);
+		SmartDashboard.putNumber("BL-lin-vel", states[2].speedMetersPerSecond);
+		SmartDashboard.putNumber("BR-lin-vel", states[3].speedMetersPerSecond);
+		
 	}
 	
-	public void MoveByChassisSpeeds(double ForwardSpeed, double RightwardSpeed, double AngSpeed, double CurrentAng) {
+	public void moveByChassisSpeeds(double forwardSpeed, double leftwardSpeed, double angSpeed, double currentAng) {
 		ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-				ForwardSpeed,
-				-RightwardSpeed,
-				AngSpeed,
-				Rotation2d.fromDegrees(Math.toDegrees(CurrentAng)));
+				forwardSpeed,
+				leftwardSpeed,
+				angSpeed,
+				Rotation2d.fromDegrees(Math.toDegrees(currentAng)));
 		SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
 		setModuleStates(states);
 	}
