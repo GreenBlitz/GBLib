@@ -1,6 +1,6 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.angles;
 
-import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.shooter.Shooter;
+import edu.greenblitz.pegasus.subsystems.Shooter;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.utils.GBMath;
 
 public class DualSidedAngTarget {
