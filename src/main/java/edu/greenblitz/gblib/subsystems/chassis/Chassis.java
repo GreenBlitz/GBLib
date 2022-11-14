@@ -2,12 +2,12 @@
 //
 //import com.ctre.phoenix.sensors.PigeonIMU;
 //import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.Localizer;
-//import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.cords.Position;
+//import edu.greenblitz.pegasus.utils.cords.Position;
 //import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.IMotorFactory;
-//import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.gyro.PigeonGyro;
+//import edu.greenblitz.pegasus.utils.PigeonGyro;
 //import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 //import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.GBMotor;
-//import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.subsystems.GBSubsystem;
+//import edu.greenblitz.pegasus.subsystems.GBSubsystem;
 //
 //public class Chassis extends GBSubsystem {
 //	private final PigeonGyro gyroscope;

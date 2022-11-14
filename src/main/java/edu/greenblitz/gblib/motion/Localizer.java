@@ -1,8 +1,8 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion;
 
 
-import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.cords.Point;
-import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.cords.Position;
+import edu.greenblitz.pegasus.utils.cords.Point;
+import edu.greenblitz.pegasus.utils.cords.Position;
 
 /**
  * A tool in order to calculate robot position using encoders (and optionally a gyro). Recommended to run in a different
