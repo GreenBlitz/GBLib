@@ -238,6 +238,9 @@ public class SwerveChassis extends GBSubsystem {
 	}
 	
 	public void moveByChassisSpeeds(double forwardSpeed, double leftwardSpeed, double angSpeed, double currentAng) {
+		SmartDashboard.putNumber("left", leftwardSpeed);
+		SmartDashboard.putNumber("forward", forwardSpeed);
+		SmartDashboard.putNumber("ang", angSpeed);
 		ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
 				forwardSpeed,
 				leftwardSpeed,
