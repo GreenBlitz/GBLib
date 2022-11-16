@@ -1,6 +1,7 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid;
 
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.tolerance.ITolerance;
+import edu.greenblitz.pegasus.utils.PIDObject;
 
 
 public class CollapsingPIDController extends PIDController {

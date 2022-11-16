@@ -2,7 +2,7 @@ package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.pegasus.utils.PIDObject;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless.AbstractMotor;
 import edu.wpi.first.wpilibj.RobotController;
 

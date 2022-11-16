@@ -1,6 +1,6 @@
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless;
 
-import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.pegasus.utils.PIDObject;
 
 public class DecoyMotor extends AbstractMotor{
 	@Override

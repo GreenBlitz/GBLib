@@ -5,7 +5,7 @@
 
 package edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushless;
 
-import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motion.pid.PIDObject;
+import edu.greenblitz.pegasus.utils.PIDObject;
 import edu.greenblitz.GBLib.src.main.java.edu.greenblitz.gblib.motors.brushed.GBBrushedMotor;
 
 public interface GBMotor extends GBBrushedMotor {
