@@ -18,7 +18,6 @@ public class SwerveChassis extends GBSubsystem {
 	//	private final PigeonGyro pigeonGyro;
 	private final PigeonGyro pigeonIMU; //todo decide on whether to use our pijen;
 	private final SwerveDriveOdometry localizer;
-	
 	public double pigeonAngleOffset = 0.0;
 	//todo make not exist
 	
@@ -54,7 +53,9 @@ public class SwerveChassis extends GBSubsystem {
 		);
 	}
 
-
+	public ChassisSpeeds getCurSpeed(){
+		return kinematics.toChassisSpeeds(frontLeft.getModuleState(), frontRight.getModuleState(), backLeft.getModuleState(), backRight.getModuleState());
+	}
 	private static SwerveChassis instance;
 
 
